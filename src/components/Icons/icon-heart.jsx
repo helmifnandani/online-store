@@ -1,6 +1,5 @@
 const SVG = ({
   style = {},
-  fill = "#000",
   width="24",
   height="24",
   className = "",
@@ -14,7 +13,7 @@ const SVG = ({
     xmlns="http://www.w3.org/2000/svg"
     className={`svg-icon ${className || ""}`}
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    stroke={fill}
+    stroke="currentColor"
     fill="none"
     strokeWidth="1"
     strokeLinecap="round"
