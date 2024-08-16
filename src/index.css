@@ -1,22 +1,25 @@
-@import './assets/css/fonts.css';
-@import './assets/css/slide.css';
-@import './assets/css/media.css';
+@import "./assets/css/fonts.css";
+@import "./assets/css/slide.css";
+@import "./assets/css/media.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
-    .sidebar-icon {
-        @apply relative flex items-center justify-center h-12 w-12 mt-2 mb-2 mx-auto bg-gray-800 text-green-500 hover:bg-green-600 hover:text-white rounded-3xl hover:rounded-xl transition-all duration-300 ease-linear;
-    }
+  .menu-item .btn-text {
+    @apply relative after:absolute after:-bottom-2px after:left-1/2 after:block after:h-px after:w-0 after:bg-slate-900 after:transition-all after:content-[''] after:hover:left-0 after:hover:w-full;
+  }
 
-    .sidebar-tooltip {
-        @apply absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md text-white bg-gray-900 text-xs font-bold transition-all duration-100 scale-0 origin-left;
-    }
+  .sidebar-icon {
+    @apply relative mx-auto mb-2 mt-2 flex h-12 w-12 items-center justify-center rounded-3xl bg-gray-800 text-green-500 transition-all duration-300 ease-linear hover:rounded-xl hover:bg-green-600 hover:text-white;
+  }
+
+  .sidebar-tooltip {
+    @apply absolute left-14 m-2 w-auto min-w-max origin-left scale-0 rounded-md bg-gray-900 p-2 text-xs font-bold text-white shadow-md transition-all duration-100;
+  }
 }
 
 :root {
-    font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
