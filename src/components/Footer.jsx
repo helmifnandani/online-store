@@ -4,7 +4,7 @@ import Button from "./Button";
 
 const Footer = () => {
   return (
-    <div className="container relative mx-auto px-4 py-3 text-sm">
+    <div className="container relative mx-auto px-6 py-3 text-sm lg:px-4">
       <div className="flex flex-col gap-4 lg:flex-row">
         <div className="basis-auto border-b pb-4 lg:basis-1/3 lg:border-0">
           <ul className="flex flex-col gap-3">

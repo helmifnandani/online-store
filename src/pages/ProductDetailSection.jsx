@@ -43,7 +43,7 @@ const ProductDetailSection = () => {
       {isLoading ? (
         <p>is loading</p>
       ) : (
-        <div className="group mx-auto flex px-4 py-7">
+        <div className="group mx-auto flex flex-col py-7 lg:flex-row lg:px-4">
           <div className="relative mb-4 flex aspect-card basis-1/2 overflow-hidden">
             <Image
               className={"peer !absolute top-0 h-full max-h-full max-w-full"}
@@ -106,7 +106,7 @@ const ProductDetailSection = () => {
                         type={"link"}
                         onClick={() => handleClickColor(color)}
                         style={{ backgroundColor: color }}
-                        className="h-6 w-6 !rounded-full"
+                        className="h-6 w-6 !rounded-full p-3"
                       />
                     </span>
                   </li>

@@ -6,7 +6,7 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom";
 const ProductItem = ({ item }) => {
   const [selectedColor, setSelectedColor] = useState(item.colors[0]);
 
-  const handleClick = (color) => {
+  const handleClickColor = (color) => {
     if (color !== selectedColor) {
       setSelectedColor(color);
     }
@@ -49,7 +49,7 @@ const ProductItem = ({ item }) => {
               </p>
             )}
           </div>
-          <ul className="flex flex-row items-center">
+          <ul className="mb-4 flex flex-row items-center">
             {item.colors.map((color, index) => (
               <li className="mr-4 last:mr-0">
                 <span
@@ -59,9 +59,9 @@ const ProductItem = ({ item }) => {
                 >
                   <Button
                     type={"link"}
-                    onClick={() => handleClick(color)}
+                    onClick={() => handleClickColor(color)}
                     style={{ backgroundColor: color }}
-                    className="h-3 w-3 rounded-full"
+                    className="h-3 w-3 rounded-full p-2"
                   />
                 </span>
               </li>
