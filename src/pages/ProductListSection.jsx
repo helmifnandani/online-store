@@ -31,15 +31,38 @@ const ProductListSection = () => {
     setSelectedCategories(selectedCategories);
   };
 
-  const toggleSortMenu = () => {
+  const toggleSortMenu = (e) => {
+    e.stopPropagation();
     if (!sortMenuOpen) {
       handlePosition();
     }
-    setSortMenuOpen(!sortMenuOpen);
+    setSortMenuOpen((prev) => {
+      if (!prev) setFilterMenuOpen(false);
+      return !prev;
+    });
   };
-  const toggleFilterMenu = () => {
-    setFilterMenuOpen(!filterMenuOpen);
+  const toggleFilterMenu = (e) => {
+    e.stopPropagation();
+    setFilterMenuOpen((prev) => {
+      if (!prev) setSortMenuOpen(false);
+      return !prev;
+    });
   };
+
+  useEffect(() => {
+    const handleBodyClick = (event) => {
+      if (filterMenuOpen || sortMenuOpen) {
+        setSortMenuOpen(false);
+        setFilterMenuOpen(false);
+      }
+    };
+
+    document.body.addEventListener("click", handleBodyClick);
+
+    return () => {
+      document.body.removeEventListener("click", handleBodyClick);
+    };
+  }, [filterMenuOpen, sortMenuOpen]);
 
   // useEffect(() => {
   //   if (mobileDrawerOpen) {
@@ -103,7 +126,7 @@ const ProductListSection = () => {
             onClick={toggleFilterMenu}
           />
           <div
-            className={`${filterMenuOpen ? "opacity-1 pointer-events-auto translate-y-0" : "pointer-events-none -translate-y-1/2 opacity-0"} absolute left-0 right-0 top-full z-10 mt-4 w-96 border-t bg-white p-8 shadow-xl transition-all ease-out`}
+            className={`${filterMenuOpen ? "opacity-1 pointer-events-auto translate-y-0" : "pointer-events-none -translate-y-1/2 opacity-0"} absolute left-0 top-full z-10 mt-4 w-96 border-t bg-white p-8 shadow-xl transition-all ease-out`}
           >
             <h1 className="text-md mb-3 border-b pb-3">Categories</h1>
             {categories.map((category, index) => {
@@ -166,7 +189,7 @@ const ProductListSection = () => {
                       htmlFor={sort.value}
                     >
                       <span
-                        className={`before:content-[' '] relative h-5 w-5 rounded-full border-2 shadow-sm transition-all ease-in-out before:absolute before:left-1/2 before:top-1/2 before:h-3 before:w-3 before:origin-center before:-translate-x-1/2 before:-translate-y-1/2 ${selectedSorts === sort.value ? "border-slate-900 before:scale-100 before:bg-slate-900" : "border-gray-200 before:scale-0 before:bg-transparent"} before:rounded-full`}
+                        className={`relative h-5 w-5 rounded-full border-2 shadow-sm transition-all ease-in-out before:absolute before:left-1/2 before:top-1/2 before:h-3 before:w-3 before:origin-center before:-translate-x-1/2 before:-translate-y-1/2 before:content-[''] ${selectedSorts === sort.value ? "border-slate-900 before:scale-100 before:bg-slate-900" : "border-gray-200 before:scale-0 before:bg-transparent"} before:rounded-full`}
                       ></span>
                       <span className="radio-text">{sort.text}</span>
                     </label>
