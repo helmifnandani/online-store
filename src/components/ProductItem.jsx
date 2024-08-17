@@ -51,7 +51,7 @@ const ProductItem = ({ item }) => {
           </div>
           <ul className="mb-4 flex flex-row items-center">
             {item.colors.map((color, index) => (
-              <li className="mr-4 last:mr-0">
+              <li className="mr-4 last:mr-0" key={index}>
                 <span
                   className={`block rounded-full border p-0.5 transition duration-300 ease-in ${
                     color === selectedColor ? "border-gray-500" : "border-white"

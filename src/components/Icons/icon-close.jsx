@@ -1,15 +1,13 @@
 const SVG = ({
   style = {},
   fill = "#202225",
-  width = "24",
-  height = "24",
   className = "",
   viewBox = "0 0 24 24",
 }) => (
   <svg
-    width={width}
+    width="100%"
     style={style}
-    height={width}
+    height="100%"
     viewBox={viewBox}
     xmlns="http://www.w3.org/2000/svg"
     className={`svg-icon ${className || ""}`}
@@ -20,8 +18,8 @@ const SVG = ({
     strokeLinecap="round"
     strokeLinejoin="round"
   >
-    <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-    <circle cx="12" cy="12" r="3" />
+    <path d="M18 6 6 18" />
+    <path d="m6 6 12 12" />
   </svg>
 );
 

@@ -19,11 +19,14 @@ const Button = ({
     case "primary":
       btnStyle +=
         "px-5 py-2.5 bg-slate-900 text-white hover:bg-gray-700 focus:outline-none ";
+      break;
     case "outline":
       btnStyle +=
         "px-5 py-2.5 hover:bg-gray-300 border border-slate-900 text-slate-900 ";
+      break;
     case "link":
-      btnStyle += "menu-item ";
+      btnStyle += "btn-link ";
+      break;
   }
 
   if (isPill) btnStyle += "rounded-full ";

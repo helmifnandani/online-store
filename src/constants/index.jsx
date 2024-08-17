@@ -4,12 +4,12 @@ import Banner3 from "../assets/images/banner-3.jpg";
 import Banner4 from "../assets/images/banner-4.jpg";
 
 export const navItems = [
-  { label: "sale", href: "/products" },
-  { label: "new in", href: "/products" },
-  { label: "tkd’s", href: "/products" },
-  { label: "pick", href: "/products" },
-  { label: "shop", href: "/products" },
-  { label: "search", href: "/products" },
+  { label: "sale", href: "/products/sale" },
+  { label: "new in", href: "/products/new-in" },
+  { label: "tkd’s", href: "/products/tkds" },
+  { label: "pick", href: "/products/pick" },
+  { label: "shop", href: "/products/shop" },
+  { label: "search", href: "/products/search" },
 ];
 
 export const bannerItems = [
@@ -270,20 +270,37 @@ export const productItems = [
   },
 ];
 
-// export const collectionItems = [
-//   {
-//     img_src:
-//       "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
-//     text: "Top",
-//   },
-//   {
-//     img_src:
-//       "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
-//     text: "Bottom",
-//   },
-//   {
-//     img_src:
-//       "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
-//     text: "Outer",
-//   },
-// ];
+export const collectionItems = [
+  {
+    img_src:
+      "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
+    text: "Top",
+  },
+  {
+    img_src:
+      "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
+    text: "Bottom",
+  },
+  {
+    img_src:
+      "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
+    text: "Outer",
+  },
+];
+
+export const categories = [
+  { value: "shirts", text: "Shirts" },
+  { value: "pants", text: "Pants" },
+  { value: "jackets", text: "Jackets" },
+  { value: "dresses", text: "Dresses" },
+  { value: "outer", text: "Outer" },
+  { value: "top", text: "Top" },
+  { value: "sweaters", text: "Sweaters" },
+  { value: "shorts", text: "Shorts" },
+];
+
+export const sorts = [
+  { value: "newest", text: "Newest" },
+  { value: "cheap", text: "Price: Low to high" },
+  { value: "expensive", text: "Price: High to low" },
+];

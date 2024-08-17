@@ -1,6 +1,6 @@
 const SVG = ({
   style = {},
-  fill = "#000",
+  fill = "#202225",
   width = "32",
   height = "32",
   className = "",
