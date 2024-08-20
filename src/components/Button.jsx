@@ -13,6 +13,7 @@ const Button = ({
   isPill = false,
   className,
   style,
+  openNewTab,
 }) => {
   let btnStyle = `flex gap-2 items-center justify-center text-center text-sm font-medium transition-all ease-linear ${btnWidth} `;
   switch (type) {
@@ -33,10 +34,28 @@ const Button = ({
 
   btnStyle += ` ${className}`;
 
+  const handleLinkClick = (e) => {
+    const overlayElement = document.getElementById("drawer_overlay");
+    if (overlayElement) {
+      const event = new MouseEvent("click", {
+        bubbles: true,
+        cancelable: true,
+        view: window,
+      });
+      overlayElement.dispatchEvent(event);
+    }
+  };
+
   return (
     <>
       {isLink ? (
-        <Link to={urlTarget} className={btnStyle} style={style}>
+        <Link
+          to={urlTarget}
+          className={btnStyle}
+          style={style}
+          target={openNewTab ? "_blank" : ""}
+          onClick={handleLinkClick}
+        >
           {iconName && (
             <span>
               <Icon name={iconName} width={iconWidth} />

@@ -29,20 +29,21 @@ const CollectionSection = ({}) => {
   //   fetchCollections();
   // }, []);
   return (
-    <div className="mb-10">
-      <div className="flex items-center justify-center gap-3">
+    <>
+      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-10 flex h-full w-screen flex-col lg:flex-row">
         {collectionItems?.map((item, index) => (
-          <div className="relative flex" key={index}>
+          <div className="relative flex w-full" key={index}>
             <Image
               imgSrc={item.img_src}
-              ratio={"aspect-card"}
+              className={"aspect-card w-full"}
               text={item.text}
               objectFit="object-cover"
+              btnUrlTarget={item.href}
             />
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

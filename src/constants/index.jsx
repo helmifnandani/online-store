@@ -4,18 +4,50 @@ import Banner3 from "../assets/images/banner-3.jpg";
 import Banner4 from "../assets/images/banner-4.jpg";
 
 export const navItems = [
-  { label: "sale", href: "/products/sale" },
-  { label: "new in", href: "/products/new-in" },
-  { label: "tkd’s", href: "/products/tkds" },
-  { label: "pick", href: "/products/pick" },
-  { label: "shop", href: "/products/shop" },
-  { label: "search", href: "/products/search" },
+  { label: "New In", href: "/products/new-in" },
+  { label: "Tkd’s Pick", href: "/products/tkds-pick" },
+  {
+    label: "Shop All",
+    href: "/products/shop",
+    menus: [
+      {
+        label: "Shop by category",
+        menuItems: [
+          { label: "Tops", href: "/products/Tops" },
+          { label: "Bottoms", href: "/products/Bottoms" },
+          { label: "Outer", href: "/products/Outer" },
+          { label: "Dress", href: "/products/Dress" },
+        ],
+      },
+
+      {
+        label: "Shop by collection",
+        menuItems: [
+          { label: "Best seller", href: "/products/Best-seller" },
+          { label: "Tkd’s pick", href: "/products/Tkds pick" },
+          { label: "Signature", href: "/products/Signature" },
+          { label: "Basic", href: "/products/Basic" },
+          { label: "Essentials", href: "/products/Essentials" },
+        ],
+      },
+      {
+        label: "Shop by season",
+        menuItems: [
+          { label: "Spring", href: "/products/Spring" },
+          { label: "Summer", href: "/products/Summer" },
+          { label: "Fall", href: "/products/Fall" },
+          { label: "Winter", href: "/products/Winter" },
+        ],
+      },
+    ],
+  },
+  { label: "Sale", href: "/products/sale" },
 ];
 
 export const bannerItems = [
-  { src: Banner1 },
+  { src: Banner1, href: "/products/pants" },
   { src: Banner2 },
-  { src: Banner3 },
+  { src: Banner3, href: "/products/shirt" },
   { src: Banner4 },
 ];
 
@@ -39,15 +71,31 @@ export const productItems = [
           "https://images.tokopedia.net/img/cache/700/VqbcmM/2024/8/13/055c6c8f-9feb-4372-988f-bce9af89f3c2.jpg.webp?ect=4g",
         isDefault: true,
       },
+      {
+        color: "#ff0000",
+        img_src_1:
+          "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
+        img_src_2:
+          "https://images.tokopedia.net/img/cache/700/VqbcmM/2024/8/13/055c6c8f-9feb-4372-988f-bce9af89f3c2.jpg.webp?ect=4g",
+        isDefault: true,
+      },
+      {
+        color: "#ff0000",
+        img_src_1:
+          "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
+        img_src_2:
+          "https://images.tokopedia.net/img/cache/700/VqbcmM/2024/8/13/055c6c8f-9feb-4372-988f-bce9af89f3c2.jpg.webp?ect=4g",
+        isDefault: true,
+      },
     ],
     url: [
       {
         onlineStore: "tokped",
-        link: "link",
+        link: "https://tokopedia.com",
       },
       {
         onlineStore: "shopee",
-        link: "link2",
+        link: "https://shopee.com",
       },
     ],
     status: true,
@@ -79,11 +127,11 @@ export const productItems = [
     url: [
       {
         onlineStore: "tokped",
-        link: "link",
+        link: "https://tokopedia.com",
       },
       {
         onlineStore: "shopee",
-        link: "link2",
+        link: "https://shopee.com",
       },
     ],
     status: true,
@@ -115,11 +163,11 @@ export const productItems = [
     url: [
       {
         onlineStore: "tokped",
-        link: "link",
+        link: "https://tokopedia.com",
       },
       {
         onlineStore: "shopee",
-        link: "link2",
+        link: "https://shopee.com",
       },
     ],
     status: true,
@@ -151,11 +199,11 @@ export const productItems = [
     url: [
       {
         onlineStore: "tokped",
-        link: "link",
+        link: "https://tokopedia.com",
       },
       {
         onlineStore: "shopee",
-        link: "link2",
+        link: "https://shopee.com",
       },
     ],
     status: true,
@@ -187,11 +235,11 @@ export const productItems = [
     url: [
       {
         onlineStore: "tokped",
-        link: "link",
+        link: "https://tokopedia.com",
       },
       {
         onlineStore: "shopee",
-        link: "link2",
+        link: "https://shopee.com",
       },
     ],
     status: true,
@@ -223,11 +271,11 @@ export const productItems = [
     url: [
       {
         onlineStore: "tokped",
-        link: "link",
+        link: "https://tokopedia.com",
       },
       {
         onlineStore: "shopee",
-        link: "link2",
+        link: "https://shopee.com",
       },
     ],
     status: true,
@@ -259,11 +307,11 @@ export const productItems = [
     url: [
       {
         onlineStore: "tokped",
-        link: "link",
+        link: "https://tokopedia.com",
       },
       {
         onlineStore: "shopee",
-        link: "link2",
+        link: "https://shopee.com",
       },
     ],
     status: true,
@@ -275,16 +323,19 @@ export const collectionItems = [
     img_src:
       "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
     text: "Top",
+    href: "/products/top",
   },
   {
     img_src:
       "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
     text: "Bottom",
+    href: "/products/bottom",
   },
   {
     img_src:
       "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
     text: "Outer",
+    href: "/products/outer",
   },
 ];
 

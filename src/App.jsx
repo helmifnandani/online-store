@@ -3,12 +3,15 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
-import ProductListSection from "./pages/ProductListSection";
-import ProductDetailSection from "./pages/ProductDetailSection";
+import ProductList from "./pages/ProductList";
+import ProductDetail from "./pages/ProductDetail";
+import Account from "./pages/Account";
 
 function App() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [heightNavbar, setHeightNavbar] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const scrollRef = useRef(null);
 
   const toggleNavbar = (e) => {
     e.stopPropagation();
@@ -42,18 +45,38 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const element = scrollRef.current;
+      setIsScrolled(element.scrollTop > 0);
+    };
+
+    const element = scrollRef.current;
+    element.addEventListener("scroll", handleScroll);
+
+    return () => {
+      element.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div
       id="container"
-      className={`flex h-screen flex-col overflow-x-hidden ${mobileDrawerOpen ? "overflow-y-hidden" : ""} `}
+      ref={scrollRef}
+      className={`flex h-screen flex-col space-y-10 overflow-x-hidden ${mobileDrawerOpen ? "overflow-y-hidden" : ""} `}
     >
-      <Navbar toggleNavbar={toggleNavbar} mobileDrawerOpen={mobileDrawerOpen} />
+      <Navbar
+        toggleNavbar={toggleNavbar}
+        mobileDrawerOpen={mobileDrawerOpen}
+        isScrolled={isScrolled}
+      />
       <div
         className="mx-auto w-full max-w-7xl flex-grow px-4 lg:px-6"
         id="hero_container"
       >
         {mobileDrawerOpen ? (
           <div
+            id="drawer_overlay"
             className={`fixed inset-0 bg-black pt-20 transition-opacity duration-300 ${
               mobileDrawerOpen
                 ? "z-10 opacity-50"
@@ -67,11 +90,9 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/products/:collection"
-            element={<ProductListSection />}
-          />
-          <Route path="/product/:guid" element={<ProductDetailSection />} />
+          <Route path="/products/:collection" element={<ProductList />} />
+          <Route path="/product/:guid" element={<ProductDetail />} />
+          <Route path="/account" element={<Account />} />
         </Routes>
       </div>
       <Footer />

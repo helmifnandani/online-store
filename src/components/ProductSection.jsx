@@ -32,7 +32,7 @@ const ProductSection = ({
   // }, []);
 
   return (
-    <div className="mb-10">
+    <>
       <div className="mb-7 flex flex-col">
         <h2 className="text-2xl font-semibold">{title}</h2>
         <h3 className="text-lg">{description}</h3>
@@ -48,14 +48,9 @@ const ProductSection = ({
         ))}
       </div>
       <div className="flex items-center justify-center">
-        <Button
-          isLink={true}
-          type={"outline"}
-          text={"View More"}
-          isPill={true}
-        />
+        <Button isLink={true} type={"outline"} text={"View More"} />
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,12 +1,13 @@
+import React, { useState, useEffect } from "react";
 import { navItems } from "../constants";
 import Icon from "./Icons";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ toggleNavbar, mobileDrawerOpen }) => {
+const Navbar = ({ toggleNavbar, mobileDrawerOpen, isScrolled }) => {
   return (
     <nav
-      className="sticky top-0 z-50 border-b border-neutral-700/80 py-3 backdrop-blur-3xl"
+      className={`sticky top-0 z-50 bg-white py-3 transition-all ${isScrolled ? "bg-opacity-90 shadow-md" : ""}`}
       id="navbar"
     >
       <div className="container relative mx-auto px-4 text-sm">
@@ -18,13 +19,45 @@ const Navbar = ({ toggleNavbar, mobileDrawerOpen }) => {
           </div>
           <ul className="ml-14 hidden gap-10 lg:flex">
             {navItems.map((item, index) => (
-              <li key={index}>
+              <li
+                key={index}
+                className={item.menus?.length > 0 ? "group relative" : ""}
+              >
                 <Button
                   isLink={true}
                   type={"link"}
                   urlTarget={item.href}
                   text={item.label}
+                  className={
+                    item.label.toLowerCase() === "sale" ? "text-red-500" : ""
+                  }
                 />
+                {item.menus?.length > 0 ? (
+                  <div className="pointer-events-none absolute left-0 top-full z-50 flex w-fit -translate-x-1/2 gap-7 bg-white p-3 opacity-0 shadow-md transition-all group-hover:pointer-events-auto group-hover:opacity-100">
+                    {item.menus.map((menu, index) => (
+                      <li key={index}>
+                        <p className="mx-4 text-nowrap border-b border-gray-300 py-2 font-semibold">
+                          {menu.label}
+                        </p>
+                        <ul>
+                          {menu.menuItems.map((menuItem, index) => (
+                            <li className="px-4 py-2" key={index}>
+                              <Button
+                                isLink={true}
+                                type={"link"}
+                                urlTarget={menuItem.href}
+                                text={menuItem.label}
+                                className={"!justify-start !text-start"}
+                              />
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    ))}
+                  </div>
+                ) : (
+                  ""
+                )}
               </li>
             ))}
           </ul>
@@ -40,7 +73,7 @@ const Navbar = ({ toggleNavbar, mobileDrawerOpen }) => {
             <Button
               isLink={true}
               type={"link"}
-              urlTarget={"#"}
+              urlTarget={"/account"}
               iconName={"profile"}
               iconWidth={20}
             />
@@ -64,7 +97,7 @@ const Navbar = ({ toggleNavbar, mobileDrawerOpen }) => {
         </div>
       </div>
       <div
-        className="absolute right-0 min-h-screen w-56 translate-x-full transform overflow-y-auto bg-white text-slate-900 shadow-xl transition-transform duration-300 ease-in-out"
+        className="absolute right-0 min-h-screen w-56 translate-x-full transform overflow-y-auto bg-white text-slate-900 shadow-xl transition-transform duration-300 ease-in-out lg:hidden"
         id="sidebar"
       >
         <div className="p-4">
@@ -79,6 +112,9 @@ const Navbar = ({ toggleNavbar, mobileDrawerOpen }) => {
                   type={"link"}
                   urlTarget={item.href}
                   text={item.label}
+                  className={
+                    item.label.toLowerCase() === "sale" ? "text-red-500" : ""
+                  }
                 />
               </li>
             ))}
@@ -87,7 +123,7 @@ const Navbar = ({ toggleNavbar, mobileDrawerOpen }) => {
             <Button
               isLink={true}
               type={"link"}
-              urlTarget={"#"}
+              urlTarget={"/account"}
               text={"Favorites"}
               iconName={"heart"}
               iconWidth={20}
@@ -95,7 +131,7 @@ const Navbar = ({ toggleNavbar, mobileDrawerOpen }) => {
             <Button
               isLink={true}
               type={"link"}
-              urlTarget={"#"}
+              urlTarget={"/account"}
               text={"Account"}
               iconName={"profile"}
               iconWidth={20}
@@ -108,3 +144,35 @@ const Navbar = ({ toggleNavbar, mobileDrawerOpen }) => {
 };
 
 export default Navbar;
+
+// const Navbar = () => {
+//   return (
+//     <nav className="bg-gray-800 p-4">
+//       <ul className="flex space-x-8">
+//         <li className="relative group">
+//           <a href="#" className="text-white">
+//             Menu Item 1
+//           </a>
+//           <ul className="absolute left-0 mt-2 hidden w-48 bg-white text-black shadow-lg group-hover:block">
+//             <li className="px-4 py-2 hover:bg-gray-200">
+//               <a href="#">Dropdown Item 1</a>
+//             </li>
+//             <li className="px-4 py-2 hover:bg-gray-200">
+//               <a href="#">Dropdown Item 2</a>
+//             </li>
+//             <li className="px-4 py-2 hover:bg-gray-200">
+//               <a href="#">Dropdown Item 3</a>
+//             </li>
+//           </ul>
+//         </li>
+//         <li>
+//           <a href="#" className="text-white">
+//             Menu Item 2
+//           </a>
+//         </li>
+//       </ul>
+//     </nav>
+//   );
+// };
+
+// export default Navbar;

@@ -11,26 +11,38 @@
   height: 100%;
 }
 
-.slick-dots {
-  bottom: 0;
-}
+.slider-default {
+  .slick-dots {
+    bottom: 0;
+  }
 
-.slick-dots {
-  li {
-    button {
-      &:before {
-        opacity: 0.5;
-        color: white;
-      }
-    }
-
-    &.slick-active {
+  .slick-dots {
+    li {
       button {
         &:before {
-          opacity: 1;
+          opacity: 0.5;
           color: white;
+        }
+      }
+
+      &.slick-active {
+        button {
+          &:before {
+            opacity: 1;
+            color: white;
+          }
         }
       }
     }
   }
+}
+
+@layer components {
+  .slick-image li {
+    @apply size-16;
+  }
+}
+.slick-image {
+  bottom: -80px;
+  /* transform: translateY(5rem); */
 }

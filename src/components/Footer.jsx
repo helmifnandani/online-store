@@ -4,7 +4,21 @@ import Button from "./Button";
 
 const Footer = () => {
   return (
-    <div className="container relative mx-auto px-6 py-3 text-sm lg:px-4">
+    <div className="container relative mx-auto space-y-10 px-6 py-3 text-sm lg:px-4">
+      <div className="flex flex-col items-center justify-center text-center">
+        <p className="text-xl font-bold lg:text-3xl">want more styles?</p>
+        <p className="text-xl font-bold lg:text-3xl">
+          follow our travelling sister
+        </p>
+        <Button
+          isLink={true}
+          type={"link"}
+          text={"@titipkitadi"}
+          urlTarget="https://www.instagram.com/titipkitadi"
+          openNewTab={true}
+          className={"text-xl !font-bold lg:text-3xl"}
+        />
+      </div>
       <div className="flex flex-col gap-4 lg:flex-row">
         <div className="basis-auto border-b pb-4 lg:basis-1/3 lg:border-0">
           <ul className="flex flex-col gap-3">
@@ -13,7 +27,7 @@ const Footer = () => {
                 className={"!justify-start"}
                 isLink={true}
                 type={"link"}
-                text={"about"}
+                text={"About"}
               />
             </li>
             <li>
@@ -21,7 +35,7 @@ const Footer = () => {
                 className={"!justify-start"}
                 isLink={true}
                 type={"link"}
-                text={"contact"}
+                text={"Contact"}
               />
             </li>
             <li>
@@ -29,15 +43,7 @@ const Footer = () => {
                 className={"!justify-start"}
                 isLink={true}
                 type={"link"}
-                text={"faq"}
-              />
-            </li>
-            <li>
-              <Button
-                className={"!justify-start"}
-                isLink={true}
-                type={"link"}
-                text={"careers"}
+                text={"FAQ"}
               />
             </li>
           </ul>
@@ -49,7 +55,7 @@ const Footer = () => {
                 className={"!justify-start"}
                 isLink={true}
                 type={"link"}
-                text={"sign in"}
+                text={"Returns & Exchanges"}
               />
             </li>
             <li>
@@ -57,7 +63,7 @@ const Footer = () => {
                 className={"!justify-start"}
                 isLink={true}
                 type={"link"}
-                text={"returns & exchanges"}
+                text={"Shipping"}
               />
             </li>
             <li>
@@ -65,7 +71,7 @@ const Footer = () => {
                 className={"!justify-start"}
                 isLink={true}
                 type={"link"}
-                text={"shipping"}
+                text={"Careers"}
               />
             </li>
           </ul>
@@ -77,9 +83,11 @@ const Footer = () => {
                 className={"!justify-start"}
                 isLink={true}
                 type={"link"}
-                text={"thekoreandaily"}
+                text={"the.koreandaily"}
+                urlTarget="https://www.instagram.com/the.koreandaily"
                 iconName={"instagram"}
                 iconWidth={20}
+                openNewTab={true}
               />
               <Button isLink={true} type={"link"} href={"#"} />
             </li>
@@ -88,9 +96,11 @@ const Footer = () => {
                 className={"!justify-start"}
                 isLink={true}
                 type={"link"}
+                urlTarget="https://www.instagram.com/titipkitadi"
                 text={"titipkitadi"}
                 iconName={"instagram"}
                 iconWidth={20}
+                openNewTab={true}
               />
             </li>
           </ul>
