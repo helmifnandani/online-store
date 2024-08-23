@@ -72,7 +72,7 @@ const Navbar = ({
             <Button
               isLink={true}
               type={"link"}
-              urlTarget={"#"}
+              urlTarget={"/account"}
               text={"Favorites"}
               iconName={"heart"}
               iconWidth={20}
