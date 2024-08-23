@@ -4,6 +4,7 @@ import Heart from "./Icons/icon-heart.jsx";
 import Profile from "./Icons/icon-profile.jsx";
 import Instagram from "./Icons/icon-instagram.jsx";
 import ChevronRight from "./Icons/icon-chevron-right.jsx";
+import ChevronDown from "./Icons/icon-chevron-down.jsx";
 import ChevronLeft from "./Icons/icon-chevron-left.jsx";
 import Eye from "./Icons/icon-eye.jsx";
 import Shopee from "./Icons/icon-shopee.jsx";
@@ -28,6 +29,8 @@ const Icon = (props) => {
       return <ChevronRight {...props} />;
     case "chevron-left":
       return <ChevronLeft {...props} />;
+    case "chevron-down":
+      return <ChevronDown {...props} />;
     case "eye":
       return <Eye {...props} />;
     case "shopee":

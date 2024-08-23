@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { navItems } from "../constants";
+import { navItems, categories } from "../constants";
 import Icon from "./Icons";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 
-const Navbar = ({ toggleNavbar, mobileDrawerOpen, isScrolled }) => {
+const Navbar = ({
+  toggleNavbar,
+  mobileDrawerOpen,
+  isScrolled,
+  categoryList,
+}) => {
   return (
     <nav
       className={`sticky top-0 z-50 bg-white py-3 transition-all ${isScrolled ? "bg-opacity-90 shadow-md" : ""}`}
@@ -21,7 +26,7 @@ const Navbar = ({ toggleNavbar, mobileDrawerOpen, isScrolled }) => {
             {navItems.map((item, index) => (
               <li
                 key={index}
-                className={item.menus?.length > 0 ? "group relative" : ""}
+                className={item.hasNestedMenu ? "group relative" : ""}
               >
                 <Button
                   isLink={true}
@@ -32,29 +37,31 @@ const Navbar = ({ toggleNavbar, mobileDrawerOpen, isScrolled }) => {
                     item.label.toLowerCase() === "sale" ? "text-red-500" : ""
                   }
                 />
-                {item.menus?.length > 0 ? (
-                  <div className="pointer-events-none absolute left-0 top-full z-50 flex w-fit -translate-x-1/2 gap-7 bg-white p-3 opacity-0 shadow-md transition-all group-hover:pointer-events-auto group-hover:opacity-100">
-                    {item.menus.map((menu, index) => (
+                {item.hasNestedMenu ? (
+                  <ul className="min-w pointer-events-none absolute -left-10 top-full z-50 flex w-screen flex-wrap gap-7 bg-white p-3 opacity-0 shadow-md transition-all group-hover:pointer-events-auto group-hover:opacity-100 lg:max-w-screen-lg lg:-translate-x-1/2 xl:max-w-screen-xl 2xl:max-w-screen-2xl">
+                    {categoryList.map((category, index) => (
                       <li key={index}>
                         <p className="mx-4 text-nowrap border-b border-gray-300 py-2 font-semibold">
-                          {menu.label}
+                          {category.categoryName}
                         </p>
                         <ul>
-                          {menu.menuItems.map((menuItem, index) => (
-                            <li className="px-4 py-2" key={index}>
-                              <Button
-                                isLink={true}
-                                type={"link"}
-                                urlTarget={menuItem.href}
-                                text={menuItem.label}
-                                className={"!justify-start !text-start"}
-                              />
-                            </li>
-                          ))}
+                          {category.categoryDetails.map(
+                            (categoryDetail, index) => (
+                              <li className="px-4 py-2" key={index}>
+                                <Button
+                                  isLink={true}
+                                  type={"link"}
+                                  urlTarget={`/${categoryDetail.categoryDetailName}`}
+                                  text={categoryDetail.categoryDetailName}
+                                  className={"!justify-start !text-start"}
+                                />
+                              </li>
+                            ),
+                          )}
                         </ul>
                       </li>
                     ))}
-                  </div>
+                  </ul>
                 ) : (
                   ""
                 )}

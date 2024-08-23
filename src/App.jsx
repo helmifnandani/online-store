@@ -1,18 +1,29 @@
 import { useState, useEffect, useRef } from "react";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import { Route, Routes } from "react-router-dom";
 import ProductList from "./pages/ProductList";
 import ProductDetail from "./pages/ProductDetail";
 import Account from "./pages/Account";
+import About from "./pages/About";
+import Careers from "./pages/Careers";
+import Contact from "./pages/Contact";
+import Faq from "./pages/Faq";
+import ReturnsExchanges from "./pages/ReturnsExchanges";
+import Shipping from "./pages/Shipping";
+import { categories } from "./constants";
 
 function App() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [heightNavbar, setHeightNavbar] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
-  const scrollRef = useRef(null);
+  const containerRef = useRef(null);
+  const [categoryList, setCategoryList] = useState([]);
 
+  useEffect(() => {
+    setCategoryList(categories);
+  }, []);
   const toggleNavbar = (e) => {
     e.stopPropagation();
     setMobileDrawerOpen(!mobileDrawerOpen);
@@ -47,11 +58,11 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const element = scrollRef.current;
+      const element = containerRef.current;
       setIsScrolled(element.scrollTop > 0);
     };
 
-    const element = scrollRef.current;
+    const element = containerRef.current;
     element.addEventListener("scroll", handleScroll);
 
     return () => {
@@ -62,13 +73,14 @@ function App() {
   return (
     <div
       id="container"
-      ref={scrollRef}
+      ref={containerRef}
       className={`flex h-screen flex-col space-y-10 overflow-x-hidden ${mobileDrawerOpen ? "overflow-y-hidden" : ""} `}
     >
       <Navbar
         toggleNavbar={toggleNavbar}
         mobileDrawerOpen={mobileDrawerOpen}
         isScrolled={isScrolled}
+        categoryList={categoryList}
       />
       <div
         className="mx-auto w-full max-w-7xl flex-grow px-4 lg:px-6"
@@ -90,9 +102,19 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/products/:collection" element={<ProductList />} />
+          <Route path="/products" element={<Navigate to="/products/all" />} />
+          <Route
+            path="/products/:collection"
+            element={<ProductList categoryList={categoryList} />}
+          />
           <Route path="/product/:guid" element={<ProductDetail />} />
           <Route path="/account" element={<Account />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/returnsExchanges" element={<ReturnsExchanges />} />
+          <Route path="/shipping" element={<Shipping />} />
         </Routes>
       </div>
       <Footer />

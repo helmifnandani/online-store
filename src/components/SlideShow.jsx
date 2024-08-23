@@ -8,7 +8,7 @@ import Image from "./Image";
 const NextArrow = ({ className, cn, style, onClick }) => {
   return (
     <div
-      className={`${className} ${cn} right-0 z-10 size-12 lg:right-7 lg:size-16`}
+      className={`${className} ${cn} right-0 z-10 size-10 lg:right-7 lg:size-16`}
       style={{ ...style, display: "block" }}
       onClick={onClick}
     >
@@ -25,7 +25,7 @@ const NextArrow = ({ className, cn, style, onClick }) => {
 const PrevArrow = ({ className, cn, style, onClick }) => {
   return (
     <div
-      className={`${className} ${cn} left-0 z-10 size-12 lg:left-7 lg:size-16`}
+      className={`${className} ${cn} left-0 z-10 size-10 lg:left-7 lg:size-16`}
       style={{ ...style, display: "block" }}
       onClick={onClick}
     >

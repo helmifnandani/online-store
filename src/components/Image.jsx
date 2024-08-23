@@ -25,7 +25,7 @@ const Image = ({
           type={btnType}
           text={"View More"}
           urlTarget={btnUrlTarget}
-          className={`${btnClassName} absolute inset-0 top-1/2 m-auto h-12 w-32 border-white text-white`}
+          className={`${btnClassName} absolute inset-0 top-1/2 m-auto !h-10 !w-24 text-nowrap border-white !text-xs text-white lg:!h-12 lg:!w-32`}
         />
       ) : (
         ""

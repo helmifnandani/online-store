@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
 import ProductItem from "./ProductItem";
-import SlideShow from "./SlideShow";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { productItems } from "../constants";
 import Button from "./Button";
 import axios from "axios";
@@ -41,7 +38,7 @@ const ProductSection = ({
         {productItems.slice(0, 4).map((item, index) => (
           <div
             className="col-span-6 h-full w-full lg:col-span-3"
-            key={item.productId}
+            key={item.productid}
           >
             <ProductItem item={item} />
           </div>

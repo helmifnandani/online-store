@@ -10,23 +10,22 @@ const Button = ({
   iconWidth = 20,
   onClick,
   btnWidth = "w-auto",
-  isPill = false,
-  className,
+  isPill,
+  className = "",
   style,
   openNewTab,
+  disabled,
 }) => {
   let btnStyle = `flex gap-2 items-center justify-center text-center text-sm font-medium transition-all ease-linear ${btnWidth} `;
   switch (type) {
     case "primary":
-      btnStyle +=
-        "px-5 py-2.5 bg-slate-900 text-white hover:bg-gray-700 focus:outline-none ";
+      btnStyle += `${disabled ? "!bg-gray-100 pointer-events-none !text-gray-400" : ""} px-5 py-2.5 bg-slate-900 text-white hover:bg-gray-700 focus:outline-none `;
       break;
     case "outline":
-      btnStyle +=
-        "px-5 py-2.5 hover:bg-gray-300 border border-slate-900 text-slate-900 ";
+      btnStyle += `${disabled ? "!bg-gray-100 pointer-events-none !text-gray-400" : ""} px-5 py-2.5 hover:bg-gray-300 border border-slate-900 text-slate-900 `;
       break;
     case "link":
-      btnStyle += "btn-link ";
+      btnStyle += `${disabled ? "pointer-events-none !text-gray-400" : ""} btn-link`;
       break;
   }
 
@@ -70,7 +69,9 @@ const Button = ({
               <Icon name={iconName} width={iconWidth} />
             </span>
           )}
-          {text}
+          {text && (
+            <span className={type === "link" ? "btn-text" : ""}>{text}</span>
+          )}
         </button>
       )}
     </>

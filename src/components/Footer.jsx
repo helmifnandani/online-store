@@ -28,6 +28,7 @@ const Footer = () => {
                 isLink={true}
                 type={"link"}
                 text={"About"}
+                urlTarget="About"
               />
             </li>
             <li>
@@ -36,6 +37,7 @@ const Footer = () => {
                 isLink={true}
                 type={"link"}
                 text={"Contact"}
+                urlTarget="Contact"
               />
             </li>
             <li>
@@ -44,6 +46,7 @@ const Footer = () => {
                 isLink={true}
                 type={"link"}
                 text={"FAQ"}
+                urlTarget="Faq"
               />
             </li>
           </ul>
@@ -56,6 +59,7 @@ const Footer = () => {
                 isLink={true}
                 type={"link"}
                 text={"Returns & Exchanges"}
+                urlTarget="ReturnsExchanges"
               />
             </li>
             <li>
@@ -64,6 +68,7 @@ const Footer = () => {
                 isLink={true}
                 type={"link"}
                 text={"Shipping"}
+                urlTarget="Shipping"
               />
             </li>
             <li>
@@ -72,6 +77,7 @@ const Footer = () => {
                 isLink={true}
                 type={"link"}
                 text={"Careers"}
+                urlTarget="Careers"
               />
             </li>
           </ul>
