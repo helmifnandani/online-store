@@ -23,11 +23,11 @@ const Account = () => {
       {isLogin ? (
         <>
           <div className="grid h-full grid-cols-12 gap-7">
-            <div className="col-span-4 border-r px-3 py-4">
+            <div className="col-span-12 border-r px-3 py-4 lg:col-span-4">
               <h2 className="text-2xl font-semibold">Welcome, {user.name}</h2>
               <h3 className="text-lg">{user.email}</h3>
             </div>
-            <div className="col-span-8 space-y-10 px-3 py-4">
+            <div className="col-span-12 space-y-10 px-3 py-4 lg:col-span-8">
               <h2 className="text-2xl font-semibold">Wishlist</h2>
               <div className="mb-7 grid h-full grid-cols-12 gap-2 lg:gap-7">
                 {productItems.map((item, index) => (
