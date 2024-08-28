@@ -163,7 +163,7 @@ const ProductListSection = ({ categoryList }) => {
             classContainer="flex justify-between"
           />
           <div className="space-y-4">
-            <div className="mb-7 grid h-full w-full grid-cols-12 gap-2 lg:gap-7">
+            <div className="lg:max-auto -mx-4 mb-7 grid h-full w-screen grid-cols-12 gap-1 lg:w-full lg:gap-7">
               {(() => {
                 const elements = [];
                 for (let i = 0; i < 8; i++) {
@@ -330,8 +330,8 @@ const ProductListSection = ({ categoryList }) => {
               </div>
             </div>
           </div>
-          <div className="mb-7 grid h-full grid-cols-12 gap-2 lg:gap-7">
-            {products.map((item, index) => (
+          <div className="lg:max-auto -mx-4 mb-7 grid h-full grid-cols-12 gap-1 lg:gap-7">
+            {products.map((item) => (
               <div
                 className="col-span-6 h-full w-full lg:col-span-3"
                 key={item.productid}

@@ -12,6 +12,7 @@ const Button = ({
   btnWidth = "w-auto",
   isPill,
   className = "",
+  btnTextClass = "",
   style,
   openNewTab,
   disabled,
@@ -19,13 +20,13 @@ const Button = ({
   let btnStyle = `flex gap-2 items-center justify-center text-center text-sm font-medium transition-all ease-linear ${btnWidth} `;
   switch (type) {
     case "primary":
-      btnStyle += `${disabled ? "!bg-gray-100 pointer-events-none !text-gray-400" : ""} px-5 py-2.5 bg-slate-900 text-white hover:bg-gray-700 focus:outline-none `;
+      btnStyle += `${disabled ? "!bg-gray-100 pointer-events-none !text-gray-400" : ""} px-5 py-2.5 bg-primary-500 text-white hover:bg-gray-700 focus:outline-none `;
       break;
     case "outline":
-      btnStyle += `${disabled ? "!bg-gray-100 pointer-events-none !text-gray-400" : ""} px-5 py-2.5 hover:bg-gray-300 border border-slate-900 text-slate-900 `;
+      btnStyle += `${disabled ? "!bg-gray-100 pointer-events-none !text-gray-400" : ""} px-5 py-2.5 hover:bg-gray-300 border border-primary-500 text-primary-500 `;
       break;
     case "link":
-      btnStyle += `${disabled ? "pointer-events-none !text-gray-400" : ""} btn-link`;
+      btnStyle += `${disabled ? "pointer-events-none !text-gray-400" : "text-primary-500"} btn-link`;
       break;
   }
 
@@ -60,7 +61,7 @@ const Button = ({
               <Icon name={iconName} width={iconWidth} />
             </span>
           )}
-          <span className="btn-text">{text}</span>
+          <span className={`btn-text ${btnTextClass}`}>{text}</span>
         </Link>
       ) : (
         <button onClick={onClick} className={btnStyle} style={style}>
@@ -70,7 +71,9 @@ const Button = ({
             </span>
           )}
           {text && (
-            <span className={type === "link" ? "btn-text" : ""}>{text}</span>
+            <span className={type === "link" ? `btn-text ${btnTextClass}` : ""}>
+              {text}
+            </span>
           )}
         </button>
       )}

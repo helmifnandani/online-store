@@ -1,15 +1,15 @@
 .menu-item > a {
-    display: block;
-    position: absolute;
-    bottom: -5px;
-    background: #141414;
-    content: '';
-    width: 0;
-    left: 50%;
-    height: 1px;
-    transition: all .2s ease-in;
+  display: block;
+  position: absolute;
+  bottom: -5px;
+  background: #2a314a;
+  content: "";
+  width: 0;
+  left: 50%;
+  height: 1px;
+  transition: all 0.2s ease-in;
 }
 .menu-item > a:after {
-    width: 100%;
-    left: 0;
+  width: 100%;
+  left: 0;
 }

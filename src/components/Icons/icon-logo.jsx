@@ -2,7 +2,7 @@ const SVG = ({
   style = {},
   fill = "#202225",
   className = "",
-  viewBox = "0 0 40 26",
+  viewBox = "0 0 32 32",
 }) => (
   <svg
     width="100%"

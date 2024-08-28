@@ -18,7 +18,7 @@ const Home = () => {
           <div className="space-y-10">
             <Skeleton
               className={
-                "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-10 aspect-20x9 w-screen"
+                "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-10 aspect-2x3 w-screen lg:aspect-20x9"
               }
             />
             <div className="space-y-4">
@@ -74,16 +74,16 @@ const Home = () => {
                   btnType={"outline"}
                   btnIsLink={true}
                   btnUrlTarget={item.href}
-                  ratio={"aspect-20x9"}
+                  ratio={"aspect-2x3 lg:aspect-20x9"}
                 />
               </div>
             ))}
           </SlideShow>
           <ProductSection
-            title={"new in"}
-            description={"we got you more styles!"}
+            title={"New In"}
+            description={"We got you more styles!"}
           />
-          <ProductSection title={"tkd's pick"} description={"pieces we love"} />
+          <ProductSection title={"Tkd's Pick"} description={"Pieces we love"} />
           <CollectionSection />
         </div>
       )}

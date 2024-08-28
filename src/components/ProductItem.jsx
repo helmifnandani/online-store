@@ -48,7 +48,7 @@ const ProductItem = ({ item }) => {
           )}
         </div>
       </Link>
-      <div className="flex flex-col justify-between px-2 lg:px-5">
+      <div className="flex flex-col justify-between px-3 lg:px-5">
         <div className="flex flex-col gap-4">
           <Link to={`/product/${item.productid}`}>
             <h5 className="text-sm tracking-tight text-slate-900">

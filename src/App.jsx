@@ -32,10 +32,10 @@ function App() {
   useEffect(() => {
     if (mobileDrawerOpen) {
       document.querySelector("#sidebar").classList.add("translate-x-0");
-      document.querySelector("#sidebar").classList.remove("translate-x-full");
+      document.querySelector("#sidebar").classList.remove("-translate-x-full");
     } else {
       document.querySelector("#sidebar").classList.remove("translate-x-0");
-      document.querySelector("#sidebar").classList.add("translate-x-full");
+      document.querySelector("#sidebar").classList.add("-translate-x-full");
     }
   }, [mobileDrawerOpen]);
 
@@ -74,7 +74,7 @@ function App() {
     <div
       id="container"
       ref={containerRef}
-      className={`flex h-screen flex-col space-y-10 overflow-x-hidden ${mobileDrawerOpen ? "overflow-y-hidden" : ""} `}
+      className={`flex h-screen flex-col overflow-x-hidden lg:space-y-10 ${mobileDrawerOpen ? "overflow-y-hidden" : ""} `}
     >
       <Navbar
         toggleNavbar={toggleNavbar}
@@ -91,7 +91,7 @@ function App() {
             id="drawer_overlay"
             className={`fixed inset-0 bg-black pt-20 transition-opacity duration-300 ${
               mobileDrawerOpen
-                ? "z-10 opacity-50"
+                ? "z-20 opacity-50"
                 : "pointer-events-none opacity-0"
             }`}
             onClick={toggleNavbar}

@@ -561,6 +561,12 @@ export const collectionItems = [
     text: "Outer",
     href: "/products/outer",
   },
+  {
+    img_src:
+      "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
+    text: "Dress",
+    href: "/products/dress",
+  },
 ];
 
 export const categories = [
@@ -814,6 +820,7 @@ export const productDetail = {
   colors: ["#FF0000", "#008000", "#0000FF"],
   size: ["xs", "s", "m", "l"],
   material: "wool",
+  sizeMetric: "shirt",
   onlineStores: [
     {
       onlineStore: "tokped",
@@ -979,3 +986,9 @@ export const productDetail = {
     },
   ],
 };
+
+export const announcementBarItemsArray = [
+  { text: "Announcement Bar Item 1" },
+  { text: "Announcement Bar Item 2" },
+  { text: "Announcement Bar Item 3" },
+];

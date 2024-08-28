@@ -5,6 +5,14 @@ import Image from "../components/Image";
 import Skeleton from "../components/Skeleton";
 import SlideShow from "../components/SlideShow";
 import Icon from "../components/Icons";
+import SizeTshirt from "../assets/images/size-tshirt.jpg";
+import SizeCoat from "../assets/images/size-coat.jpg";
+import SizeDress from "../assets/images/size-dress.jpg";
+import SizePants from "../assets/images/size-pants.jpg";
+import SizeShirt from "../assets/images/size-shirt.jpg";
+import SizeSkirt from "../assets/images/size-skirt.jpg";
+import SizeTrousers from "../assets/images/size-trousers.jpg";
+
 // ////////////////////////////////////////////////////////
 // TEMP: DELETE LATER
 import { productItems, productDetail } from "../constants";
@@ -67,7 +75,7 @@ const ProductDetailSection = () => {
                 classContainer="relative mb-4 flex aspect-card overflow-hidden"
                 className="aspect-card h-full w-full"
               />
-              <div className="flex justify-center gap-4">
+              <div className="hidden justify-center gap-4 lg:flex">
                 <Skeleton
                   classContainer="relative mb-4 flex aspect-card overflow-hidden"
                   className="aspect-card size-16"
@@ -109,7 +117,7 @@ const ProductDetailSection = () => {
       ) : (
         <>
           <div className="flex max-w-full flex-col lg:flex-row">
-            <div className="mb-24 w-full lg:w-1/2">
+            <div className="mb-10 w-full lg:mb-24 lg:w-1/2">
               <SlideShow
                 className="aspect-card"
                 dots={true}
@@ -144,16 +152,9 @@ const ProductDetailSection = () => {
             <div className="flex w-full flex-col justify-between px-2 lg:w-1/2 lg:px-5">
               <div className="flex flex-col gap-7">
                 <div className="flex flex-col gap-3">
-                  <div>
-                    {product.description && (
-                      <p className="text-md font-semibold tracking-tight text-slate-900">
-                        {product.Brand}
-                      </p>
-                    )}
-                    <h5 className="text-xl font-semibold tracking-tight text-slate-900">
-                      {product.productName}
-                    </h5>
-                  </div>
+                  <h5 className="text-xl font-semibold tracking-tight text-slate-900">
+                    {product.productName}
+                  </h5>
                   <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
                     <p className="text-md text-nowrap font-semibold text-gray-500">
                       Rp {new Intl.NumberFormat().format(product.price)}
@@ -168,6 +169,53 @@ const ProductDetailSection = () => {
                     )}
                   </div>
                 </div>
+                {product.colors.length > 0 && (
+                  <div>
+                    <div className="mb-2 inline-flex">
+                      <p className="text-slate-900">Colors:</p>
+                      <p className="text-slate-400"></p>
+                    </div>
+                    <ul className="flex flex-row items-center">
+                      {product.colors.map((color, index) => (
+                        <li className="mr-4 last:mr-0" key={index}>
+                          <span
+                            className={`block rounded-full border p-1 transition duration-300 ease-in ${
+                              color === selectedColor
+                                ? "border-gray-500"
+                                : "border-white"
+                            }`}
+                          >
+                            <Button
+                              type={"link"}
+                              onClick={() => handleClickColor(color)}
+                              style={{ backgroundColor: color }}
+                              className="h-6 w-6 !rounded-full p-3"
+                            />
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {product.size.length > 0 && (
+                  <div>
+                    <div className="mb-2 inline-flex">
+                      <p className="text-slate-900">Size:</p>
+                      <p className="text-slate-400"></p>
+                    </div>
+                    <div className="flex flex-wrap gap-3">
+                      {product.size.map((size, index) => (
+                        <div key={index}>
+                          <Button
+                            type={`${size === selectedSize ? "primary" : "outline"}`}
+                            text={size}
+                            onClick={() => handleClickSize(size)}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 <div className="grid divide-y divide-neutral-200">
                   {product.description && (
@@ -179,7 +227,7 @@ const ProductDetailSection = () => {
                             <Icon name="chevron-down" />
                           </span>
                         </summary>
-                        <p className="group-open:animate-fadeIn mt-3 text-neutral-600">
+                        <p className="mt-3 text-neutral-600 group-open:animate-fadeIn">
                           {product.description}
                         </p>
                       </details>
@@ -194,60 +242,76 @@ const ProductDetailSection = () => {
                             <Icon name="chevron-down" />
                           </span>
                         </summary>
-                        <p className="group-open:animate-fadeIn mt-3 text-neutral-600">
+                        <p className="mt-3 text-neutral-600 group-open:animate-fadeIn">
                           {product.material}
                         </p>
                       </details>
                     </div>
                   )}
-                  {product.size.length > 0 && (
+                  {product.sizeMetric && (
                     <div className="py-5">
                       <details className="group">
                         <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                          <span>SIZE</span>
+                          <span>SIZE MEASUREMENT</span>
                           <span className="transition group-open:rotate-180">
                             <Icon name="chevron-down" />
                           </span>
                         </summary>
-                        <div className="group-open:animate-fadeIn mt-3 text-neutral-600">
-                          <div className="flex flex-wrap gap-3">
-                            {product.size.map((size, index) => (
-                              <div key={index}>
-                                <Button
-                                  type={`${size === selectedSize ? "primary" : "outline"}`}
-                                  text={size}
-                                  onClick={() => handleClickSize(size)}
-                                />
-                              </div>
-                            ))}
-                          </div>
+                        <div className="mt-3 text-neutral-600 group-open:animate-fadeIn">
+                          {product.sizeMetric == "tshirt" && (
+                            <Image
+                              imgSrc={SizeTshirt}
+                              objectFit={"object-contain"}
+                              ratio={"w-full aspect-9x10"}
+                            />
+                          )}
+                          {product.sizeMetric == "coat" && (
+                            <Image
+                              imgSrc={SizeCoat}
+                              objectFit={"object-contain"}
+                              ratio={"w-full aspect-9x10"}
+                            />
+                          )}
+                          {product.sizeMetric == "dress" && (
+                            <Image
+                              imgSrc={SizeDress}
+                              objectFit={"object-contain"}
+                              ratio={"w-full aspect-9x10"}
+                            />
+                          )}
+                          {product.sizeMetric == "pants" && (
+                            <Image
+                              imgSrc={SizePants}
+                              objectFit={"object-contain"}
+                              ratio={"w-full aspect-9x10"}
+                            />
+                          )}
+                          {product.sizeMetric == "shirt" && (
+                            <Image
+                              imgSrc={SizeShirt}
+                              objectFit={"object-contain"}
+                              ratio={"w-full aspect-9x10"}
+                            />
+                          )}
+                          {product.sizeMetric == "skirt" && (
+                            <Image
+                              imgSrc={SizeSkirt}
+                              objectFit={"object-contain"}
+                              ratio={"w-full aspect-9x10"}
+                            />
+                          )}
+                          {product.sizeMetric == "trousers" && (
+                            <Image
+                              imgSrc={SizeTrousers}
+                              objectFit={"object-contain"}
+                              ratio={"w-full aspect-9x10"}
+                            />
+                          )}
                         </div>
                       </details>
                     </div>
                   )}
                 </div>
-                {product.colors.length > 0 && (
-                  <ul className="flex flex-row items-center">
-                    {product.colors.map((color, index) => (
-                      <li className="mr-4 last:mr-0" key={index}>
-                        <span
-                          className={`block rounded-full border p-1 transition duration-300 ease-in ${
-                            color === selectedColor
-                              ? "border-gray-500"
-                              : "border-white"
-                          }`}
-                        >
-                          <Button
-                            type={"link"}
-                            onClick={() => handleClickColor(color)}
-                            style={{ backgroundColor: color }}
-                            className="h-6 w-6 !rounded-full p-3"
-                          />
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
                 <div className="flex w-full items-center gap-3">
                   {product.onlineStores.find(
                     (el) => el.onlineStore === "shopee",

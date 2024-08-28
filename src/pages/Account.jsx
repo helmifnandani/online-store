@@ -5,12 +5,18 @@ import { productItems } from "../constants";
 import ProductItem from "../components/ProductItem";
 
 const Account = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [isRegister, setIsRegister] = useState(false);
   const [user, setUser] = useState(false);
 
   useEffect(() => {
-    setUser(users[0]);
+    if (isLogin) {
+      setUser(users[0]);
+    }
+  }, [isLogin]);
+
+  useEffect(() => {
+    setIsLogin(true);
   }, []);
   const handleClickAccount = () => {
     setIsRegister((prev) => {
@@ -23,7 +29,7 @@ const Account = () => {
       {isLogin ? (
         <>
           <div className="grid h-full grid-cols-12 gap-7">
-            <div className="col-span-12 border-r px-3 py-4 lg:col-span-4">
+            <div className="col-span-12 px-3 py-4 lg:col-span-4 lg:border-r">
               <h2 className="text-2xl font-semibold">Welcome, {user.name}</h2>
               <h3 className="text-lg">{user.email}</h3>
             </div>
