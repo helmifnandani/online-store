@@ -36,7 +36,7 @@ const Account = () => {
             <div className="col-span-12 space-y-10 px-3 py-4 lg:col-span-8">
               <h2 className="text-2xl font-semibold">Wishlist</h2>
               <div className="mb-7 grid h-full grid-cols-12 gap-2 lg:gap-7">
-                {productItems.map((item) => (
+                {productItems.map((item, index) => (
                   <div
                     className="col-span-6 h-full w-full lg:col-span-3"
                     key={item.productid}
@@ -80,11 +80,6 @@ const Account = () => {
                   </label>
                   <input
                     type="text"
-                    className="mb-5 mt-1 w-full border px-3 py-2 text-sm"
-                  />
-                  <input
-                    type="file"
-                    id="upload"
                     className="mb-5 mt-1 w-full border px-3 py-2 text-sm"
                   />
                   <Button className="w-full" text={"Register"} />

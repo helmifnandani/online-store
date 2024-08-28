@@ -82,11 +82,6 @@ const Account = () => {
                     type="text"
                     className="mb-5 mt-1 w-full border px-3 py-2 text-sm"
                   />
-                  <input
-                    type="file"
-                    id="upload"
-                    className="mb-5 mt-1 w-full border px-3 py-2 text-sm"
-                  />
                   <Button className="w-full" text={"Register"} />
                 </div>
               ) : (

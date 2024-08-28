@@ -1,50 +1,20 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
-
 const input = () => {
   const [radioValue, setRadioValue] = useState("");
   const [checkboxValue, setCheckboxValue] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [file, setFile] = useState(null);
-  const [uploading, setUploading] = useState(false);
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-
-  const CLOUDFLARE_TOKEN = "rot7C1YxhAf3IUc4KmE4EJrGDa_1x7jVJiKimLi8";
-  const CLOUDFLARE_ID = "8c38baf0067f9ddd3e408e6702ad02bd";
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
-    setSuccess("");
-    setError("");
   };
   const handleFileUpload = async () => {
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      // Assuming you have an endpoint or direct URL for Cloudflare R2 uploads
-      const response = await axios.post(
-        `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ID}/images/v1`, // Replace with your actual Cloudflare R2 upload URL
-        formData,
-        {
-          headers: formData.getHeaders
-            ? formData.getHeaders()
-            : { "Content-Type": "multipart/form-data" },
-        },
-      );
-
-      setSuccess("File uploaded successfully!");
-      console.log(response.data);
-    } catch (err) {
-      console.error(err);
-      setError("File upload failed. Please try again.");
-    } finally {
-      setUploading(false);
-    }
+    const formData = new FormData();
+    formData.append("file", file);
+    console.log([...formData]);
   };
   return (
     <div className="space-y-10">
@@ -105,3 +75,9 @@ const input = () => {
 };
 
 export default input;
+
+const response = await axios.post("CLOUDFLARE_URL", formData, {
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+});

@@ -10,7 +10,7 @@ import About from "./pages/About";
 import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import Faq from "./pages/Faq";
-import Input from "./pages/Input";
+import Faq from "./pages/Input";
 import ReturnsExchanges from "./pages/ReturnsExchanges";
 import Shipping from "./pages/Shipping";
 import { categories } from "./constants";
@@ -103,7 +103,6 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/input" element={<Input />} />
           <Route path="/products" element={<Navigate to="/products/all" />} />
           <Route
             path="/products/:collection"

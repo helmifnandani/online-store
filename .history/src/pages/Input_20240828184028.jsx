@@ -10,8 +10,7 @@ const input = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
-  const CLOUDFLARE_TOKEN = "rot7C1YxhAf3IUc4KmE4EJrGDa_1x7jVJiKimLi8";
-  const CLOUDFLARE_ID = "8c38baf0067f9ddd3e408e6702ad02bd";
+  const CLOUDFLARE_TOKEN = rot7C1YxhAf3IUc4KmE4EJrGDa_1x7jVJiKimLi8;
 
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
@@ -28,12 +27,13 @@ const input = () => {
 
       // Assuming you have an endpoint or direct URL for Cloudflare R2 uploads
       const response = await axios.post(
-        `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ID}/images/v1`, // Replace with your actual Cloudflare R2 upload URL
+        "https://api.cloudflare.com/client/v4/accounts/${process.env.CLOUDFLARE_ID}/images/v1,", // Replace with your actual Cloudflare R2 upload URL
         formData,
         {
-          headers: formData.getHeaders
-            ? formData.getHeaders()
-            : { "Content-Type": "multipart/form-data" },
+                headers: {
+                    'Authorization': Bearer ${process.env.CLOUDFLARE_TOKEN},
+                    ...formData.getHeaders(),
+          },
         },
       );
 

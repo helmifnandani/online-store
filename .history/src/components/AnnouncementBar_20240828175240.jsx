@@ -10,6 +10,7 @@ const AnnouncementBar = ({ isScrolled }) => {
 
   useEffect(() => {
     setAnnouncementBarItems(announcementBarItemsArray);
+    console.log(announcementBarItems);
   }, []);
   return (
     <div

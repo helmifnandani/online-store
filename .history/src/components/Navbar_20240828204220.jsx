@@ -15,7 +15,7 @@ const Navbar = ({
     <>
       <AnnouncementBar isScrolled={isScrolled} />
       <nav
-        className={`sticky top-0 z-50 bg-white transition-all lg:!mt-0 ${isScrolled ? "bg-opacity-90 shadow-md" : ""}`}
+        className={`sticky top-0 z-50 bg-white transition-all lg:mt-0 ${isScrolled ? "bg-opacity-90 shadow-md" : ""}`}
         id="navbar"
       >
         <div className="container relative mx-auto px-4 py-3 text-sm">

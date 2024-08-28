@@ -103,7 +103,6 @@ function App() {
         )}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/input" element={<Input />} />
           <Route path="/products" element={<Navigate to="/products/all" />} />
           <Route
             path="/products/:collection"

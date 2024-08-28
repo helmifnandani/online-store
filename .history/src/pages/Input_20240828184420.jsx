@@ -31,9 +31,10 @@ const input = () => {
         `https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ID}/images/v1`, // Replace with your actual Cloudflare R2 upload URL
         formData,
         {
-          headers: formData.getHeaders
-            ? formData.getHeaders()
-            : { "Content-Type": "multipart/form-data" },
+          headers: {
+            Authorization: `Bearer ${CLOUDFLARE_TOKEN}`,
+            formData.getHeaders ? formData.getHeaders() : { 'Content-Type': 'multipart/form-data' }
+          },
         },
       );
 
