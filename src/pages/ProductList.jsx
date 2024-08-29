@@ -5,6 +5,7 @@ import { productItems, sorts } from "../constants";
 import ProductItem from "../components/ProductItem";
 import Icon from "../components/Icons";
 import Skeleton from "../components/Skeleton";
+import axios from "axios";
 
 const ProductListSection = ({ categoryList }) => {
   const [filterMenuOpen, setFilterMenuOpen] = useState(false);
@@ -16,6 +17,7 @@ const ProductListSection = ({ categoryList }) => {
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [style, setStyle] = useState({});
   const [products, setProducts] = useState([]);
+  const [productsAPI, setProductsAPI] = useState([]);
   const [page, setPage] = useState(1);
 
   const { collection } = useParams();
@@ -78,6 +80,7 @@ const ProductListSection = ({ categoryList }) => {
 
   useEffect(() => {
     fetchProducts(page);
+    fetchProductsAPI();
 
     const handleScroll = () => {
       const containerEl = document.querySelector("#container");
@@ -99,17 +102,18 @@ const ProductListSection = ({ categoryList }) => {
     };
   }, [page]);
 
-  // const fetchProducts = async (page) => {
-  //   setIsLoading(true);
-  //   try {
-  //     const response = await axios.get(`/api/products?page=${page}`);
-  //     setProducts((prevProducts) => [...prevProducts, ...response.data]);
-  //   } catch (error) {
-  //     console.error("Failed to load products:", error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  // };
+  const fetchProductsAPI = async (page) => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(`/api/products`);
+      console.log(response);
+      setProductsAPI((prevProducts) => [...prevProducts, ...response.data]);
+    } catch (error) {
+      console.error("Failed to load products:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const fetchProducts = (page) => {
     if (!isLoadingMore) setIsLoading(true);

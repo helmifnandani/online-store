@@ -9,7 +9,6 @@ import Skeleton from "../components/Skeleton";
 const Home = ({ heightNavbar }) => {
   const [isLoading, setLoading] = useState(true);
   setTimeout(() => {
-    console.log(heightNavbar);
     setLoading(false);
   }, 500);
   return (

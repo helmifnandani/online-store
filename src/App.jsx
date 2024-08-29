@@ -60,7 +60,7 @@ function App() {
 
     setTimeout(() => {
       updateHeight();
-    }, 300);
+    }, 600);
 
     window.addEventListener("resize", updateHeight);
 
