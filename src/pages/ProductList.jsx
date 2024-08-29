@@ -80,7 +80,7 @@ const ProductListSection = ({ categoryList }) => {
 
   useEffect(() => {
     fetchProducts(page);
-    fetchProductsAPI();
+    // fetchProductsAPI();
 
     const handleScroll = () => {
       const containerEl = document.querySelector("#container");
