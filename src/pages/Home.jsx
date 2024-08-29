@@ -10,7 +10,7 @@ const Home = ({ heightNavbar }) => {
   const [isLoading, setLoading] = useState(true);
   setTimeout(() => {
     setLoading(false);
-  }, 500);
+  }, 600);
   return (
     <>
       {isLoading ? (
