@@ -9,24 +9,22 @@ import Skeleton from "../components/Skeleton";
 const Home = ({ heightNavbar }) => {
   const [isLoading, setLoading] = useState(true);
   setTimeout(() => {
+    console.log(heightNavbar);
     setLoading(false);
   }, 500);
   return (
     <>
       {isLoading ? (
         <>
-          <div
-            className="space-y-10"
-            style={{ marginTop: `-${heightNavbar}px` }}
-          >
+          <div className="space-y-10">
             <Skeleton
               className={
-                "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] aspect-2x3 w-screen lg:-mt-10 lg:aspect-20x9"
+                "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-[72px] aspect-2x3 w-screen lg:-mt-[144px] lg:aspect-20x9"
               }
             />
             <div className="space-y-4">
               <Skeleton
-                className="h-7 w-6/12"
+                className="h-7 w-6/12 lg:w-3/12"
                 classContainer="flex justify-center"
               />
               <div className="mb-7 grid h-full grid-cols-12 gap-2 lg:gap-7">
@@ -48,7 +46,7 @@ const Home = ({ heightNavbar }) => {
             </div>
             <div className="space-y-4">
               <Skeleton
-                className="h-7 w-6/12"
+                className="h-7 w-6/12 lg:w-3/12"
                 classContainer="flex justify-center"
               />
               <div className="mb-7 grid h-full grid-cols-12 gap-2 lg:gap-7">
