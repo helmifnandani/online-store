@@ -4,10 +4,7 @@ import { productItems } from "../constants";
 import Button from "./Button";
 import axios from "axios";
 
-const ProductSection = ({
-  title = "Best Seller",
-  description = "Check out our best seller collection",
-}) => {
+const ProductSection = ({ title = "Best Seller" }) => {
   // const [products, setProduct] = useState([]); // State to store the product data
   // const [loading, setLoading] = useState(true); // State to manage loading state
   // const [error, setError] = useState(null); // State to handle errors
@@ -32,9 +29,8 @@ const ProductSection = ({
     <>
       <div className="mb-7 flex flex-col text-center">
         <h2 className="text-3xl font-semibold">{title}</h2>
-        <h3 className="text-lg">{description}</h3>
       </div>
-      <div className="mb-7 grid h-full grid-cols-12 gap-2 lg:gap-7">
+      <div className="mb-7 grid h-full grid-cols-12 gap-x-2 gap-y-5 lg:gap-x-7">
         {productItems.slice(0, 4).map((item, index) => (
           <div
             className="col-span-6 h-full w-full lg:col-span-3"
@@ -45,7 +41,11 @@ const ProductSection = ({
         ))}
       </div>
       <div className="flex items-center justify-center">
-        <Button isLink={true} type={"outline"} text={"View More"} />
+        <Button
+          isLink={true}
+          className="text-xs font-semibold"
+          text={"View More"}
+        />
       </div>
     </>
   );

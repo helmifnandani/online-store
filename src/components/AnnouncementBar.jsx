@@ -14,6 +14,7 @@ const AnnouncementBar = ({ isScrolled }) => {
   return (
     <div
       className={`bg-primary-500 py-2 text-white ${isScrolled ? "h-0 max-h-0" : "h-auto max-h-10"}`}
+      id="announcement_bar"
     >
       <SlideShow
         arrows={false}

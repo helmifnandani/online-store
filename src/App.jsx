@@ -18,6 +18,7 @@ import { categories } from "./constants";
 function App() {
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [heightNavbar, setHeightNavbar] = useState(0);
+  const [announcementBarHeight, setAnnouncementBarHeight] = useState(0);
   const [isScrolled, setIsScrolled] = useState(false);
   const containerRef = useRef(null);
   const [categoryList, setCategoryList] = useState([]);
@@ -43,12 +44,23 @@ function App() {
   useEffect(() => {
     var navbar = document.querySelector("#navbar");
     const updateHeight = () => {
+      setAnnouncementBarHeight(
+        document.querySelector("#announcement_bar").offsetHeight,
+      );
       if (navbar) {
-        setHeightNavbar(navbar.offsetHeight);
+        if (window.innerWidth <= 768) {
+          setHeightNavbar(navbar.offsetHeight);
+        } else {
+          setHeightNavbar(
+            navbar.offsetHeight + navbar.getClientRects()[0].top + 4,
+          );
+        }
       }
     };
 
-    updateHeight();
+    setTimeout(() => {
+      updateHeight();
+    }, 300);
 
     window.addEventListener("resize", updateHeight);
 
@@ -75,13 +87,14 @@ function App() {
     <div
       id="container"
       ref={containerRef}
-      className={`flex h-screen flex-col overflow-x-hidden lg:space-y-10 ${mobileDrawerOpen ? "overflow-y-hidden" : ""} `}
+      className={`relative flex h-screen flex-col overflow-x-hidden lg:space-y-10 ${mobileDrawerOpen ? "overflow-y-hidden" : ""} `}
     >
       <Navbar
         toggleNavbar={toggleNavbar}
         mobileDrawerOpen={mobileDrawerOpen}
         isScrolled={isScrolled}
         categoryList={categoryList}
+        sideBarPosition={heightNavbar + announcementBarHeight}
       />
       <div
         className="mx-auto w-full max-w-7xl flex-grow px-4 lg:px-6"
@@ -96,13 +109,15 @@ function App() {
                 : "pointer-events-none opacity-0"
             }`}
             onClick={toggleNavbar}
-            style={{ marginTop: `${heightNavbar}px` }}
+            style={{
+              marginTop: `${heightNavbar + announcementBarHeight}px`,
+            }}
           ></div>
         ) : (
           <></>
         )}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home heightNavbar={heightNavbar} />} />
           <Route path="/input" element={<Input />} />
           <Route path="/products" element={<Navigate to="/products/all" />} />
           <Route

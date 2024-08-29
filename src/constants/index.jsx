@@ -5,10 +5,9 @@ import Banner4 from "../assets/images/banner-4.jpg";
 
 export const navItems = [
   { label: "New In", href: "/products/new-in" },
-  { label: "Tkd’s Pick", href: "/products/tkds-pick" },
+  { label: "Our Pick", href: "/products/our-pick" },
   {
     label: "Shop All",
-    href: "/products/shop",
     hasNestedMenu: true,
   },
   { label: "Sale", href: "/products/sale" },
@@ -448,7 +447,7 @@ export const productItems = [
           categorydetailname: "Our Pick",
           Category: {
             categoryid: "fc64fa3e-cd69-438a-9201-960f0f48491f",
-            categoryname: "TKD's Pick",
+            categoryname: "Our Pick",
           },
         },
       },
@@ -564,8 +563,8 @@ export const collectionItems = [
   {
     img_src:
       "https://images.tokopedia.net/img/cache/200-square/VqbcmM/2024/8/13/7787d351-6e74-413c-bbce-0cd7223277ce.jpg",
-    text: "Dress",
-    href: "/products/dress",
+    text: "Denim",
+    href: "/products/denim",
   },
 ];
 
@@ -782,7 +781,7 @@ export const categories = [
   },
   {
     categoryId: "7f6173ce-e37b-42b0-9e2f-1e2ce939f22d",
-    categoryName: "Tkd's Pick",
+    categoryName: "Our Pick",
     isStandard: false,
     status: true,
     createdDate: "2024-01-01 00:00:00",

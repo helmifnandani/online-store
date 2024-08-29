@@ -16,8 +16,9 @@ const Button = ({
   style,
   openNewTab,
   disabled,
+  children,
 }) => {
-  let btnStyle = `flex gap-2 items-center justify-center text-center text-sm font-medium transition-all ease-linear ${btnWidth} `;
+  let btnStyle = `flex gap-2 items-center justify-center text-center text-sm font-medium transition-all ease-linear focus-visible:ring-offset-0 ${btnWidth} `;
   switch (type) {
     case "primary":
       btnStyle += `${disabled ? "!bg-gray-100 pointer-events-none !text-gray-400" : ""} px-5 py-2.5 bg-primary-500 text-white hover:bg-gray-700 focus:outline-none `;
@@ -61,7 +62,12 @@ const Button = ({
               <Icon name={iconName} width={iconWidth} />
             </span>
           )}
-          <span className={`btn-text ${btnTextClass}`}>{text}</span>
+          <span
+            className={`btn-text focus-visible:ring-offset-0 ${btnTextClass}`}
+          >
+            {text}
+          </span>
+          {children}
         </Link>
       ) : (
         <button onClick={onClick} className={btnStyle} style={style}>
@@ -71,10 +77,17 @@ const Button = ({
             </span>
           )}
           {text && (
-            <span className={type === "link" ? `btn-text ${btnTextClass}` : ""}>
+            <span
+              className={
+                type === "link"
+                  ? `btn-text focus-visible:ring-offset-0 ${btnTextClass}`
+                  : ""
+              }
+            >
               {text}
             </span>
           )}
+          {children}
         </button>
       )}
     </>

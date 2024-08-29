@@ -209,6 +209,7 @@ const ProductDetailSection = () => {
                           <Button
                             type={`${size === selectedSize ? "primary" : "outline"}`}
                             text={size}
+                            className="uppercase"
                             onClick={() => handleClickSize(size)}
                           />
                         </div>

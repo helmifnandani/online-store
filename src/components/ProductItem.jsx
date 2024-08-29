@@ -29,7 +29,7 @@ const ProductItem = ({ item }) => {
   return (
     <div className="group flex max-w-xs flex-col overflow-hidden">
       <Link to={`/product/${item.productid}`} className="flex-grow">
-        <div className="relative mb-4 flex aspect-card overflow-hidden">
+        <div className="relative mb-3 flex aspect-card overflow-hidden">
           <Image
             className={"peer !absolute top-0 h-full max-h-full max-w-full"}
             imgSrc={imgArray[0] ? imgArray[0].imagepath : placeholderImg}
@@ -48,14 +48,14 @@ const ProductItem = ({ item }) => {
           )}
         </div>
       </Link>
-      <div className="flex flex-col justify-between px-3 lg:px-5">
-        <div className="flex flex-col gap-4">
+      <div className="flex flex-col justify-between">
+        <div className="flex flex-col">
           <Link to={`/product/${item.productid}`}>
-            <h5 className="text-sm tracking-tight text-slate-900">
+            <h5 className="mb-2.5 text-sm tracking-tight text-slate-900">
               {item.productname}
             </h5>
           </Link>
-          <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
+          <div className="mb-4 flex items-center gap-3.5">
             <p className="text-nowrap text-sm">
               Rp {new Intl.NumberFormat().format(item.price)}
             </p>
@@ -68,9 +68,9 @@ const ProductItem = ({ item }) => {
               </p>
             )}
           </div>
-          <ul className="mb-4 flex flex-row items-center">
+          <ul className="mb-4 flex flex-row items-center gap-2.5">
             {item.colors.map((color, index) => (
-              <li className="mr-4 last:mr-0" key={index}>
+              <li className="last:mr-0" key={index}>
                 <span
                   className={`block rounded-full border p-0.5 transition duration-300 ease-in ${
                     color === selectedColor ? "border-gray-500" : "border-white"

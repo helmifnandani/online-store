@@ -6,7 +6,7 @@ import { bannerItems } from "../constants";
 import Image from "../components/Image";
 import Skeleton from "../components/Skeleton";
 
-const Home = () => {
+const Home = ({ heightNavbar }) => {
   const [isLoading, setLoading] = useState(true);
   setTimeout(() => {
     setLoading(false);
@@ -15,15 +15,20 @@ const Home = () => {
     <>
       {isLoading ? (
         <>
-          <div className="space-y-10">
+          <div
+            className="space-y-10"
+            style={{ marginTop: `-${heightNavbar}px` }}
+          >
             <Skeleton
               className={
-                "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-10 aspect-2x3 w-screen lg:aspect-20x9"
+                "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] aspect-2x3 w-screen lg:-mt-10 lg:aspect-20x9"
               }
             />
             <div className="space-y-4">
-              <Skeleton className="h-7 w-1/12" />
-              <Skeleton className="h-7 w-2/12" />
+              <Skeleton
+                className="h-7 w-6/12"
+                classContainer="flex justify-center"
+              />
               <div className="mb-7 grid h-full grid-cols-12 gap-2 lg:gap-7">
                 {(() => {
                   const elements = [];
@@ -42,8 +47,10 @@ const Home = () => {
               </div>
             </div>
             <div className="space-y-4">
-              <Skeleton className="h-7 w-1/12" />
-              <Skeleton className="h-7 w-2/12" />
+              <Skeleton
+                className="h-7 w-6/12"
+                classContainer="flex justify-center"
+              />
               <div className="mb-7 grid h-full grid-cols-12 gap-2 lg:gap-7">
                 {(() => {
                   const elements = [];
@@ -64,8 +71,8 @@ const Home = () => {
           </div>
         </>
       ) : (
-        <div className="space-y-10">
-          <SlideShow className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-10 w-screen">
+        <div className="space-y-10" style={{ marginTop: `-${heightNavbar}px` }}>
+          <SlideShow className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen lg:-mt-10">
             {bannerItems.map((item, index) => (
               <div key={index}>
                 <Image
@@ -79,11 +86,8 @@ const Home = () => {
               </div>
             ))}
           </SlideShow>
-          <ProductSection
-            title={"New In"}
-            description={"We got you more styles!"}
-          />
-          <ProductSection title={"Tkd's Pick"} description={"Pieces we love"} />
+          <ProductSection title={"New In"} />
+          <ProductSection title={"Our Pick"} />
           <CollectionSection />
         </div>
       )}
