@@ -80,7 +80,7 @@ const ProductListSection = ({ categoryList }) => {
 
   useEffect(() => {
     fetchProducts(page);
-    // fetchProductsAPI();
+    // fetchProductsAPI(page);
 
     const handleScroll = () => {
       const containerEl = document.querySelector("#container");
@@ -102,18 +102,26 @@ const ProductListSection = ({ categoryList }) => {
     };
   }, [page]);
 
-  const fetchProductsAPI = async (page) => {
-    setIsLoading(true);
-    try {
-      const response = await axios.get(`/api/products`);
-      console.log(response);
-      setProductsAPI((prevProducts) => [...prevProducts, ...response.data]);
-    } catch (error) {
-      console.error("Failed to load products:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // useEffect(function () {
+  //   axios.get(`/api/products`).then((res) => {
+  //     console.log(res);
+  //     const data = res.data;
+  //     console.log(data);
+  //     setProductsAPI(data);
+  //   });
+  // }, []);
+  // const fetchProductsAPI = async (page) => {
+  //   setIsLoading(true);
+  //   try {
+  //     const response = await axios.get(`localhost:5000/api/products?page=${page}`);
+  //     console.log(response);
+  //     setProductsAPI((prevProducts) => [...prevProducts, ...response.data]);
+  //   } catch (error) {
+  //     console.error("Failed to load products:", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
 
   const fetchProducts = (page) => {
     if (!isLoadingMore) setIsLoading(true);
@@ -158,11 +166,11 @@ const ProductListSection = ({ categoryList }) => {
         <>
           <Skeleton className="mb-7 h-7 w-3/12" />
           <Skeleton
-            className="mb-7 h-7 w-2/12"
+            className="mb-7 h-7 w-4/12 lg:w-2/12"
             classContainer="flex justify-center"
           />
           <Skeleton
-            className="mb-7 h-7 w-1/12"
+            className="mb-7 h-7 w-3/12 lg:w-1/12"
             items="2"
             classContainer="flex justify-between"
           />
@@ -209,15 +217,15 @@ const ProductListSection = ({ categoryList }) => {
                       fill={"#374151"}
                     />
                     {index === pathnames.length - 1 ? (
-                      <span className="ml-1 text-sm font-medium text-gray-400 md:ml-2">
-                        {value}
+                      <span className="ml-1 text-sm font-medium capitalize text-gray-400 md:ml-2">
+                        {decodeURI(value)}
                       </span>
                     ) : (
                       <Link
                         to={to}
-                        className="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2"
+                        className="ml-1 text-sm font-medium capitalize text-gray-700 hover:text-gray-900 md:ml-2"
                       >
-                        {value}
+                        {decodeURI(value)}
                       </Link>
                     )}
                   </li>
@@ -226,27 +234,28 @@ const ProductListSection = ({ categoryList }) => {
             </ol>
           </div>
           <div className="mb-7 flex justify-center">
-            <h1 className="text-4xl font-semibold">{collection}</h1>
+            <h1 className="text-xl font-semibold capitalize lg:text-4xl">
+              {collection}
+            </h1>
           </div>
           <div className="mb-7 flex justify-between">
             <div className="relative">
               <Button
                 type="link"
-                text="filter"
+                text="Filter"
                 iconWidth={20}
                 iconName="filter"
                 onClick={toggleFilterMenu}
               />
               <ul
-                className={`${filterMenuOpen ? "opacity-1 pointer-events-auto translate-y-0" : "pointer-events-none -translate-y-1/2 opacity-0"} absolute left-0 top-full z-10 mt-4 flex w-screen flex-wrap gap-7 border-t bg-white p-8 shadow-xl transition-all ease-out lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl`}
-                // className="min-w pointer-events-none absolute -left-10 top-full z-50 flex w-screen flex-wrap gap-7 bg-white p-3 opacity-0 shadow-md transition-all group-hover:pointer-events-auto group-hover:opacity-100 lg:max-w-screen-lg lg:-translate-x-1/2 xl:max-w-screen-xl 2xl:max-w-screen-2xl"
+                className={`${filterMenuOpen ? "opacity-1 pointer-events-auto translate-y-0" : "pointer-events-none -translate-y-1/2 opacity-0"} absolute -left-4 top-full z-10 mt-4 grid w-screen grid-cols-2 gap-y-5 border-t bg-white p-8 shadow-xl transition-all ease-out lg:left-0 lg:flex lg:w-fit lg:flex-nowrap`}
               >
                 {categoryList.map((category, index) => (
                   <li
                     key={category.categoryId}
                     className={category.categoryName}
                   >
-                    <p className="mx-4 text-nowrap border-b border-gray-300 py-2 text-center font-semibold">
+                    <p className="mx-4 text-nowrap border-b border-gray-300 py-2 font-semibold">
                       {category.categoryName}
                     </p>
                     <ul>
@@ -274,7 +283,7 @@ const ProductListSection = ({ categoryList }) => {
                                 }
                               />
                               <label
-                                className="flex cursor-pointer items-center gap-2"
+                                className="flex cursor-pointer items-center gap-2 text-nowrap"
                                 htmlFor={categoryDetail.categoryDetailId}
                               >
                                 <span
@@ -294,7 +303,7 @@ const ProductListSection = ({ categoryList }) => {
             <div className="relative">
               <Button
                 type="link"
-                text="sort"
+                text="Sort"
                 iconWidth={20}
                 iconName="sort"
                 onClick={toggleSortMenu}
@@ -304,7 +313,7 @@ const ProductListSection = ({ categoryList }) => {
                 ref={dropdownRef}
                 style={style}
               >
-                <h1 className="text-md mb-3 border-b pb-3">Categories</h1>
+                <h3 className="text-md mb-3 border-b pb-3">Categories</h3>
                 {sorts.map((sort, index) => {
                   return (
                     <li key={index} className="mb-2 list-none">

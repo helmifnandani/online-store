@@ -14,9 +14,9 @@ const SVG = ({
     xmlns="http://www.w3.org/2000/svg"
     className={`svg-icon ${className || ""}`}
     xmlnsXlink="http://www.w3.org/1999/xlink"
-    stroke={fill}
+    stroke="currentColor"
     fill="none"
-    strokeWidth="1"
+    strokeWidth="2"
     strokeLinecap="round"
     strokeLinejoin="round"
   >

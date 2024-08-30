@@ -31,10 +31,11 @@ const CollectionSection = ({}) => {
           <div className="relative flex w-1/2 lg:w-full" key={index}>
             <Image
               imgSrc={item.img_src}
-              className={"aspect-card w-full"}
+              className={"w-full"}
               text={item.text}
               objectFit="object-cover"
               btnUrlTarget={item.href}
+              ratio={"aspect-card"}
             />
           </div>
         ))}

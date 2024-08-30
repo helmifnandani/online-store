@@ -28,10 +28,10 @@ const ProductSection = ({ title = "Best Seller" }) => {
   return (
     <>
       <div className="mb-7 flex flex-col text-center">
-        <h2 className="text-3xl font-semibold">{title}</h2>
+        <h1 className="text-2xl font-semibold">{title}</h1>
       </div>
       <div className="mb-7 grid h-full grid-cols-12 gap-x-2 gap-y-5 lg:gap-x-7">
-        {productItems.slice(0, 4).map((item, index) => (
+        {productItems.slice(0, 8).map((item, index) => (
           <div
             className="col-span-6 h-full w-full lg:col-span-3"
             key={item.productid}

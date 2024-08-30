@@ -134,20 +134,6 @@ const ProductDetailSection = () => {
                   </div>
                 ))}
               </SlideShow>
-              {/* <Image
-                className={"peer !absolute top-0 h-full max-h-full max-w-full"}
-                imgSrc={product.images[0].img_src_1}
-                ratio={"aspect-card"}
-                objectFit={"object-cover"}
-              />
-              <Image
-                className={
-                  "peer !absolute top-0 h-full max-h-full max-w-full transition-all delay-100 duration-300 hover:opacity-0 peer-hover:opacity-0"
-                }
-                imgSrc={product.images[0].img_src_2}
-                ratio={"aspect-card"}
-                objectFit={"object-cover"}
-              /> */}
             </div>
             <div className="flex w-full flex-col justify-between px-2 lg:w-1/2 lg:px-5">
               <div className="flex flex-col gap-7">
@@ -219,41 +205,11 @@ const ProductDetailSection = () => {
                 )}
 
                 <div className="grid divide-y divide-neutral-200">
-                  {product.description && (
-                    <div className="py-5">
-                      <details className="group">
-                        <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                          <span>DESCRIPTION</span>
-                          <span className="transition group-open:rotate-180">
-                            <Icon name="chevron-down" />
-                          </span>
-                        </summary>
-                        <p className="mt-3 text-neutral-600 group-open:animate-fadeIn">
-                          {product.description}
-                        </p>
-                      </details>
-                    </div>
-                  )}
-                  {product.material && (
-                    <div className="py-5">
-                      <details className="group">
-                        <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                          <span>MATERIAL</span>
-                          <span className="transition group-open:rotate-180">
-                            <Icon name="chevron-down" />
-                          </span>
-                        </summary>
-                        <p className="mt-3 text-neutral-600 group-open:animate-fadeIn">
-                          {product.material}
-                        </p>
-                      </details>
-                    </div>
-                  )}
                   {product.sizeMetric && (
                     <div className="py-5">
                       <details className="group">
                         <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
-                          <span>SIZE MEASUREMENT</span>
+                          <span>Sizing</span>
                           <span className="transition group-open:rotate-180">
                             <Icon name="chevron-down" />
                           </span>
@@ -309,6 +265,36 @@ const ProductDetailSection = () => {
                             />
                           )}
                         </div>
+                      </details>
+                    </div>
+                  )}
+                  {product.material && (
+                    <div className="py-5">
+                      <details className="group">
+                        <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
+                          <span>Material</span>
+                          <span className="transition group-open:rotate-180">
+                            <Icon name="chevron-down" />
+                          </span>
+                        </summary>
+                        <p className="mt-3 text-neutral-600 group-open:animate-fadeIn">
+                          {product.material}
+                        </p>
+                      </details>
+                    </div>
+                  )}
+                  {product.shipping && (
+                    <div className="py-5">
+                      <details className="group">
+                        <summary className="flex cursor-pointer list-none items-center justify-between font-medium">
+                          <span>Shipping</span>
+                          <span className="transition group-open:rotate-180">
+                            <Icon name="chevron-down" />
+                          </span>
+                        </summary>
+                        <p className="mt-3 text-neutral-600 group-open:animate-fadeIn">
+                          {product.shipping}
+                        </p>
                       </details>
                     </div>
                   )}

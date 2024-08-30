@@ -62,11 +62,13 @@ const Button = ({
               <Icon name={iconName} width={iconWidth} />
             </span>
           )}
-          <span
-            className={`btn-text focus-visible:ring-offset-0 ${btnTextClass}`}
-          >
-            {text}
-          </span>
+          {text && (
+            <span
+              className={`btn-text tracking-widest focus-visible:ring-offset-0 ${btnTextClass}`}
+            >
+              {text}
+            </span>
+          )}
           {children}
         </Link>
       ) : (
@@ -80,7 +82,7 @@ const Button = ({
             <span
               className={
                 type === "link"
-                  ? `btn-text focus-visible:ring-offset-0 ${btnTextClass}`
+                  ? `btn-text tracking-widest focus-visible:ring-offset-0 ${btnTextClass}`
                   : ""
               }
             >

@@ -10,7 +10,7 @@ const Home = ({ heightNavbar }) => {
   const [isLoading, setLoading] = useState(true);
   setTimeout(() => {
     setLoading(false);
-  }, 600);
+  }, 1000);
   return (
     <>
       {isLoading ? (
@@ -83,7 +83,7 @@ const Home = ({ heightNavbar }) => {
               </div>
             ))}
           </SlideShow>
-          <ProductSection title={"New In"} />
+          <ProductSection title={"New Arrivals"} />
           <ProductSection title={"Our Pick"} />
           <CollectionSection />
         </div>
