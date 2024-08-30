@@ -206,7 +206,7 @@ const Navbar = ({
           </div>
         </div>
         <div
-          className="absolute left-0 flex w-2/3 -translate-x-full overflow-auto bg-white text-primary-500 shadow-xl transition-transform duration-300 ease-in-out lg:hidden"
+          className="absolute left-0 flex w-10/12 -translate-x-full overflow-auto bg-white text-primary-500 shadow-xl transition-transform duration-300 ease-in-out lg:hidden"
           style={{
             height: `calc(100vh - ${sideBarPosition}px)`,
           }}

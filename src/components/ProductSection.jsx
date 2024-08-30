@@ -26,9 +26,9 @@ const ProductSection = ({ title = "Best Seller" }) => {
   // }, []);
 
   return (
-    <>
+    <div className="mb-12 lg:mb-14">
       <div className="mb-7 flex flex-col text-center">
-        <h1 className="text-2xl font-semibold">{title}</h1>
+        <h1 className="text-xl font-semibold tracking-widest">{title}</h1>
       </div>
       <div className="mb-7 grid h-full grid-cols-12 gap-x-2 gap-y-5 lg:gap-x-7">
         {productItems.slice(0, 8).map((item, index) => (
@@ -47,7 +47,7 @@ const ProductSection = ({ title = "Best Seller" }) => {
           text={"View More"}
         />
       </div>
-    </>
+    </div>
   );
 };
 

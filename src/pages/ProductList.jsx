@@ -234,7 +234,7 @@ const ProductListSection = ({ categoryList }) => {
             </ol>
           </div>
           <div className="mb-7 flex justify-center">
-            <h1 className="text-xl font-semibold capitalize lg:text-4xl">
+            <h1 className="text-xl font-semibold capitalize tracking-widest lg:text-2xl">
               {collection}
             </h1>
           </div>

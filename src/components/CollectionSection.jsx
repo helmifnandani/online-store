@@ -25,8 +25,8 @@ const CollectionSection = ({}) => {
   //   fetchCollections();
   // }, []);
   return (
-    <>
-      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-10 flex h-full w-screen flex-row flex-wrap lg:flex-nowrap">
+    <div className="mb-12 lg:mb-14">
+      <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] flex h-full w-screen flex-row flex-wrap lg:flex-nowrap">
         {collectionItems?.map((item, index) => (
           <div className="relative flex w-1/2 lg:w-full" key={index}>
             <Image
@@ -40,7 +40,7 @@ const CollectionSection = ({}) => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

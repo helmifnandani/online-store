@@ -14,62 +14,60 @@ const Home = ({ heightNavbar }) => {
   return (
     <>
       {isLoading ? (
-        <>
-          <div className="space-y-10">
+        <div>
+          <Skeleton
+            className={
+              "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-[72px] mb-14 aspect-2x3 w-screen lg:-mt-[144px] lg:mb-16 lg:aspect-20x9"
+            }
+          />
+          <div className="mb-12 space-y-4 lg:mb-14">
             <Skeleton
-              className={
-                "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-[72px] aspect-2x3 w-screen lg:-mt-[144px] lg:aspect-20x9"
-              }
+              className="h-7 w-6/12 lg:w-3/12"
+              classContainer="flex justify-center"
             />
-            <div className="space-y-4">
-              <Skeleton
-                className="h-7 w-6/12 lg:w-3/12"
-                classContainer="flex justify-center"
-              />
-              <div className="mb-7 grid h-full grid-cols-12 gap-2 lg:gap-7">
-                {(() => {
-                  const elements = [];
-                  for (let i = 0; i < 4; i++) {
-                    elements.push(
-                      <div
-                        className="col-span-6 h-full w-full lg:col-span-3"
-                        key={i}
-                      >
-                        <Skeleton key={i} className={"aspect-card"} />
-                      </div>,
-                    );
-                  }
-                  return elements;
-                })()}
-              </div>
-            </div>
-            <div className="space-y-4">
-              <Skeleton
-                className="h-7 w-6/12 lg:w-3/12"
-                classContainer="flex justify-center"
-              />
-              <div className="mb-7 grid h-full grid-cols-12 gap-2 lg:gap-7">
-                {(() => {
-                  const elements = [];
-                  for (let i = 0; i < 4; i++) {
-                    elements.push(
-                      <div
-                        className="col-span-6 h-full w-full lg:col-span-3"
-                        key={i}
-                      >
-                        <Skeleton key={i} className={"aspect-card"} />
-                      </div>,
-                    );
-                  }
-                  return elements;
-                })()}
-              </div>
+            <div className="mb-7 grid h-full grid-cols-12 gap-2 lg:gap-7">
+              {(() => {
+                const elements = [];
+                for (let i = 0; i < 4; i++) {
+                  elements.push(
+                    <div
+                      className="col-span-6 h-full w-full lg:col-span-3"
+                      key={i}
+                    >
+                      <Skeleton key={i} className={"aspect-card"} />
+                    </div>,
+                  );
+                }
+                return elements;
+              })()}
             </div>
           </div>
-        </>
+          <div className="mb-12 space-y-4 lg:mb-14">
+            <Skeleton
+              className="h-7 w-6/12 lg:w-3/12"
+              classContainer="flex justify-center"
+            />
+            <div className="mb-7 grid h-full grid-cols-12 gap-2 lg:gap-7">
+              {(() => {
+                const elements = [];
+                for (let i = 0; i < 4; i++) {
+                  elements.push(
+                    <div
+                      className="col-span-6 h-full w-full lg:col-span-3"
+                      key={i}
+                    >
+                      <Skeleton key={i} className={"aspect-card"} />
+                    </div>,
+                  );
+                }
+                return elements;
+              })()}
+            </div>
+          </div>
+        </div>
       ) : (
-        <div className="space-y-10" style={{ marginTop: `-${heightNavbar}px` }}>
-          <SlideShow className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] w-screen lg:-mt-10">
+        <div style={{ marginTop: `-${heightNavbar}px` }}>
+          <SlideShow className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-14 w-screen lg:-mt-10 lg:mb-16">
             {bannerItems.map((item, index) => (
               <div key={index}>
                 <Image
