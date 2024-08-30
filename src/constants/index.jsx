@@ -5,11 +5,12 @@ import Banner4 from "../assets/images/banner-4.jpg";
 
 export const navItems = [
   { label: "New Arrival", href: "/products/new arrival" },
-  { label: "Our Pick", href: "/products/our pick" },
   {
-    label: "Shop All",
+    label: "Shop",
     hasNestedMenu: true,
   },
+  { label: "Our Picks", href: "/products/our picks" },
+  { label: "Best Seller", href: "/products/best seller" },
   { label: "Sale", href: "/products/sale" },
 ];
 

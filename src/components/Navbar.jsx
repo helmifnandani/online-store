@@ -58,7 +58,8 @@ const Navbar = ({
             <ul className="ml-14 hidden gap-10 lg:flex">
               {navItems.map(
                 (item, index) =>
-                  item.label.toLowerCase() !== "sale" && (
+                  item.label.toLowerCase() !== "sale" &&
+                  item.label.toLowerCase() !== "best seller" && (
                     <li
                       key={index}
                       className={item.hasNestedMenu ? "group relative" : ""}
@@ -75,23 +76,12 @@ const Navbar = ({
                           {categoryList.map(
                             (category, index) =>
                               category.categoryName.toLowerCase() !==
-                                "collection" && (
+                                "collection" &&
+                              category.categoryDetails.length > 1 && (
                                 <li key={index}>
-                                  {category.categoryDetails.length == 1 ? (
-                                    <Button
-                                      isLink={true}
-                                      type={"link"}
-                                      urlTarget={`/products/${category.categoryName}`}
-                                      text={category.categoryName}
-                                      className={
-                                        "mx-4 !justify-start text-nowrap py-2 !text-start font-semibold"
-                                      }
-                                    />
-                                  ) : (
-                                    <p className="mx-4 text-nowrap border-b border-gray-300 py-2 font-semibold tracking-widest">
-                                      {category.categoryName}
-                                    </p>
-                                  )}
+                                  <p className="mx-4 text-nowrap border-b border-gray-300 py-2 font-semibold tracking-widest">
+                                    {category.categoryName}
+                                  </p>
                                   {category.categoryDetails.length > 1 && (
                                     <ul>
                                       {category.categoryDetails.map(
@@ -116,6 +106,26 @@ const Navbar = ({
                                 </li>
                               ),
                           )}
+                          <li>
+                            <ul>
+                              {categoryList.map(
+                                (category, index) =>
+                                  category.categoryDetails.length === 1 && (
+                                    <li key={index}>
+                                      <Button
+                                        isLink={true}
+                                        type={"link"}
+                                        urlTarget={`/products/${category.categoryName}`}
+                                        text={category.categoryName}
+                                        className={
+                                          "mx-4 !justify-start text-nowrap py-2 !text-start font-semibold"
+                                        }
+                                      />
+                                    </li>
+                                  ),
+                              )}
+                            </ul>
+                          </li>
                         </ul>
                       )}
                     </li>
@@ -131,7 +141,7 @@ const Navbar = ({
                         text={category.categoryName}
                         className={`tracking-[0.125em] ${isHome && !isScrolled && "not-scrolled"}`}
                       />
-                      <ul className="min-w pointer-events-none absolute left-0 top-full z-50 flex w-fit flex-wrap gap-7 bg-white p-3 opacity-0 shadow-md transition-all group-hover:pointer-events-auto group-hover:opacity-80 lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl">
+                      <ul className="min-w pointer-events-none absolute left-0 top-full z-50 flex w-fit flex-wrap gap-7 bg-white p-3 opacity-0 shadow-md transition-all group-hover:pointer-events-auto group-hover:opacity-100 lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl">
                         {categoryList.map(
                           (category, index) =>
                             category.categoryName.toLowerCase() ===
@@ -149,7 +159,7 @@ const Navbar = ({
                                             categoryDetail.categoryDetailName
                                           }
                                           className={
-                                            "!justify-start !text-start"
+                                            "!justify-start text-nowrap !text-start"
                                           }
                                         />
                                       </li>
@@ -160,6 +170,23 @@ const Navbar = ({
                             ),
                         )}
                       </ul>
+                    </li>
+                  ),
+              )}
+              {navItems.map(
+                (item, index) =>
+                  item.label.toLowerCase() === "best seller" && (
+                    <li
+                      key={index}
+                      className={item.hasNestedMenu ? "group relative" : ""}
+                    >
+                      <Button
+                        isLink={true}
+                        type={"link"}
+                        urlTarget={item.href}
+                        text={item.label}
+                        className={`tracking-[0.125em] ${isHome && !isScrolled && "not-scrolled"}`}
+                      />
                     </li>
                   ),
               )}
@@ -216,7 +243,8 @@ const Navbar = ({
             <ul className="px-4">
               {navItems.map(
                 (item, index) =>
-                  item.label.toLowerCase() !== "sale" && (
+                  item.label.toLowerCase() !== "sale" &&
+                  item.label.toLowerCase() !== "best seller" && (
                     <li key={index} className="border-b py-5">
                       <div className="relative">
                         <Button
@@ -358,6 +386,23 @@ const Navbar = ({
                             ),
                           )}
                         </ul>
+                      </div>
+                    </li>
+                  ),
+              )}
+              {navItems.map(
+                (item, index) =>
+                  item.label.toLowerCase() === "best seller" && (
+                    <li key={index} className="border-b py-5">
+                      <div className="relative">
+                        <Button
+                          isLink={true}
+                          type={"link"}
+                          urlTarget={item.href}
+                          text={item.label}
+                          className={"!justify-start"}
+                          btnTextClass={"tracking-[0.125em]"}
+                        ></Button>
                       </div>
                     </li>
                   ),

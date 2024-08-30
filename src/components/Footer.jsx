@@ -1,22 +1,19 @@
 import React from "react";
 import Icon from "./Icons";
 import Button from "./Button";
+import Banner from "../assets/images/banner-3.jpg";
+import Image from "./Image";
 
 const Footer = () => {
   return (
-    <div className="container relative mx-auto space-y-10 px-6 py-3 text-sm lg:px-4">
-      <div className="flex flex-col items-center justify-center text-center">
-        <p className="text-xl font-bold lg:text-3xl">want more styles?</p>
-        <p className="text-xl font-bold lg:text-3xl">
-          follow our travelling sister
-        </p>
-        <Button
-          isLink={true}
-          type={"link"}
-          text={"@titipkitadi"}
-          urlTarget="https://www.instagram.com/titipkitadi"
-          openNewTab={true}
-          className={"text-xl !font-bold lg:text-3xl"}
+    <div className="container relative mx-auto space-y-10 px-6 pb-3 text-sm lg:px-4">
+      <div className="mb-12 flex flex-col items-center justify-center text-center lg:mb-14">
+        <Image
+          imgSrc={Banner}
+          className={"w-full"}
+          objectFit="object-cover"
+          btnUrlTarget={"https://www.instagram.com/titipkitadi"}
+          ratio={"aspect-20x9"}
         />
       </div>
       <div className="flex flex-col gap-4 lg:flex-row">
