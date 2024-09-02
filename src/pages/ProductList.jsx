@@ -6,6 +6,8 @@ import ProductItem from "../components/ProductItem";
 import Icon from "../components/Icons";
 import Skeleton from "../components/Skeleton";
 import axios from "axios";
+import Banner from "../assets/images/banner-4.jpg";
+import Image from "../components/Image";
 
 const ProductListSection = ({ categoryList }) => {
   const [filterMenuOpen, setFilterMenuOpen] = useState(false);
@@ -164,6 +166,11 @@ const ProductListSection = ({ categoryList }) => {
     <div className="group mx-auto py-7 lg:px-4" ref={productListRef}>
       {isLoading ? (
         <>
+          <Skeleton
+            className={
+              "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-5 mb-14 aspect-4x5 w-screen lg:-mt-[144px] lg:mb-16 lg:aspect-20x9"
+            }
+          />
           <Skeleton className="mb-7 h-7 w-3/12" />
           <Skeleton
             className="mb-7 h-7 w-4/12 lg:w-2/12"
@@ -195,6 +202,15 @@ const ProductListSection = ({ categoryList }) => {
         </>
       ) : (
         <>
+          <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-5 mb-7 w-screen lg:-mt-12">
+            <Image
+              imgSrc={Banner}
+              className={"w-full"}
+              objectFit="object-cover"
+              btnUrlTarget={"https://www.instagram.com/titipkitadi"}
+              ratio={"aspect-4x5 lg:aspect-20x9"}
+            />
+          </div>
           <div className="mb-7">
             <ol className="inline-flex items-center space-x-1 md:space-x-2">
               <li className="inline-flex items-center">
@@ -234,7 +250,7 @@ const ProductListSection = ({ categoryList }) => {
             </ol>
           </div>
           <div className="mb-7 flex justify-center">
-            <h1 className="text-xl font-semibold capitalize tracking-widest lg:text-2xl">
+            <h1 className="text-xl font-semibold capitalize tracking-wider lg:text-2xl">
               {collection}
             </h1>
           </div>

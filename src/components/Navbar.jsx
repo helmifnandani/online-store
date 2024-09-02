@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { navItems, categories } from "../constants";
 import Icon from "./Icons";
 import Button from "./Button";
@@ -14,7 +14,11 @@ const Navbar = ({
 }) => {
   const [isCollapse, setIsCollapse] = useState(true);
   const [isCollapseChild, setIsCollapseChild] = useState(true);
+  const [menuPosition, setMenuPosition] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const menuRef = useRef(null);
   const location = useLocation();
+
   const handleClickNestedMenu = (e) => {
     e.classList.toggle("active");
     setIsCollapse(!isCollapse);
@@ -24,7 +28,29 @@ const Navbar = ({
     setIsCollapseChild(isCollapseChild === index ? null : index);
   };
   const isHome = location.pathname === "/";
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
 
+  useEffect(() => {
+    const updatePosition = () => {
+      const element = menuRef.current;
+      const leftElement = element.getClientRects()[0].left;
+      const widthElement = element.offsetWidth;
+      const windowWidth = window.innerWidth;
+      if (leftElement + widthElement > windowWidth) {
+        const leftValue = windowWidth - (leftElement + widthElement + 32);
+        setMenuPosition(leftValue);
+      }
+    };
+
+    updatePosition();
+
+    window.addEventListener("resize", updatePosition);
+
+    return () => {
+      window.removeEventListener("resize", updatePosition);
+    };
+  }, [isHovered]);
   return (
     <>
       <AnnouncementBar isScrolled={isScrolled} />
@@ -70,9 +96,18 @@ const Navbar = ({
                         urlTarget={item.href}
                         text={item.label}
                         className={`tracking-[0.125em] ${isHome && !isScrolled && "not-scrolled"}`}
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
                       />
                       {item.hasNestedMenu && (
-                        <ul className="min-w pointer-events-none absolute top-full z-50 flex w-fit flex-wrap gap-7 bg-white p-3 opacity-0 shadow-md transition-all group-hover:pointer-events-auto group-hover:opacity-100 lg:max-w-screen-lg lg:-translate-x-1/2 lg:flex-nowrap xl:max-w-screen-xl 2xl:max-w-screen-2xl">
+                        <ul
+                          className="min-w pointer-events-none absolute top-full z-50 flex w-fit flex-wrap gap-7 bg-white p-3 opacity-0 shadow-md transition-all group-hover:pointer-events-auto group-hover:opacity-100 lg:max-w-screen-lg lg:flex-nowrap xl:max-w-screen-xl 2xl:max-w-screen-2xl"
+                          style={{
+                            left: `${menuPosition}px`,
+                          }}
+                          id={`menu_${index}`}
+                          ref={menuRef}
+                        >
                           {categoryList.map(
                             (category, index) =>
                               category.categoryName.toLowerCase() !==

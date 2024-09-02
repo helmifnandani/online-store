@@ -13,7 +13,7 @@ const Footer = () => {
           className={"w-full"}
           objectFit="object-cover"
           btnUrlTarget={"https://www.instagram.com/titipkitadi"}
-          ratio={"aspect-20x9"}
+          ratio={"aspect-2x3 lg:aspect-20x9"}
         />
       </div>
       <div className="flex flex-col gap-4 lg:flex-row">

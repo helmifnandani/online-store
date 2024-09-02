@@ -10,4 +10,13 @@ export default defineConfig({
       symbolId: "icon_[name]", // This will generate IDs like "icon-close" for "close.svg"
     }),
   ],
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:5000/",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });

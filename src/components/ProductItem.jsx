@@ -60,7 +60,7 @@ const ProductItem = ({ item }) => {
               Rp {new Intl.NumberFormat().format(item.price)}
             </p>
             {item.discountprice > 0 && (
-              <p className="text-nowrap text-xs text-red-600 line-through">
+              <p className="text-nowrap text-xs line-through">
                 Rp{" "}
                 {new Intl.NumberFormat().format(
                   item.discountprice - item.price,

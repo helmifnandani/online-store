@@ -17,6 +17,8 @@ const Button = ({
   openNewTab,
   disabled,
   children,
+  onMouseEnter,
+  onMouseLeave,
 }) => {
   let btnStyle = `flex gap-2 items-center justify-center text-center text-sm font-medium transition-all ease-linear focus-visible:ring-offset-0 ${btnWidth} `;
   switch (type) {
@@ -56,6 +58,8 @@ const Button = ({
           style={style}
           target={openNewTab ? "_blank" : ""}
           onClick={handleLinkClick}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
         >
           {iconName && (
             <span>
@@ -72,7 +76,13 @@ const Button = ({
           {children}
         </Link>
       ) : (
-        <button onClick={onClick} className={btnStyle} style={style}>
+        <button
+          onClick={onClick}
+          className={btnStyle}
+          style={style}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        >
           {iconName && (
             <span>
               <Icon name={iconName} width={iconWidth} />

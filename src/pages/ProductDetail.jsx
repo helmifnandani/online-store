@@ -146,7 +146,7 @@ const ProductDetailSection = () => {
                       Rp {new Intl.NumberFormat().format(product.price)}
                     </p>
                     {product.discount > 0 && (
-                      <p className="text-nowrap text-sm font-semibold text-red-600 line-through">
+                      <p className="text-nowrap text-sm font-semibold line-through">
                         Rp{" "}
                         {new Intl.NumberFormat().format(
                           product.discount - product.price,
