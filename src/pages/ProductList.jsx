@@ -168,7 +168,7 @@ const ProductListSection = ({ categoryList }) => {
         <>
           <Skeleton
             className={
-              "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-5 mb-14 aspect-4x5 w-screen lg:-mt-[144px] lg:mb-16 lg:aspect-20x9"
+              "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-5 mb-14 aspect-4x5 w-screen lg:-mt-12 lg:mb-16 lg:aspect-20x9"
             }
           />
           <Skeleton className="mb-7 h-7 w-3/12" />
