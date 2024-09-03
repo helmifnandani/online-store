@@ -66,7 +66,7 @@ const ProductDetailSection = () => {
   };
 
   return (
-    <div className="group mx-auto flex flex-col lg:flex-row lg:px-4 lg:py-7">
+    <div className="group mx-auto mb-12 flex flex-col lg:mb-14 lg:flex-row lg:px-4 lg:py-7">
       {isLoading ? (
         <>
           <div className="flex w-full flex-col lg:flex-row">
@@ -142,17 +142,17 @@ const ProductDetailSection = () => {
                     {product.productName}
                   </h5>
                   <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
-                    <p className="text-md text-nowrap font-semibold text-gray-500">
-                      Rp {new Intl.NumberFormat().format(product.price)}
-                    </p>
-                    {product.discount > 0 && (
+                    {product.discountPrice > 0 && (
                       <p className="text-nowrap text-sm font-semibold line-through">
                         Rp{" "}
                         {new Intl.NumberFormat().format(
-                          product.discount - product.price,
+                          product.discountPrice - product.price,
                         )}
                       </p>
                     )}
+                    <p className="text-md text-nowrap font-semibold text-gray-500">
+                      Rp {new Intl.NumberFormat().format(product.price)}
+                    </p>
                   </div>
                 </div>
                 {product.colors.length > 0 && (

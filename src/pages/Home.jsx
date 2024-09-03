@@ -17,7 +17,7 @@ const Home = ({ heightNavbar }) => {
         <div>
           <Skeleton
             className={
-              "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-[72px] mb-14 aspect-4x5 w-screen lg:-mt-[144px] lg:mb-16 lg:aspect-20x9"
+              "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-[72px] mb-14 aspect-4x5 w-screen lg:-mt-[132px] lg:mb-16 lg:aspect-20x9"
             }
           />
           <div className="mb-12 space-y-4 lg:mb-14">

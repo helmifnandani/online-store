@@ -34,12 +34,14 @@ const Navbar = ({
   useEffect(() => {
     const updatePosition = () => {
       const element = menuRef.current;
-      const leftElement = element.getClientRects()[0].left;
-      const widthElement = element.offsetWidth;
-      const windowWidth = window.innerWidth;
-      if (leftElement + widthElement > windowWidth) {
-        const leftValue = windowWidth - (leftElement + widthElement + 32);
-        setMenuPosition(leftValue);
+      if (element) {
+        const leftElement = element.getClientRects()[0]?.left;
+        const widthElement = element.offsetWidth;
+        const windowWidth = window.innerWidth;
+        if (leftElement + widthElement > windowWidth) {
+          const leftValue = windowWidth - (leftElement + widthElement + 32);
+          setMenuPosition(leftValue);
+        }
       }
     };
 
@@ -78,7 +80,7 @@ const Navbar = ({
             </div>
             <div className="flex flex-shrink-0 items-center">
               <Link to={"/"}>
-                <Icon name="logo" className="h-12 w-12 lg:h-20 lg:w-20" />
+                <Icon name="logo" className="h-12 w-12 lg:h-16 lg:w-16" />
               </Link>
             </div>
             <ul className="ml-14 hidden gap-10 lg:flex">

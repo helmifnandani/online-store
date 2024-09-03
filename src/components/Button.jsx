@@ -93,7 +93,7 @@ const Button = ({
               className={
                 type === "link"
                   ? `btn-text tracking-widest focus-visible:ring-offset-0 ${btnTextClass}`
-                  : ""
+                  : "tracking-wider"
               }
             >
               {text}

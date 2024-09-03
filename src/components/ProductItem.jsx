@@ -56,9 +56,6 @@ const ProductItem = ({ item }) => {
             </h5>
           </Link>
           <div className="mb-4 flex items-center gap-3.5">
-            <p className="text-nowrap text-sm">
-              Rp {new Intl.NumberFormat().format(item.price)}
-            </p>
             {item.discountprice > 0 && (
               <p className="text-nowrap text-xs line-through">
                 Rp{" "}
@@ -67,6 +64,9 @@ const ProductItem = ({ item }) => {
                 )}
               </p>
             )}
+            <p className="text-nowrap text-sm">
+              Rp {new Intl.NumberFormat().format(item.price)}
+            </p>
           </div>
           <ul className="mb-4 flex flex-row items-center gap-2.5">
             {item.colors.map((color, index) => (
