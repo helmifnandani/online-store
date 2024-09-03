@@ -1047,7 +1047,7 @@ export const productDetail = {
       link: "link2",
     },
   ],
-  status: false,
+  status: "Pre-Order",
   createdDate: "2024-01-01 00:00:00",
   productImages: [
     {

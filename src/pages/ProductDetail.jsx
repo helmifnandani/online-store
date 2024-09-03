@@ -138,8 +138,15 @@ const ProductDetailSection = () => {
             <div className="flex w-full flex-col justify-between px-2 lg:w-1/2 lg:px-5">
               <div className="flex flex-col gap-7">
                 <div className="flex flex-col gap-3">
-                  <h5 className="text-xl font-semibold tracking-tight text-slate-900">
+                  <h5 className="inline-flex items-center text-xl font-semibold tracking-tight text-slate-900">
                     {product.productName}
+                    {product.status !== "available" && (
+                      <span
+                        className={`${product.status == "out-of-stock" ? "bg-red-400" : "bg-green-300"} ml-4 px-2 py-1 text-xs`}
+                      >
+                        {product.status}
+                      </span>
+                    )}
                   </h5>
                   <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
                     {product.discountPrice > 0 && (
@@ -341,7 +348,6 @@ const ProductDetailSection = () => {
                     urlTarget={`https://wa.me/6282323727197?text=${encodeURI("Hi! Mau tanya tentang produk")} ${encodeURI(product.productName)} ${fullUrl}`}
                     isLink={true}
                     openNewTab={true}
-                    disabled={!product.status}
                   />
                   <Button
                     type={"outline"}
