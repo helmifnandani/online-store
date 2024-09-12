@@ -12,46 +12,64 @@ import SizePants from "../assets/images/size-pants.jpg";
 import SizeShirt from "../assets/images/size-shirt.jpg";
 import SizeSkirt from "../assets/images/size-skirt.jpg";
 import SizeTrousers from "../assets/images/size-trousers.jpg";
+import placeholderImg from "../assets/images/placeholder-image.jpg";
+import axios from "axios";
 
-// ////////////////////////////////////////////////////////
-// TEMP: DELETE LATER
-import { productItems, productDetail } from "../constants";
-// ////////////////////////////////////////////////////////
-
-const ProductDetailSection = () => {
+const ProductDetailSection = ({
+  imgData,
+  user,
+  wishlist,
+  addWishlist,
+  setAddWishlist,
+}) => {
   const { guid } = useParams();
   const [product, setProduct] = useState(null);
   const [imgArray, setImgArray] = useState([]);
   const [selectedColor, setSelectedColor] = useState(null);
   const [selectedSize, setSelectedSize] = useState(null);
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isWishlist, setIsWishlist] = useState(false);
   const location = useLocation();
   const fullUrl = `${window.location.origin}${location.pathname}${location.search}${location.hash}`;
 
   useEffect(() => {
-    setLoading(true);
-    setProduct(productDetail);
+    const fetchProduct = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axios.get(
+          `http://localhost:5000/api/products/${guid}`,
+        );
+        setProduct(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProduct();
   }, []);
 
   useEffect(() => {
     if (product) {
       setSelectedColor(product.colors[0]);
-      setSelectedSize(product.size[0]);
+      setSelectedSize(product.sizes[0]);
+      if (wishlist.length > 0) {
+        setIsWishlist(() =>
+          wishlist.find((item) => item.productid === product.productid),
+        );
+      }
     }
-  }, [product]);
+  }, [product, wishlist]);
 
   useEffect(() => {
     if (product) {
       setImgArray(
-        product.productImages
-          .map((image) => {
-            return image.color === selectedColor ? image.imagePath : [];
-          })
-          .flat(),
+        imgData.filter(
+          (img) =>
+            img.imagetype.split("_")[0] === product.productid &&
+            img.imagetype.split("_")[1] === selectedColor,
+        ),
       );
-      setTimeout(() => {
-        setLoading(false);
-      }, 500);
     }
   }, [selectedColor]);
 
@@ -63,6 +81,41 @@ const ProductDetailSection = () => {
 
   const handleClickSize = (size) => {
     setSelectedSize(size);
+  };
+
+  const handleWishlist = async () => {
+    setAddWishlist(true);
+    try {
+      const formData = {
+        customerid: user.customerid,
+        productid: product.productid,
+      };
+      if (isWishlist) {
+        const response = await axios.delete(
+          `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/wishlist`,
+          {
+            data: formData,
+          },
+        );
+
+        if (response.status >= 200 && response.status < 300) {
+          setIsWishlist(false);
+          setAddWishlist(false);
+        }
+      } else {
+        const response = await axios.post(
+          `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/wishlist`,
+          formData,
+        );
+
+        if (response.status >= 200 && response.status < 300) {
+          setIsWishlist(true);
+          setAddWishlist(false);
+        }
+      }
+    } catch (error) {
+      console.error("Wishlist failed", error);
+    }
   };
 
   return (
@@ -116,30 +169,40 @@ const ProductDetailSection = () => {
         </>
       ) : (
         <>
-          <div className="flex max-w-full flex-col lg:flex-row">
+          <div className="flex w-full max-w-full flex-col lg:flex-row">
             <div className="mb-10 w-full lg:mb-24 lg:w-1/2">
-              <SlideShow
-                className="aspect-card"
-                dots={true}
-                propsCustomPaging={imgArray}
-                fade={false}
-              >
-                {imgArray.map((item, index) => (
-                  <div key={index}>
-                    <Image
-                      imgSrc={item}
-                      ratio={"w-full aspect-card"}
-                      className=""
-                    />
-                  </div>
-                ))}
-              </SlideShow>
+              {imgArray.length > 0 && (
+                <SlideShow
+                  className="aspect-card w-full"
+                  dots={true}
+                  propsCustomPaging={imgArray}
+                  fade={false}
+                  infinite={false}
+                >
+                  {imgArray.map((item, index) => (
+                    <div className="h-full w-full" key={index}>
+                      <Image
+                        imgSrc={item.imagepath}
+                        ratio={"aspect-card"}
+                        className="h-full w-full"
+                      />
+                    </div>
+                  ))}
+                </SlideShow>
+              )}
+              {imgArray.length < 1 && (
+                <Image
+                  imgSrc={placeholderImg}
+                  ratio={"aspect-card"}
+                  className="h-full w-full"
+                />
+              )}
             </div>
             <div className="flex w-full flex-col justify-between px-2 lg:w-1/2 lg:px-5">
               <div className="flex flex-col gap-7">
                 <div className="flex flex-col gap-3">
                   <h5 className="inline-flex items-center text-xl font-semibold tracking-tight text-slate-900">
-                    {product.productName}
+                    {product.productname}
                     {product.status !== "available" && (
                       <span
                         className={`${product.status == "out-of-stock" ? "bg-red-400" : "bg-green-300"} ml-4 px-2 py-1 text-xs`}
@@ -149,11 +212,11 @@ const ProductDetailSection = () => {
                     )}
                   </h5>
                   <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
-                    {product.discountPrice > 0 && (
+                    {product.productname > 0 && (
                       <p className="text-nowrap text-sm font-semibold line-through">
                         Rp{" "}
                         {new Intl.NumberFormat().format(
-                          product.discountPrice - product.price,
+                          product.productname - product.price,
                         )}
                       </p>
                     )}
@@ -190,14 +253,14 @@ const ProductDetailSection = () => {
                     </ul>
                   </div>
                 )}
-                {product.size.length > 0 && (
+                {product.sizes.length > 0 && (
                   <div>
                     <div className="mb-2 inline-flex">
                       <p className="text-slate-900">Size:</p>
                       <p className="text-slate-400"></p>
                     </div>
                     <div className="flex flex-wrap gap-3">
-                      {product.size.map((size, index) => (
+                      {product.sizes.map((size, index) => (
                         <div key={index}>
                           <Button
                             type={`${size === selectedSize ? "primary" : "outline"}`}
@@ -307,7 +370,7 @@ const ProductDetailSection = () => {
                   )}
                 </div>
                 <div className="flex w-full items-center gap-3">
-                  {product.onlineStores.find(
+                  {product.onlinestores.find(
                     (el) => el.onlineStore === "shopee",
                   ) && (
                     <Button
@@ -315,7 +378,7 @@ const ProductDetailSection = () => {
                       iconName={"shopee"}
                       className={"flex-grow"}
                       urlTarget={
-                        product.onlineStores.find(
+                        product.onlinestores.find(
                           (el) => el.onlineStore === "shopee",
                         ).link
                       }
@@ -323,7 +386,7 @@ const ProductDetailSection = () => {
                       openNewTab={true}
                     />
                   )}
-                  {product.onlineStores.find(
+                  {product.onlinestores.find(
                     (el) => el.onlineStore === "tokped",
                   ) && (
                     <Button
@@ -331,7 +394,7 @@ const ProductDetailSection = () => {
                       iconName={"tokopedia"}
                       className={"flex-grow"}
                       urlTarget={
-                        product.onlineStores.find(
+                        product.onlinestores.find(
                           (el) => el.onlineStore === "tokped",
                         ).link
                       }
@@ -345,7 +408,7 @@ const ProductDetailSection = () => {
                     text="Whatsapp"
                     iconName={"whatsapp"}
                     className={"flex-grow"}
-                    urlTarget={`https://wa.me/6282323727197?text=${encodeURI("Hi! Mau tanya tentang produk")} ${encodeURI(product.productName)} ${fullUrl}`}
+                    urlTarget={`https://wa.me/6282323727197?text=${encodeURI("Hi! Mau tanya tentang produk")} ${encodeURI(product.productname)} ${fullUrl}`}
                     isLink={true}
                     openNewTab={true}
                   />
@@ -353,6 +416,8 @@ const ProductDetailSection = () => {
                     type={"outline"}
                     iconName={"heart"}
                     className={"flex-shrink"}
+                    isWishlist={isWishlist}
+                    onClick={handleWishlist}
                   />
                 </div>
               </div>

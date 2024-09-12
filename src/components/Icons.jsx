@@ -14,6 +14,7 @@ import Menu from "./Icons/icon-menu.jsx";
 import Filter from "./Icons/icon-filter.jsx";
 import Sort from "./Icons/icon-sort.jsx";
 import Whatsapp from "./Icons/icon-whatsapp.jsx";
+import Logout from "./Icons/icon-logout.jsx";
 
 const Icon = (props) => {
   switch (props.name) {
@@ -47,6 +48,8 @@ const Icon = (props) => {
       return <Sort {...props} />;
     case "whatsapp":
       return <Whatsapp {...props} />;
+    case "logout":
+      return <Logout {...props} />;
     default:
   }
 };

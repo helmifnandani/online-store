@@ -19,6 +19,7 @@ const Button = ({
   children,
   onMouseEnter,
   onMouseLeave,
+  isWishlist,
 }) => {
   let btnStyle = `flex gap-2 items-center justify-center text-center text-sm font-medium transition-all ease-linear focus-visible:ring-offset-0 ${btnWidth} `;
   switch (type) {
@@ -68,7 +69,7 @@ const Button = ({
           )}
           {text && (
             <span
-              className={`btn-text tracking-widest focus-visible:ring-offset-0 ${btnTextClass}`}
+              className={`btn-text tracking-widest focus-visible:ring-offset-0 ${btnTextClass} red`}
             >
               {text}
             </span>
@@ -85,7 +86,12 @@ const Button = ({
         >
           {iconName && (
             <span>
-              <Icon name={iconName} width={iconWidth} />
+              <Icon
+                name={iconName}
+                width={iconWidth}
+                fill={isWishlist ? "#ef4444" : "none"}
+                stroke={isWishlist ? "#ef4444" : "currentColor"}
+              />
             </span>
           )}
           {text && (

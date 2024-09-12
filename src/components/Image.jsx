@@ -16,7 +16,7 @@ const Image = ({
   return (
     <>
       <img
-        className={`relative ${objectFit} ${ratio} ${text ? "bg-gray-300" : ""} ${className}`}
+        className={`relative w-full ${objectFit} ${ratio} ${text ? "bg-gray-300" : ""} ${className}`}
         src={imgSrc}
       />
       {hasButton ? (

@@ -4,8 +4,8 @@ import Image from "./Image";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import placeholderImg from "../assets/images/placeholder-image.jpg";
 
-const ProductItem = ({ item }) => {
-  const [selectedColor, setSelectedColor] = useState(item.colors[0]);
+const ProductItem = ({ item, imgData, isWishlistPage = false }) => {
+  const [selectedColor, setSelectedColor] = useState(null);
   const [imgArray, setImgArray] = useState([]);
 
   const handleClickColor = (color) => {
@@ -15,11 +15,23 @@ const ProductItem = ({ item }) => {
   };
 
   useEffect(() => {
+    if (!isWishlistPage) setSelectedColor(item.colors[0]);
+  }, []);
+
+  useEffect(() => {
     if (item) {
       setImgArray(
-        item.ProductImages.map((productImage) => {
-          return productImage.color === selectedColor ? productImage.Image : [];
-        })
+        imgData
+          .filter((img) => {
+            if (isWishlistPage) {
+              return img.imagetype.split("_")[0] === item.productid;
+            } else {
+              return (
+                img.imagetype.split("_")[0] === item.productid &&
+                img.imagetype.split("_")[1] === selectedColor
+              );
+            }
+          })
           .flat()
           .slice(0, 2),
       );
@@ -68,24 +80,28 @@ const ProductItem = ({ item }) => {
               Rp {new Intl.NumberFormat().format(item.price)}
             </p>
           </div>
-          <ul className="mb-4 flex flex-row items-center gap-2.5">
-            {item.colors.map((color, index) => (
-              <li className="last:mr-0" key={index}>
-                <span
-                  className={`block rounded-full border p-0.5 transition duration-300 ease-in ${
-                    color === selectedColor ? "border-gray-500" : "border-white"
-                  }`}
-                >
-                  <Button
-                    type={"link"}
-                    onClick={() => handleClickColor(color)}
-                    style={{ backgroundColor: color }}
-                    className="h-3 w-3 rounded-full p-2"
-                  />
-                </span>
-              </li>
-            ))}
-          </ul>
+          {!isWishlistPage && (
+            <ul className="mb-4 flex flex-row items-center gap-2.5">
+              {item.colors.map((color, index) => (
+                <li className="last:mr-0" key={index}>
+                  <span
+                    className={`block rounded-full border p-0.5 transition duration-300 ease-in ${
+                      color === selectedColor
+                        ? "border-gray-500"
+                        : "border-white"
+                    }`}
+                  >
+                    <Button
+                      type={"link"}
+                      onClick={() => handleClickColor(color)}
+                      style={{ backgroundColor: color }}
+                      className="h-3 w-3 rounded-full p-2"
+                    />
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>

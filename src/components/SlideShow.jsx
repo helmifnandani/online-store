@@ -110,7 +110,7 @@ const SlideShow = ({
         return (
           <a className="">
             <Image
-              imgSrc={propsCustomPaging[i]}
+              imgSrc={propsCustomPaging[i].imagepath}
               ratio={"aspect-card"}
               className="h-full w-full"
             />

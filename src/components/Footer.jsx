@@ -9,13 +9,15 @@ const Footer = () => {
     <div className="container relative mx-auto space-y-4 px-6 pb-3 text-sm lg:space-y-10 lg:px-4">
       <div className="border-b pb-4">
         <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 w-screen lg:mb-10">
-          <Image
-            imgSrc={Banner}
-            className={"w-full"}
-            objectFit="object-cover"
-            btnUrlTarget={"https://www.instagram.com/titipkitadi"}
-            ratio={"aspect-2x3 lg:aspect-20x9"}
-          />
+          <a target="_blank" href="https://www.instagram.com/the.koreandaily">
+            <Image
+              imgSrc={Banner}
+              className={"w-full"}
+              objectFit="object-cover"
+              btnUrlTarget={"https://www.instagram.com/titipkitadi"}
+              ratio={"aspect-2x3 lg:aspect-20x9"}
+            />
+          </a>
         </div>
       </div>
       <div className="flex flex-col gap-4 lg:flex-row">

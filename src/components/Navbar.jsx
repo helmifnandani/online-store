@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { navItems, categories } from "../constants";
+import { navItems } from "../constants";
 import Icon from "./Icons";
 import Button from "./Button";
 import { Link, useLocation } from "react-router-dom";
@@ -110,26 +110,35 @@ const Navbar = ({
                           id={`menu_${index}`}
                           ref={menuRef}
                         >
-                          {categoryList.map(
+                          {categoryList?.map(
                             (category, index) =>
-                              category.categoryName.toLowerCase() !==
+                              category.categoryname.toLowerCase() !==
                                 "collection" &&
-                              category.categoryDetails.length > 1 && (
-                                <li key={index}>
+                              category.categoryname.toLowerCase() !==
+                                "new arrival" &&
+                              category.categoryname.toLowerCase() !==
+                                "our's pick" &&
+                              category.CategoryDetails.length > 1 && (
+                                <li key={category.categoryid}>
                                   <p className="mx-4 text-nowrap border-b border-gray-300 py-2 font-semibold tracking-widest">
-                                    {category.categoryName}
+                                    {category.categoryname}
                                   </p>
-                                  {category.categoryDetails.length > 1 && (
+                                  {category.CategoryDetails.length > 1 && (
                                     <ul>
-                                      {category.categoryDetails.map(
+                                      {category.CategoryDetails.map(
                                         (categoryDetail, index) => (
-                                          <li className="px-4 py-2" key={index}>
+                                          <li
+                                            className="px-4 py-2"
+                                            key={
+                                              categoryDetail.categorydetailid
+                                            }
+                                          >
                                             <Button
                                               isLink={true}
                                               type={"link"}
-                                              urlTarget={`/products/${categoryDetail.categoryDetailName}`}
+                                              urlTarget={`/products/${categoryDetail.categorydetailid}`}
                                               text={
-                                                categoryDetail.categoryDetailName
+                                                categoryDetail.categorydetailname
                                               }
                                               className={
                                                 "!justify-start text-nowrap !text-start"
@@ -145,15 +154,19 @@ const Navbar = ({
                           )}
                           <li>
                             <ul>
-                              {categoryList.map(
+                              {categoryList?.map(
                                 (category, index) =>
-                                  category.categoryDetails.length === 1 && (
+                                  category.CategoryDetails.length === 1 &&
+                                  category.categoryname.toLowerCase() !==
+                                    "new arrival" &&
+                                  category.categoryname.toLowerCase() !==
+                                    "our's pick" && (
                                     <li key={index}>
                                       <Button
                                         isLink={true}
                                         type={"link"}
-                                        urlTarget={`/products/${category.categoryName}`}
-                                        text={category.categoryName}
+                                        urlTarget={`/products/${category.CategoryDetails[0].categorydetailid}`}
+                                        text={category.categoryname}
                                         className={
                                           "mx-4 !justify-start text-nowrap py-2 !text-start font-semibold"
                                         }
@@ -168,32 +181,35 @@ const Navbar = ({
                     </li>
                   ),
               )}
-              {categoryList.map(
+              {categoryList?.map(
                 (category, index) =>
-                  category.categoryName.toLowerCase() === "collection" && (
-                    <li key={index} className="group relative">
+                  category.categoryname.toLowerCase() === "collection" && (
+                    <li key={category.categoryid} className="group relative">
                       <Button
                         isLink={true}
                         type={"link"}
-                        text={category.categoryName}
+                        text={category.categoryname}
                         className={`tracking-[0.125em] ${isHome && !isScrolled && "not-scrolled"}`}
                       />
                       <ul className="min-w pointer-events-none absolute left-0 top-full z-50 flex w-fit flex-wrap gap-7 bg-white p-3 opacity-0 shadow-md transition-all group-hover:pointer-events-auto group-hover:opacity-100 lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl">
-                        {categoryList.map(
+                        {categoryList?.map(
                           (category, index) =>
-                            category.categoryName.toLowerCase() ===
+                            category.categoryname.toLowerCase() ===
                               "collection" && (
                               <li key={index}>
                                 <ul>
-                                  {category.categoryDetails.map(
+                                  {category.CategoryDetails.map(
                                     (categoryDetail, index) => (
-                                      <li className="px-4 py-2" key={index}>
+                                      <li
+                                        className="px-4 py-2"
+                                        key={categoryDetail.categorydetailid}
+                                      >
                                         <Button
                                           isLink={true}
                                           type={"link"}
-                                          urlTarget={`/products/${categoryDetail.categoryDetailName}`}
+                                          urlTarget={`/products/${categoryDetail.categorydetailid}`}
                                           text={
-                                            categoryDetail.categoryDetailName
+                                            categoryDetail.categorydetailname
                                           }
                                           className={
                                             "!justify-start text-nowrap !text-start"
@@ -311,10 +327,14 @@ const Navbar = ({
                           className={`transition-height overflow-hidden pt-2 duration-300 ease-in-out ${isCollapse ? "hidden h-0" : "block h-full"}`}
                         >
                           <ul>
-                            {categoryList.map(
+                            {categoryList?.map(
                               (category, index) =>
-                                category.categoryName.toLowerCase() !==
-                                  "collection" && (
+                                category.categoryname.toLowerCase() !==
+                                  "collection" &&
+                                category.categoryname.toLowerCase() !==
+                                  "new arrival" &&
+                                category.categoryname.toLowerCase() !==
+                                  "our's pick" && (
                                   <li
                                     key={index}
                                     className="border-b pb-5 ps-2 pt-5 last:border-0 last:pb-0"
@@ -322,17 +342,17 @@ const Navbar = ({
                                     <div className="relative text-nowrap font-semibold">
                                       <Button
                                         isLink={
-                                          category.categoryDetails.length === 1
+                                          category.CategoryDetails.length === 1
                                         }
                                         urlTarget={
-                                          category.categoryDetails.length ===
+                                          category.CategoryDetails.length ===
                                             1 &&
-                                          `/products/${category.categoryName}`
+                                          `/products/${category.categoryname}`
                                         }
                                         type={"link"}
-                                        text={category.categoryName}
+                                        text={category.categoryname}
                                         onClick={(event) =>
-                                          category.categoryDetails.length > 1 &&
+                                          category.CategoryDetails.length > 1 &&
                                           handleClickNestedChildMenu(
                                             index,
                                             event.currentTarget,
@@ -340,7 +360,7 @@ const Navbar = ({
                                         }
                                         className={"!justify-start !text-start"}
                                       >
-                                        {category.categoryDetails.length >
+                                        {category.CategoryDetails.length >
                                           1 && (
                                           <div className="icon-collapsable-plus"></div>
                                         )}
@@ -350,7 +370,7 @@ const Navbar = ({
                                       className={`transition-height overflow-hidden pt-2 duration-300 ease-in-out ${isCollapseChild === index ? "block h-full" : "hidden h-0"}`}
                                     >
                                       <ul>
-                                        {category.categoryDetails.map(
+                                        {category.CategoryDetails.map(
                                           (categoryDetail, index) => (
                                             <li
                                               className="border-b pb-5 ps-2 pt-5 last:border-0 last:pb-0"
@@ -359,9 +379,9 @@ const Navbar = ({
                                               <Button
                                                 isLink={true}
                                                 type={"link"}
-                                                urlTarget={`/products/${categoryDetail.categoryDetailName}`}
+                                                urlTarget={`/products/${categoryDetail.categorydetailid}`}
                                                 text={
-                                                  categoryDetail.categoryDetailName
+                                                  categoryDetail.categorydetailname
                                                 }
                                                 className={
                                                   "!justify-start !text-start"
@@ -381,18 +401,18 @@ const Navbar = ({
                     </li>
                   ),
               )}
-              {categoryList.map(
+              {categoryList?.map(
                 (category, index) =>
-                  category.categoryName.toLowerCase() === "collection" && (
+                  category.categoryname.toLowerCase() === "collection" && (
                     <li key={index} className="border-b py-5">
                       <div className="relative text-nowrap font-semibold">
                         <Button
-                          isLink={!category.categoryDetails.length > 0}
+                          isLink={!category.CategoryDetails.length > 0}
                           type={"link"}
-                          text={category.categoryName}
+                          text={category.categoryname}
                           btnTextClass={"tracking-[0.125em]"}
                           onClick={(event) =>
-                            category.categoryDetails.length > 0 &&
+                            category.CategoryDetails.length > 0 &&
                             handleClickNestedChildMenu(
                               index,
                               event.currentTarget,
@@ -406,7 +426,7 @@ const Navbar = ({
                         className={`transition-height overflow-hidden pt-2 duration-300 ease-in-out ${isCollapseChild === index ? "block h-full" : "hidden h-0"}`}
                       >
                         <ul>
-                          {category.categoryDetails.map(
+                          {category.CategoryDetails.map(
                             (categoryDetail, index) => (
                               <li
                                 className="border-b pb-5 ps-2 pt-5 last:border-0 last:pb-0"
@@ -415,8 +435,8 @@ const Navbar = ({
                                 <Button
                                   isLink={true}
                                   type={"link"}
-                                  urlTarget={`/products/${categoryDetail.categoryDetailName}`}
-                                  text={categoryDetail.categoryDetailName}
+                                  urlTarget={`/products/${categoryDetail.categorydetailid}`}
+                                  text={categoryDetail.categorydetailname}
                                   className={"!justify-start !text-start"}
                                 />
                               </li>
