@@ -1,21 +1,42 @@
 import React from "react";
 import Icon from "./Icons";
 import Button from "./Button";
-import Banner from "../assets/images/banner-3.jpg";
 import Image from "./Image";
+import Banner2 from "../assets/images/banner-2.jpg";
 
-const Footer = () => {
+const Footer = ({ imgData }) => {
   return (
     <div className="container relative mx-auto space-y-4 px-6 pb-3 text-sm lg:space-y-10 lg:px-4">
       <div className="border-b pb-4">
-        <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 w-screen lg:mb-10">
+        <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 hidden w-screen lg:mb-10 lg:block">
           <a target="_blank" href="https://www.instagram.com/the.koreandaily">
             <Image
-              imgSrc={Banner}
+              imgSrc={
+                imgData.find((img) => img.imagetype === "footer_desktop")
+                  ? imgData.find((img) => img.imagetype === "footer_desktop")
+                      .imagepath
+                  : Banner2
+              }
               className={"w-full"}
               objectFit="object-cover"
               btnUrlTarget={"https://www.instagram.com/titipkitadi"}
-              ratio={"aspect-2x3 lg:aspect-20x9"}
+              ratio={"aspect-20x9"}
+            />
+          </a>
+        </div>
+        <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 w-screen lg:mb-10 lg:hidden">
+          <a target="_blank" href="https://www.instagram.com/the.koreandaily">
+            <Image
+              imgSrc={
+                imgData.find((img) => img.imagetype === "footer_mobile")
+                  ? imgData.find((img) => img.imagetype === "footer_mobile")
+                      .imagepath
+                  : Banner2
+              }
+              className={"w-full"}
+              objectFit="object-cover"
+              btnUrlTarget={"https://www.instagram.com/titipkitadi"}
+              ratio={"aspect-[320/250]"}
             />
           </a>
         </div>

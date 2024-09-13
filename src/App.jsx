@@ -101,6 +101,7 @@ function App() {
     } catch (error) {
       console.error("Error fetching images:", error);
     } finally {
+      updateHeight();
       setIsLoadingImage(false);
     }
   };
@@ -311,7 +312,7 @@ function App() {
           <Route path="/shipping" element={<Shipping />} />
         </Routes>
       </div>
-      <Footer />
+      <Footer imgData={imgData} />
     </div>
   );
 }

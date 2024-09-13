@@ -3,6 +3,8 @@ import ProductItem from "./ProductItem";
 import Button from "./Button";
 import axios from "axios";
 import Skeleton from "./Skeleton";
+import placeholderImgEmpty from "../assets/images/placeholder-empty.png";
+import Image from "./Image";
 
 const ProductSection = ({ title = "Best Seller", categoryId, imgData }) => {
   const [products, setProducts] = useState([]);
@@ -13,7 +15,7 @@ const ProductSection = ({ title = "Best Seller", categoryId, imgData }) => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/products-category/${categoryId}`,
+          `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/products-category/${categoryId}`,
         );
         setProducts(response.data.products.slice(0, 8));
       } catch (error) {
@@ -57,16 +59,30 @@ const ProductSection = ({ title = "Best Seller", categoryId, imgData }) => {
           <div className="mb-7 flex flex-col text-center">
             <h1 className="text-xl font-semibold tracking-wider">{title}</h1>
           </div>
-          <div className="mb-7 grid h-full grid-cols-12 gap-x-2 gap-y-5 lg:gap-x-7">
-            {products?.map((item, index) => (
-              <div
-                className="col-span-6 h-full w-full lg:col-span-3"
-                key={item.productid}
-              >
-                <ProductItem item={item} imgData={imgData} />
-              </div>
-            ))}
-          </div>
+          {products.length < 1 && (
+            <div className="mb-7 flex flex-col items-center space-y-4 lg:space-y-8">
+              <p className="text-xl font-bold tracking-wider lg:text-2xl">
+                Collection is empty
+              </p>
+              <Image
+                imgSrc={placeholderImgEmpty}
+                ratio="aspect-20x9"
+                objectFit="object-contain"
+              />
+            </div>
+          )}
+          {products.length > 0 && (
+            <div className="mb-7 grid h-full grid-cols-12 gap-x-2 gap-y-5 lg:gap-x-7">
+              {products?.map((item, index) => (
+                <div
+                  className="col-span-6 h-full w-full lg:col-span-3"
+                  key={item.productid}
+                >
+                  <ProductItem item={item} imgData={imgData} />
+                </div>
+              ))}
+            </div>
+          )}
           <div className="flex items-center justify-center">
             <Button
               isLink={true}

@@ -117,11 +117,14 @@ const ProductListSection = ({ categoryList, imgData }) => {
   }, [page, categoryList, collection, selectedCategory]);
 
   const fetchProducts = async (page) => {
-    if (!selectedCategory) return;
+    if (!selectedCategory) {
+      setIsLoading(false);
+      return;
+    }
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/products-category/${selectedCategory.categorydetailid}?page=${page}`,
+        `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/products-category/${selectedCategory.categorydetailid}?page=${page}`,
       );
       if (page > 1) {
         setProducts((prevProducts) => [
@@ -426,7 +429,7 @@ const ProductListSection = ({ categoryList, imgData }) => {
           )}
           {!selectedCategory && (
             <div className="flex flex-col items-center space-y-4 lg:space-y-8">
-              <p className="text-4xl font-bold tracking-wider">
+              <p className="text-xl font-bold tracking-wider lg:text-2xl">
                 Collection does not exist
               </p>
               <Image imgSrc={placeholderImgEmpty} />
