@@ -22,7 +22,8 @@ const ProductListSection = ({ categoryList, imgData }) => {
   const [selectedCategories, setSelectedCategories] = useState("");
   const [selectedSorts, setSelectedSorts] = useState("newest");
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [categoryBanner, setCategoryBanner] = useState(null);
+  const [categoryBannerDesktop, setCategoryBannerDesktop] = useState(null);
+  const [categoryBannerMobile, setCategoryBannerMobile] = useState(null);
   const [products, setProducts] = useState([]);
 
   const { collection } = useParams();
@@ -46,10 +47,6 @@ const ProductListSection = ({ categoryList, imgData }) => {
     }
   };
 
-  const toggleCategory = (e) => {
-    setSelectedCategories(selectedCategories);
-  };
-
   const toggleSortMenu = (e) => {
     e.stopPropagation();
     if (!sortMenuOpen) {
@@ -60,6 +57,7 @@ const ProductListSection = ({ categoryList, imgData }) => {
       return !prev;
     });
   };
+
   const toggleFilterMenu = (e) => {
     e.stopPropagation();
     setFilterMenuOpen((prev) => {
@@ -88,13 +86,20 @@ const ProductListSection = ({ categoryList, imgData }) => {
       .flatMap((category) => category.CategoryDetails)
       .find((detail) => detail.categorydetailid === collection);
     setSelectedCategory(categorydetail);
-    setCategoryBanner(() =>
+    setCategoryBannerDesktop(() =>
       imgData.find(
         (img) =>
-          img.imagetype.split("_")[0] === categorydetail.categorydetailid,
+          img.imagetype.split("_")[0] === categorydetail.categorydetailid &&
+          img.imagetype.split("_")[2] === "desktop",
       ),
     );
-    fetchProducts(page);
+    setCategoryBannerMobile(() =>
+      imgData.find(
+        (img) =>
+          img.imagetype.split("_")[0] === categorydetail.categorydetailid &&
+          img.imagetype.split("_")[2] === "mobile",
+      ),
+    );
 
     const handleScroll = () => {
       const containerEl = document.querySelector("#container");
@@ -114,14 +119,15 @@ const ProductListSection = ({ categoryList, imgData }) => {
     return () => {
       containerEl.removeEventListener("scroll", handleScroll);
     };
-  }, [page, categoryList, collection, selectedCategory]);
+  }, [categoryList, collection]);
+
+  useEffect(() => {
+    fetchProducts(page);
+  }, [page, selectedCategory]);
 
   const fetchProducts = async (page) => {
-    if (!selectedCategory) {
-      setIsLoading(false);
-      return;
-    }
     setIsLoading(true);
+    if (!selectedCategory) return;
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/products-category/${selectedCategory.categorydetailid}?page=${page}`,
@@ -214,13 +220,30 @@ const ProductListSection = ({ categoryList, imgData }) => {
         <>
           {selectedCategory && (
             <>
-              <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-5 mb-7 w-screen lg:-mt-12">
+              <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-5 mb-7 hidden w-screen lg:-mt-12 lg:block">
                 <Image
-                  imgSrc={categoryBanner ? categoryBanner.imagepath : Banner1}
+                  imgSrc={
+                    categoryBannerDesktop
+                      ? categoryBannerDesktop.imagepath
+                      : Banner1
+                  }
                   className={"w-full"}
                   objectFit="object-cover"
                   btnUrlTarget={"https://www.instagram.com/titipkitadi"}
-                  ratio={"aspect-4x5 lg:aspect-20x9"}
+                  ratio={"aspect-20x9"}
+                />
+              </div>
+              <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-5 mb-7 w-screen lg:-mt-12 lg:hidden">
+                <Image
+                  imgSrc={
+                    categoryBannerMobile
+                      ? categoryBannerMobile.imagepath
+                      : Banner1
+                  }
+                  className={"w-full"}
+                  objectFit="object-cover"
+                  btnUrlTarget={"https://www.instagram.com/titipkitadi"}
+                  ratio={"aspect-[320/250]"}
                 />
               </div>
               <div className="mb-7">
@@ -395,7 +418,7 @@ const ProductListSection = ({ categoryList, imgData }) => {
               )}
               {products.length < 1 && (
                 <div className="mb-7 flex flex-col items-center space-y-4 lg:space-y-8">
-                  <p className="text-4xl font-bold tracking-wider">
+                  <p className="text-center text-xl font-bold tracking-wider lg:text-2xl">
                     Collection is empty
                   </p>
                   <Image
