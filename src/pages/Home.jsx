@@ -20,7 +20,7 @@ const Home = ({ heightNavbar, imgData, isLoadingImage, categoryList }) => {
       )}
       {!isLoadingImage && (
         <>
-          {imgData.filter((image) => image.imagetype === "header_desktop")
+          {imgData?.filter((image) => image.imagetype === "header_desktop")
             .length > 0 ? (
             <SlideShow className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-14 hidden w-screen lg:mb-16 lg:block">
               {imgData
