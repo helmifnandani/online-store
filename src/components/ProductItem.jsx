@@ -9,13 +9,13 @@ const ProductItem = ({ item, imgData, isWishlistPage = false }) => {
   const [imgArray, setImgArray] = useState([]);
 
   const handleClickColor = (color) => {
-    if (color !== selectedColor) {
+    if (color.hex !== selectedColor.hex) {
       setSelectedColor(color);
     }
   };
 
   useEffect(() => {
-    if (!isWishlistPage) setSelectedColor(item.colors[0]);
+    if (!isWishlistPage && item.colors) setSelectedColor(item.colors[0]);
   }, []);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ const ProductItem = ({ item, imgData, isWishlistPage = false }) => {
             } else {
               return (
                 img.imagetype.split("_")[0] === item.productid &&
-                img.imagetype.split("_")[1] === selectedColor
+                img.imagetype.split("_")[1] === selectedColor.hex
               );
             }
           })
@@ -82,19 +82,19 @@ const ProductItem = ({ item, imgData, isWishlistPage = false }) => {
           </div>
           {!isWishlistPage && (
             <ul className="mb-4 flex flex-row items-center gap-2.5">
-              {item.colors.map((color, index) => (
+              {item.colors?.map((color, index) => (
                 <li className="last:mr-0" key={index}>
                   <span
                     className={`block rounded-full border p-0.5 transition duration-300 ease-in ${
-                      color === selectedColor
+                      color.hex === selectedColor?.hex
                         ? "border-gray-500"
                         : "border-white"
                     }`}
                   >
                     <Button
                       type={"link"}
-                      onClick={() => handleClickColor(color)}
-                      style={{ backgroundColor: color }}
+                      onClick={() => handleClickColor(color.hex)}
+                      style={{ backgroundColor: color.hex }}
                       className="h-3 w-3 rounded-full p-2"
                     />
                   </span>

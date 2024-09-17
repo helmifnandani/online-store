@@ -7,7 +7,10 @@ import Skeleton from "./Skeleton";
 
 const Footer = ({ imgData, isLoadingImage }) => {
   return (
-    <div className="container relative mx-auto space-y-4 px-6 pb-3 text-sm lg:space-y-10 lg:px-4">
+    <div
+      className="container relative mx-auto space-y-4 px-6 pb-3 text-sm lg:space-y-10 lg:px-4"
+      id="footer"
+    >
       <div className="border-b pb-4">
         {isLoadingImage && (
           <Skeleton

@@ -11,10 +11,16 @@ import Image from "../components/Image";
 import placeholderImgEmpty from "../assets/images/placeholder-empty.png";
 import Banner1 from "../assets/images/banner-1.jpg";
 
-const ProductListSection = ({ categoryList, imgData }) => {
+const ProductListSection = ({
+  categoryList,
+  imgData,
+  isBottomBody,
+  setIsBottomBody,
+}) => {
   const [filterMenuOpen, setFilterMenuOpen] = useState(false);
   const [sortMenuOpen, setSortMenuOpen] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+  const [isLoadedAll, setIsLoadedAll] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [style, setStyle] = useState({});
@@ -64,6 +70,37 @@ const ProductListSection = ({ categoryList, imgData }) => {
       if (!prev) setSortMenuOpen(false);
       return !prev;
     });
+  };
+
+  const fetchProducts = async (page) => {
+    if (page < 1) {
+      setIsLoading(true);
+    }
+    if (!selectedCategory) return;
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/products-category/${selectedCategory.categorydetailid}?page=${page}`,
+      );
+      if (page > 1) {
+        setProducts((prevProducts) => [
+          ...prevProducts,
+          ...response.data.products,
+        ]);
+        setIsBottomBody(false);
+      } else {
+        setProducts(response.data.products);
+      }
+      if (response.data.nextPage) {
+        setPage(response.data.nextPage);
+      }
+      setIsLoadedAll(!response.data.nextPage);
+    } catch (error) {
+      setProducts([]);
+      console.error("Failed to load products:", error);
+    } finally {
+      setIsLoading(false);
+      setIsLoadingMore(false);
+    }
   };
 
   useEffect(() => {
@@ -123,55 +160,14 @@ const ProductListSection = ({ categoryList, imgData }) => {
 
   useEffect(() => {
     fetchProducts(page);
-  }, [page, selectedCategory]);
+  }, [selectedCategory]);
 
-  const fetchProducts = async (page) => {
-    setIsLoading(true);
-    if (!selectedCategory) return;
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/products-category/${selectedCategory.categorydetailid}?page=${page}`,
-      );
-      if (page > 1) {
-        setProducts((prevProducts) => [
-          ...prevProducts,
-          ...response.data.products,
-        ]);
-      } else {
-        setProducts(response.data.products);
-      }
-    } catch (error) {
-      setProducts([]);
-      console.error("Failed to load products:", error);
-    } finally {
-      setIsLoading(false);
+  useEffect(() => {
+    if (isBottomBody && !isLoadedAll) {
+      setIsLoadingMore(true);
+      fetchProducts(page);
     }
-  };
-
-  // const fetchProducts = (page) => {
-  //   if (!isLoadingMore) setIsLoading(true);
-  //   setProducts((prevProducts) => {
-  //     collection;
-  //     if (collection.toLowerCase() === "all") {
-  //     } else {
-  //       let collection;
-  //       productItems.filter((item, index) => {
-  //         item.ProductCategories;
-  //       });
-  //     }
-  //     return [
-  //       ...prevProducts,
-  //       ...productItems.slice(
-  //         prevProducts.length,
-  //         isFirstLoad ? 8 : prevProducts.length + 8,
-  //       ),
-  //     ];
-  //   });
-  //   if (isFirstLoad) {
-  //   }
-  //   if (isLoadingMore) {
-  //   }
-  // };
+  }, [isBottomBody]);
 
   const loadMoreProducts = () => {
     setIsLoadingMore(true);

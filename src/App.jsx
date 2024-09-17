@@ -22,6 +22,7 @@ function App() {
   const [isLoadingWishlist, setIsLoadingWishlist] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isBottomBody, setIsBottomBody] = useState(false);
   const [addWishlist, setAddWishlist] = useState(false);
   const [errorLogIn, setErrorLogIn] = useState(null);
   const [user, setUser] = useState(null);
@@ -172,6 +173,14 @@ function App() {
     setUser(null);
   };
 
+  const isElementInViewport = (el) => {
+    const rect = el.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.top <= (window.innerHeight || document.documentElement.clientHeight)
+    );
+  };
+
   useEffect(() => {
     fetchWishlist();
   }, [user, addWishlist]);
@@ -212,10 +221,11 @@ function App() {
     const handleScroll = () => {
       const element = containerRef.current;
       setIsScrolled(element.scrollTop > 0);
+      const footerEl = document.getElementById("footer");
+      setIsBottomBody(isElementInViewport(footerEl));
     };
 
     const element = containerRef.current;
-
     element.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", updateHeight);
 
@@ -273,7 +283,12 @@ function App() {
           <Route
             path="/products/:collection"
             element={
-              <ProductList categoryList={categoryList} imgData={imgData} />
+              <ProductList
+                categoryList={categoryList}
+                imgData={imgData}
+                isBottomBody={isBottomBody}
+                setIsBottomBody={setIsBottomBody}
+              />
             }
           />
           <Route
