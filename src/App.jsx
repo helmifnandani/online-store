@@ -10,7 +10,6 @@ import About from "./pages/About";
 import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import Faq from "./pages/Faq";
-import ReturnsExchanges from "./pages/ReturnsExchanges";
 import Shipping from "./pages/Shipping";
 import axios from "axios";
 import ScrollToTop from "./components/ScrollToTop";
@@ -96,7 +95,9 @@ function App() {
       const response = await axios.get(
         `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/images`,
       );
-      setImgData(response.data);
+      if (response.data.length > 0) {
+        setImgData(response.data);
+      }
       updateHeight();
     } catch (error) {
       console.error("Error fetching images:", error);
@@ -308,11 +309,10 @@ function App() {
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />
-          <Route path="/returnsExchanges" element={<ReturnsExchanges />} />
           <Route path="/shipping" element={<Shipping />} />
         </Routes>
       </div>
-      <Footer imgData={imgData} />
+      <Footer imgData={imgData} isLoadingImage={isLoadingImage} />
     </div>
   );
 }

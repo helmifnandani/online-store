@@ -4,25 +4,31 @@ const Contact = () => {
   return (
     <div className="space-y-5">
       <h2 className="text-2xl font-semibold">Contact</h2>
-      <p className="text-lg">
-        Est sunt mollit sunt reprehenderit. Irure non sit nulla incididunt duis
-        ad anim cillum culpa do occaecat exercitation anim enim. Irure eu
-        eiusmod ea et consequat ut voluptate. Dolor laborum aute occaecat aliqua
-        pariatur eiusmod adipisicing ex laboris. Cillum commodo do nisi proident
-        ex est esse dolor nostrud fugiat cillum duis laborum.
-      </p>
-      <p className="text-lg">
-        Laboris id est labore amet incididunt ad aute ipsum ea excepteur amet
-        commodo reprehenderit eu. Laborum commodo velit laboris cupidatat
-        ullamco. Dolore et nostrud non minim cupidatat duis officia officia
-        aliquip aliquip enim dolore anim.
-      </p>
-      <p className="text-lg">
-        Mollit velit qui in consequat voluptate ipsum quis amet magna. Anim
-        incididunt consectetur ut cupidatat ex. Reprehenderit ullamco ut ea
-        fugiat irure occaecat. Laborum irure ea laborum ad nisi cupidatat non
-        laborum sit sint.
-      </p>
+      <div>
+        <h2 className="mb-2 text-xl font-semibold">Email us</h2>
+        <a
+          className="btn-link text-primary-500 transition-all ease-linear focus-visible:ring-offset-0"
+          href="mailto: its.thekoreandaily@gmail.com"
+          target="_blank"
+        >
+          <span className="btn-text tracking-widest focus-visible:ring-offset-0">
+            its.thekoreandaily@gmail.com
+          </span>
+        </a>
+      </div>
+      <div>
+        <h2 className="mb-2 text-xl font-semibold">Whatsapp us</h2>
+        <a
+          className="btn-link text-primary-500 transition-all ease-linear focus-visible:ring-offset-0"
+          href="https://wa.me/6282323727197"
+          target="_blank"
+        >
+          <span className="btn-text tracking-widest focus-visible:ring-offset-0">
+            +62 8232 3727 197
+          </span>
+        </a>
+        <p></p>
+      </div>
     </div>
   );
 };

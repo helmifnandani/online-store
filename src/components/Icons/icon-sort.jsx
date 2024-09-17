@@ -39,5 +39,5 @@ export default SVG;
   stroke-width="2"
   stroke-linecap="round"
   stroke-linejoin="round"
-  class="lucide lucide-arrow-up-down"
+  className="lucide lucide-arrow-up-down"
 ></svg>;
