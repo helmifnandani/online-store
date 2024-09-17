@@ -9,7 +9,7 @@ const ProductItem = ({ item, imgData, isWishlistPage = false }) => {
   const [imgArray, setImgArray] = useState([]);
 
   const handleClickColor = (color) => {
-    if (color.hex !== selectedColor.hex) {
+    if (color.hex !== selectedColor?.hex) {
       setSelectedColor(color);
     }
   };
@@ -28,7 +28,7 @@ const ProductItem = ({ item, imgData, isWishlistPage = false }) => {
             } else {
               return (
                 img.imagetype.split("_")[0] === item.productid &&
-                img.imagetype.split("_")[1] === selectedColor.hex
+                img.imagetype.split("_")[1] === selectedColor?.hex
               );
             }
           })

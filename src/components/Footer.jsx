@@ -22,43 +22,44 @@ const Footer = ({ imgData, isLoadingImage }) => {
         {!isLoadingImage && (
           <>
             <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 hidden w-screen lg:mb-10 lg:block">
-              <a
-                target="_blank"
-                href="https://www.instagram.com/the.koreandaily"
-              >
-                <Image
-                  imgSrc={
-                    imgData.find((img) => img.imagetype === "footer_desktop")
-                      ? imgData.find(
-                          (img) => img.imagetype === "footer_desktop",
-                        ).imagepath
-                      : Banner2
-                  }
-                  className={"w-full"}
-                  objectFit="object-cover"
-                  btnUrlTarget={"https://www.instagram.com/titipkitadi"}
-                  ratio={"aspect-20x9"}
-                />
-              </a>
+              {imgData.map((img, index) => {
+                return (
+                  img.imagetype === "footer_desktop" && (
+                    <a
+                      className={`${!img.properties ? "pointer-events-none" : ""} `}
+                      target="_blank"
+                      href={img.properties?.url}
+                    >
+                      <Image
+                        imgSrc={img.imagepath ? img.imagepath : Banner2}
+                        className={"w-full"}
+                        objectFit="object-cover"
+                        ratio={"aspect-20x9"}
+                      />
+                    </a>
+                  )
+                );
+              })}
             </div>
             <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 w-screen lg:mb-10 lg:hidden">
-              <a
-                target="_blank"
-                href="https://www.instagram.com/the.koreandaily"
-              >
-                <Image
-                  imgSrc={
-                    imgData.find((img) => img.imagetype === "footer_mobile")
-                      ? imgData.find((img) => img.imagetype === "footer_mobile")
-                          .imagepath
-                      : Banner2
-                  }
-                  className={"w-full"}
-                  objectFit="object-cover"
-                  btnUrlTarget={"https://www.instagram.com/titipkitadi"}
-                  ratio={"aspect-[320/250]"}
-                />
-              </a>
+              {imgData.map((img, index) => {
+                return (
+                  img.imagetype === "footer_mobile" && (
+                    <a
+                      className={`${!img.properties ? "pointer-events-none" : ""} `}
+                      target="_blank"
+                      href={img.properties?.url}
+                    >
+                      <Image
+                        imgSrc={img.imagepath ? img.imagepath : Banner2}
+                        className={"w-full"}
+                        objectFit="object-cover"
+                        ratio={"aspect-[320/250]"}
+                      />
+                    </a>
+                  )
+                );
+              })}
             </div>
           </>
         )}

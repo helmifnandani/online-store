@@ -27,14 +27,20 @@ const Home = ({ heightNavbar, imgData, isLoadingImage, categoryList }) => {
                 .filter((image) => image.imagetype === "header_desktop")
                 .map((item, index) => (
                   <div key={index}>
-                    <Image
-                      imgSrc={item.imagepath}
-                      hasButton={!!item.href}
-                      btnType={"outline"}
-                      btnIsLink={true}
-                      btnUrlTarget={item.href}
-                      ratio={"aspect-20x9"}
-                    />
+                    <a
+                      className={`${!item.properties ? "pointer-events-none" : ""} `}
+                      target="_blank"
+                      href={item.properties?.url}
+                    >
+                      <Image
+                        imgSrc={item.imagepath}
+                        hasButton={!!item.href}
+                        btnType={"outline"}
+                        btnIsLink={true}
+                        btnUrlTarget={item.href}
+                        ratio={"aspect-20x9"}
+                      />
+                    </a>
                   </div>
                 ))}
             </SlideShow>
@@ -50,14 +56,20 @@ const Home = ({ heightNavbar, imgData, isLoadingImage, categoryList }) => {
                 .filter((image) => image.imagetype === "header_mobile")
                 .map((item, index) => (
                   <div key={index}>
-                    <Image
-                      imgSrc={item.imagepath}
-                      hasButton={!!item.href}
-                      btnType={"outline"}
-                      btnIsLink={true}
-                      btnUrlTarget={item.href}
-                      ratio={"aspect-[320/250]"}
-                    />
+                    <a
+                      className={`${!item.properties ? "pointer-events-none" : ""} `}
+                      target="_blank"
+                      href={item.properties?.url}
+                    >
+                      <Image
+                        imgSrc={item.imagepath}
+                        hasButton={!!item.href}
+                        btnType={"outline"}
+                        btnIsLink={true}
+                        btnUrlTarget={item.href}
+                        ratio={"aspect-[320/250]"}
+                      />
+                    </a>
                   </div>
                 ))}
             </SlideShow>
