@@ -26,6 +26,7 @@ const Footer = ({ imgData, isLoadingImage }) => {
                 return (
                   img.imagetype === "footer_desktop" && (
                     <a
+                      key={img.cdnid}
                       className={`${!img.properties ? "pointer-events-none" : ""} `}
                       target="_blank"
                       href={img.properties?.url}
@@ -46,6 +47,7 @@ const Footer = ({ imgData, isLoadingImage }) => {
                 return (
                   img.imagetype === "footer_mobile" && (
                     <a
+                      key={img.cdnid}
                       className={`${!img.properties ? "pointer-events-none" : ""} `}
                       target="_blank"
                       href={img.properties?.url}

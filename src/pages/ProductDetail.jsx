@@ -52,7 +52,9 @@ const ProductDetailSection = ({
 
   useEffect(() => {
     if (product) {
-      setSelectedColor(product.colors[0]);
+      if (product.colors) {
+        setSelectedColor(product.colors[0]);
+      }
       setSelectedSize(product.sizes[0]);
       if (wishlist.length > 0) {
         setIsWishlist(() =>
@@ -227,7 +229,7 @@ const ProductDetailSection = ({
                       </p>
                     </div>
                   </div>
-                  {product.colors.length > 0 && (
+                  {product.colors?.length > 0 && (
                     <div>
                       <div className="mb-2 inline-flex gap-2">
                         <p className="text-slate-900">Colors:</p>
