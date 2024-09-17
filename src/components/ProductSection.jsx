@@ -15,7 +15,7 @@ const ProductSection = ({ title = "Best Seller", categoryId, imgData }) => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/products-category/${categoryId}`,
+          `http://157.173.222.34:8080/api/products-category/${categoryId}`,
         );
         setProducts(response.data.products.slice(0, 8));
       } catch (error) {

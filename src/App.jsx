@@ -37,7 +37,9 @@ function App() {
   const fetchCategories = async () => {
     try {
       setIsLoadingCategories(true);
-      const response = await axios.get(`http://localhost:5000/api/categories`);
+      const response = await axios.get(
+        `http://157.173.222.34:8080/api/categories`,
+      );
       setCategoryList(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -49,7 +51,9 @@ function App() {
   const fetchCustomers = async () => {
     try {
       setIsLoadingCustomers(true);
-      const response = await axios.get(`http://localhost:5000/api/customers`);
+      const response = await axios.get(
+        `http://157.173.222.34:8080/api/customers`,
+      );
       setCustomers(response.data);
     } catch (error) {
       console.error("Error fetching customers:", error);
@@ -61,7 +65,7 @@ function App() {
       try {
         setIsLoadingWishlist(true);
         const response = await axios.get(
-          `http://localhost:5000/api/wishlist/${user.customerid}`,
+          `http://157.173.222.34:8080/api/wishlist/${user.customerid}`,
         );
         setWishlist(response.data);
       } catch (error) {
@@ -89,7 +93,7 @@ function App() {
   const fetchImages = async () => {
     try {
       setIsLoadingImage(true);
-      const response = await axios.get(`http://localhost:5000/api/images`);
+      const response = await axios.get(`http://157.173.222.34:8080/api/images`);
       if (response.data.length > 0) {
         setImgData(response.data);
       }
@@ -110,7 +114,7 @@ function App() {
   const handleLogin = async (user) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/customer-login`,
+        `http://157.173.222.34:8080/api/customer-login`,
         user,
       );
 
@@ -140,7 +144,7 @@ function App() {
   const handleRegister = async (user) => {
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/customer-create`,
+        `http://157.173.222.34:8080/api/customer-create`,
         {
           customeremail: user.customeremail,
           customername: user.customername,

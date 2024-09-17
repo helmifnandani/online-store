@@ -79,7 +79,7 @@ const ProductListSection = ({
     if (!selectedCategory) return;
     try {
       const response = await axios.get(
-        `http://localhost:5000/api/products-category/${selectedCategory.categorydetailid}?page=${page}`,
+        `http://157.173.222.34:8080/api/products-category/${selectedCategory.categorydetailid}?page=${page}`,
       );
       if (page > 1) {
         setProducts((prevProducts) => [

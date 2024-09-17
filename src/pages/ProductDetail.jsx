@@ -38,7 +38,7 @@ const ProductDetailSection = ({
       try {
         setIsLoading(true);
         const response = await axios.get(
-          `http://localhost:5000/api/products/${guid}`,
+          `http://157.173.222.34:8080/api/products/${guid}`,
         );
         setProduct(response.data);
       } catch (error) {
@@ -95,7 +95,7 @@ const ProductDetailSection = ({
       };
       if (isWishlist) {
         const response = await axios.delete(
-          `http://localhost:5000/api/wishlist`,
+          `http://157.173.222.34:8080/api/wishlist`,
           {
             data: formData,
           },
@@ -107,7 +107,7 @@ const ProductDetailSection = ({
         }
       } else {
         const response = await axios.post(
-          `http://localhost:5000/api/wishlist`,
+          `http://157.173.222.34:8080/api/wishlist`,
           formData,
         );
 

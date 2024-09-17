@@ -21,10 +21,42 @@ const Footer = ({ imgData, isLoadingImage }) => {
         )}
         {!isLoadingImage && (
           <>
-            <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 hidden w-screen lg:mb-10 lg:block">
-              {imgData.map((img, index) => {
-                return (
-                  img.imagetype === "footer_desktop" && (
+            {imgData?.filter((image) => image.imagetype === "footer_desktop")
+              .length > 0 ? (
+              <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 hidden w-screen lg:mb-10 lg:block">
+                {imgData
+                  .filter((image) => image.imagetype === "footer_desktop")
+                  .map(
+                    (img, index) =>
+                      img.imagetype === "footer_desktop" && (
+                        <a
+                          key={img.cdnid}
+                          className={`${!img.properties ? "pointer-events-none" : ""} `}
+                          target="_blank"
+                          href={img.properties?.url}
+                        >
+                          <Image
+                            imgSrc={img.imagepath}
+                            className={"w-full"}
+                            objectFit="object-cover"
+                            ratio={"aspect-20x9"}
+                          />
+                        </a>
+                      ),
+                  )}
+              </div>
+            ) : (
+              <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-14 hidden w-screen lg:mb-16 lg:block">
+                <Image imgSrc={Banner2} ratio={"aspect-20x9"} />
+              </div>
+            )}
+
+            {imgData.filter((image) => image.imagetype === "footer_mobile")
+              .length > 0 ? (
+              <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 w-screen lg:mb-10 lg:hidden">
+                {imgData
+                  .filter((image) => image.imagetype === "footer_mobile")
+                  .map((img, index) => (
                     <a
                       key={img.cdnid}
                       className={`${!img.properties ? "pointer-events-none" : ""} `}
@@ -32,37 +64,19 @@ const Footer = ({ imgData, isLoadingImage }) => {
                       href={img.properties?.url}
                     >
                       <Image
-                        imgSrc={img.imagepath ? img.imagepath : Banner2}
-                        className={"w-full"}
-                        objectFit="object-cover"
-                        ratio={"aspect-20x9"}
-                      />
-                    </a>
-                  )
-                );
-              })}
-            </div>
-            <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 w-screen lg:mb-10 lg:hidden">
-              {imgData.map((img, index) => {
-                return (
-                  img.imagetype === "footer_mobile" && (
-                    <a
-                      key={img.cdnid}
-                      className={`${!img.properties ? "pointer-events-none" : ""} `}
-                      target="_blank"
-                      href={img.properties?.url}
-                    >
-                      <Image
-                        imgSrc={img.imagepath ? img.imagepath : Banner2}
+                        imgSrc={img.imagepath}
                         className={"w-full"}
                         objectFit="object-cover"
                         ratio={"aspect-[320/250]"}
                       />
                     </a>
-                  )
-                );
-              })}
-            </div>
+                  ))}
+              </div>
+            ) : (
+              <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-14 w-screen lg:mb-16 lg:hidden">
+                <Image imgSrc={Banner2} ratio={"aspect-[320/250]"} />
+              </div>
+            )}
           </>
         )}
       </div>
