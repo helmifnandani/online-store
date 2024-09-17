@@ -15,7 +15,7 @@ const ProductSection = ({ title = "Best Seller", categoryId, imgData }) => {
       setIsLoading(true);
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/products-category/${categoryId}`,
+          `http://localhost:5000/api/products-category/${categoryId}`,
         );
         setProducts(response.data.products.slice(0, 8));
       } catch (error) {

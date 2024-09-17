@@ -38,7 +38,7 @@ const ProductDetailSection = ({
       try {
         setIsLoading(true);
         const response = await axios.get(
-          `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/products/${guid}`,
+          `http://localhost:5000/api/products/${guid}`,
         );
         setProduct(response.data);
       } catch (error) {
@@ -93,7 +93,7 @@ const ProductDetailSection = ({
       };
       if (isWishlist) {
         const response = await axios.delete(
-          `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/wishlist`,
+          `http://localhost:5000/api/wishlist`,
           {
             data: formData,
           },
@@ -105,7 +105,7 @@ const ProductDetailSection = ({
         }
       } else {
         const response = await axios.post(
-          `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/wishlist`,
+          `http://localhost:5000/api/wishlist`,
           formData,
         );
 

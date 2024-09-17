@@ -79,7 +79,7 @@ const ProductListSection = ({
     if (!selectedCategory) return;
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/products-category/${selectedCategory.categorydetailid}?page=${page}`,
+        `http://localhost:5000/api/products-category/${selectedCategory.categorydetailid}?page=${page}`,
       );
       if (page > 1) {
         setProducts((prevProducts) => [

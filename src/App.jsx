@@ -37,9 +37,7 @@ function App() {
   const fetchCategories = async () => {
     try {
       setIsLoadingCategories(true);
-      const response = await axios.get(
-        `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/categories`,
-      );
+      const response = await axios.get(`http://localhost:5000/api/categories`);
       setCategoryList(response.data);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -51,9 +49,7 @@ function App() {
   const fetchCustomers = async () => {
     try {
       setIsLoadingCustomers(true);
-      const response = await axios.get(
-        `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/customers`,
-      );
+      const response = await axios.get(`http://localhost:5000/api/customers`);
       setCustomers(response.data);
     } catch (error) {
       console.error("Error fetching customers:", error);
@@ -65,7 +61,7 @@ function App() {
       try {
         setIsLoadingWishlist(true);
         const response = await axios.get(
-          `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/wishlist/${user.customerid}`,
+          `http://localhost:5000/api/wishlist/${user.customerid}`,
         );
         setWishlist(response.data);
       } catch (error) {
@@ -93,9 +89,7 @@ function App() {
   const fetchImages = async () => {
     try {
       setIsLoadingImage(true);
-      const response = await axios.get(
-        `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/images`,
-      );
+      const response = await axios.get(`http://localhost:5000/api/images`);
       if (response.data.length > 0) {
         setImgData(response.data);
       }
@@ -116,7 +110,7 @@ function App() {
   const handleLogin = async (user) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/customer-login`,
+        `http://localhost:5000/api/customer-login`,
         user,
       );
 
@@ -146,7 +140,7 @@ function App() {
   const handleRegister = async (user) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_ENV === "development" ? import.meta.env.VITE_API_LOCAL : import.meta.env.VITE_API_URL}/api/customer-create`,
+        `http://localhost:5000/api/customer-create`,
         {
           customeremail: user.customeremail,
           customername: user.customername,
