@@ -101,7 +101,7 @@ const Navbar = ({
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                       />
-                      {item.hasNestedMenu && (
+                      {item.hasNestedMenu && categoryList && (
                         <ul
                           className="min-w pointer-events-none absolute top-full z-50 flex w-fit flex-wrap gap-7 bg-white p-3 opacity-0 shadow-md transition-all group-hover:pointer-events-auto group-hover:opacity-100 lg:max-w-screen-lg lg:flex-nowrap xl:max-w-screen-xl 2xl:max-w-screen-2xl"
                           style={{
