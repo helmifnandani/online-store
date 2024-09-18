@@ -38,7 +38,7 @@ function App() {
     try {
       setIsLoadingCategories(true);
       const response = await axios.get(
-        `http://157.173.222.34:8080/api/categories`,
+        `${import.meta.env.VITE_API_URL}/api/categories`,
       );
       setCategoryList(response.data);
     } catch (error) {
@@ -52,7 +52,7 @@ function App() {
     try {
       setIsLoadingCustomers(true);
       const response = await axios.get(
-        `http://157.173.222.34:8080/api/customers`,
+        `${import.meta.env.VITE_API_URL}/api/customers`,
       );
       setCustomers(response.data);
     } catch (error) {
@@ -65,7 +65,7 @@ function App() {
       try {
         setIsLoadingWishlist(true);
         const response = await axios.get(
-          `http://157.173.222.34:8080/api/wishlist/${user.customerid}`,
+          `${import.meta.env.VITE_API_URL}/api/wishlist/${user.customerid}`,
         );
         setWishlist(response.data);
       } catch (error) {
@@ -93,7 +93,10 @@ function App() {
   const fetchImages = async () => {
     try {
       setIsLoadingImage(true);
-      const response = await axios.get(`http://157.173.222.34:8080/api/images`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/images`,
+      );
+
       if (response.data.length > 0) {
         setImgData(response.data);
       }
@@ -114,7 +117,7 @@ function App() {
   const handleLogin = async (user) => {
     try {
       const response = await axios.post(
-        `http://157.173.222.34:8080/api/customer-login`,
+        `${import.meta.env.VITE_API_URL}/api/customer-login`,
         user,
       );
 
@@ -144,7 +147,7 @@ function App() {
   const handleRegister = async (user) => {
     try {
       const response = await axios.post(
-        `http://157.173.222.34:8080/api/customer-create`,
+        `${import.meta.env.VITE_API_URL}/api/customer-create`,
         {
           customeremail: user.customeremail,
           customername: user.customername,

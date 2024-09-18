@@ -24,7 +24,6 @@ const CollectionSection = ({ categoryList, imgData }) => {
                   : placeholderImg
               }
               className={"w-full"}
-              text={item.categoryname}
               objectFit="object-cover"
               btnUrlTarget={item.href}
               ratio={"aspect-card"}

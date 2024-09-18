@@ -12,6 +12,8 @@ import SizePants from "../assets/images/size-pants.jpg";
 import SizeShirt from "../assets/images/size-shirt.jpg";
 import SizeSkirt from "../assets/images/size-skirt.jpg";
 import SizeTrousers from "../assets/images/size-trousers.jpg";
+import SizeCardigan1 from "../assets/images/size-cardigan-1.jpeg";
+import SizeCardigan2 from "../assets/images/size-cardigan-2.jpeg";
 import placeholderImg from "../assets/images/placeholder-image.jpg";
 import placeholderImgEmpty from "../assets/images/placeholder-empty.png";
 import axios from "axios";
@@ -38,7 +40,7 @@ const ProductDetailSection = ({
       try {
         setIsLoading(true);
         const response = await axios.get(
-          `http://157.173.222.34:8080/api/products/${guid}`,
+          `${import.meta.env.VITE_API_URL}/api/products/${guid}`,
         );
         setProduct(response.data);
       } catch (error) {
@@ -95,7 +97,7 @@ const ProductDetailSection = ({
       };
       if (isWishlist) {
         const response = await axios.delete(
-          `http://157.173.222.34:8080/api/wishlist`,
+          `${import.meta.env.VITE_API_URL}/api/wishlist`,
           {
             data: formData,
           },
@@ -107,7 +109,7 @@ const ProductDetailSection = ({
         }
       } else {
         const response = await axios.post(
-          `http://157.173.222.34:8080/api/wishlist`,
+          `${import.meta.env.VITE_API_URL}/api/wishlist`,
           formData,
         );
 
@@ -301,7 +303,7 @@ const ProductDetailSection = ({
                                       {product.sizes.length > 0 &&
                                         product.sizes.map((size, index) => (
                                           <th
-                                            key="index"
+                                            key={index}
                                             scope="col"
                                             className="px-6 py-3"
                                           >
@@ -401,6 +403,21 @@ const ProductDetailSection = ({
                                   objectFit={"object-contain"}
                                   ratio={"w-full aspect-9x10"}
                                 />
+                              )}
+                              {product.sizemetricid ==
+                                "50b6873f-7380-4031-9db9-946f8db4af31" && (
+                                <>
+                                  <Image
+                                    imgSrc={SizeCardigan1}
+                                    objectFit={"object-contain"}
+                                    ratio={"w-full aspect-9x10"}
+                                  />
+                                  <Image
+                                    imgSrc={SizeCardigan2}
+                                    objectFit={"object-contain"}
+                                    ratio={"w-full aspect-9x10"}
+                                  />
+                                </>
                               )}
                             </div>
                           </details>
