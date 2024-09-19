@@ -96,7 +96,7 @@ const ProductListSection = ({
       setIsLoadedAll(!response.data.nextPage);
     } catch (error) {
       setProducts([]);
-      console.error("Failed to load products:", error);
+      // console.error("Failed to load products:", error);
     } finally {
       setIsLoading(false);
       setIsLoadingMore(false);
@@ -161,6 +161,33 @@ const ProductListSection = ({
   useEffect(() => {
     fetchProducts(page);
   }, [selectedCategory]);
+
+  useEffect(() => {
+    switch (selectedSorts) {
+      case "newest":
+        setProducts(
+          [...products].sort(
+            (a, b) => new Date(a.createddate) - new Date(b.createddate),
+          ),
+        );
+        return;
+      case "oldest":
+        setProducts(
+          [...products].sort(
+            (a, b) => new Date(b.createddate) - new Date(a.createddate),
+          ),
+        );
+        return;
+      case "cheap":
+        setProducts([...products].sort((a, b) => a.price - b.price));
+        return;
+      case "expensive":
+        setProducts([...products].sort((a, b) => b.price - a.price));
+        return;
+      default:
+        return;
+    }
+  }, [selectedSorts]);
 
   useEffect(() => {
     if (isBottomBody && !isLoadedAll) {
@@ -285,8 +312,8 @@ const ProductListSection = ({
                   {selectedCategory.categorydetailname}
                 </h1>
               </div>
-              <div className="mb-7 flex justify-between">
-                <div className="relative">
+              <div className="mb-7 flex justify-end">
+                <div className="relative hidden">
                   <Button
                     type="link"
                     text="Filter"

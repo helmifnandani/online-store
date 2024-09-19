@@ -42,7 +42,7 @@ function App() {
       );
       setCategoryList(response.data);
     } catch (error) {
-      console.error("Error fetching categories:", error);
+      // console.error("Error fetching categories:", error);
     } finally {
       setIsLoadingCategories(false);
     }
@@ -56,7 +56,7 @@ function App() {
       );
       setCustomers(response.data);
     } catch (error) {
-      console.error("Error fetching customers:", error);
+      // console.error("Error fetching customers:", error);
     }
   };
 
@@ -69,7 +69,7 @@ function App() {
         );
         setWishlist(response.data);
       } catch (error) {
-        console.error("Error fetching wishlist:", error);
+        // console.error("Error fetching wishlist:", error);
       } finally {
         setIsLoadingWishlist(false);
       }
@@ -102,7 +102,7 @@ function App() {
       }
       updateHeight();
     } catch (error) {
-      console.error("Error fetching images:", error);
+      // console.error("Error fetching images:", error);
     } finally {
       updateHeight();
       setIsLoadingImage(false);
@@ -140,7 +140,7 @@ function App() {
       }
     } catch (error) {
       setErrorLogIn("Your account is not registered");
-      console.error("Login failed", error);
+      // console.error("Login failed", error);
     }
   };
 
@@ -160,7 +160,7 @@ function App() {
       }
     } catch (error) {
       setErrorLogIn("Your account is not registered");
-      console.error("Login failed", error);
+      // console.error("Login failed", error);
     }
   };
 

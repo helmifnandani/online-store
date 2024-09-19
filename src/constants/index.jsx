@@ -62,6 +62,7 @@ export const collectionItems = [
 
 export const sorts = [
   { value: "newest", text: "Newest" },
+  { value: "oldest", text: "Oldest" },
   { value: "cheap", text: "Price: Low to high" },
   { value: "expensive", text: "Price: High to low" },
 ];
