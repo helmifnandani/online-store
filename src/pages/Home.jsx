@@ -84,12 +84,12 @@ const Home = ({ heightNavbar, imgData, isLoadingImage, categoryList }) => {
       )}
       <ProductSection
         title={"New Arrival"}
-        categoryId="e4554ea1-b441-474c-8a2a-b4ed1bffce4b"
+        categoryId="1575dcde-3eeb-4da7-a1d1-73e4dea52e4c"
         imgData={imgData}
       />
       <ProductSection
         title={"Our Picks"}
-        categoryId="9074f328-aee8-4ddc-9f6e-e665c91822cb"
+        categoryId="fc64fa3e-cd69-438a-9201-960f0f48491f"
         imgData={imgData}
       />
       <CollectionSection categoryList={categoryList} imgData={imgData} />

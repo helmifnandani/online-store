@@ -133,21 +133,26 @@ const ProductListSection = ({
   }, [filterMenuOpen, sortMenuOpen]);
 
   useEffect(() => {
-    const categorydetail = categoryList
-      .flatMap((category) => category.CategoryDetails)
-      .find((detail) => detail.categorydetailid === collection);
+    setPage(1);
+    if (categoryList) {
+      const categorydetail = categoryList
+        .flatMap((category) => category.CategoryDetails)
+        .find((detail) => detail.categorydetailid === collection);
 
-    const categoryParent = categoryList.find(
-      (detail) => detail.categoryid === collection,
-    );
+      const categoryParent = categoryList.find(
+        (detail) => detail.categoryid === collection,
+      );
 
-    if (categorydetail) {
-      setSelectedCategory(categorydetail);
-    } else if (categoryParent) {
-      setIsCategoryParent(!!categoryParent);
-      setSelectedCategory(categoryParent);
-    } else {
-      setSelectedCategory("all");
+      if (categorydetail) {
+        setSelectedCategory(categorydetail);
+        setIsCategoryParent(false);
+      } else if (categoryParent) {
+        setIsCategoryParent(true);
+        setSelectedCategory(categoryParent);
+      } else {
+        setIsCategoryParent(false);
+        setSelectedCategory("all");
+      }
     }
 
     // setCategoryBannerDesktop(() => {
@@ -323,9 +328,11 @@ const ProductListSection = ({
                         />
                         {index === pathnames.length - 1 ? (
                           <span className="ml-1 text-sm font-medium capitalize text-gray-400 md:ml-2">
-                            {selectedCategory.categorydetailname
+                            {selectedCategory &&
+                            selectedCategory.categorydetailname
                               ? selectedCategory.categorydetailname
-                              : "all"}
+                              : selectedCategory.categoryname}
+                            {selectedCategory === "all" && "all"}
                           </span>
                         ) : (
                           <Link

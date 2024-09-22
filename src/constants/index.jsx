@@ -6,8 +6,8 @@ import Banner4 from "../assets/images/banner-4.jpg";
 export const navItems = [
   {
     label: "New Arrival",
-    href: "/products/e4554ea1-b441-474c-8a2a-b4ed1bffce4b",
-    categoryid: "e4554ea1-b441-474c-8a2a-b4ed1bffce4b",
+    href: "/products/1575dcde-3eeb-4da7-a1d1-73e4dea52e4c",
+    categoryid: "1575dcde-3eeb-4da7-a1d1-73e4dea52e4c",
   },
   {
     label: "Shop All",
@@ -19,18 +19,18 @@ export const navItems = [
   },
   {
     label: "Our Picks",
-    href: "/products/9074f328-aee8-4ddc-9f6e-e665c91822cb",
-    categoryid: "9074f328-aee8-4ddc-9f6e-e665c91822cb",
+    href: "/products/fc64fa3e-cd69-438a-9201-960f0f48491f",
+    categoryid: "fc64fa3e-cd69-438a-9201-960f0f48491f",
   },
   {
     label: "Best Seller",
-    href: "/products/a232adb6-a974-442d-b0c5-05370fe4f515",
-    categoryid: "a232adb6-a974-442d-b0c5-05370fe4f515",
+    href: "/products/006f4a95-0653-4d38-a9e2-976f2c55c1e5",
+    categoryid: "006f4a95-0653-4d38-a9e2-976f2c55c1e5",
   },
   {
     label: "Sale",
-    href: "/products/a6d84e95-e318-4f21-b924-9a1cc25f73d5",
-    categoryid: "a6d84e95-e318-4f21-b924-9a1cc25f73d5",
+    href: "/products/44fc86f7-216a-41ff-8ec6-3623a7f15912",
+    categoryid: "44fc86f7-216a-41ff-8ec6-3623a7f15912",
   },
 ];
 
