@@ -31,7 +31,7 @@ const Home = ({ heightNavbar, imgData, isLoadingImage, categoryList }) => {
                       <a
                         className={`${!item.properties ? "pointer-events-none" : ""} `}
                         target="_blank"
-                        href={item.properties?.url}
+                        href={JSON.parse(item.properties)?.url}
                       >
                         <Image
                           imgSrc={item.imagepath}
@@ -61,7 +61,7 @@ const Home = ({ heightNavbar, imgData, isLoadingImage, categoryList }) => {
                     <a
                       className={`${!item.properties ? "pointer-events-none" : ""} `}
                       target="_blank"
-                      href={item.properties?.url}
+                      href={JSON.parse(item.properties)?.url}
                     >
                       <Image
                         imgSrc={item.imagepath}

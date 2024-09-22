@@ -26,21 +26,23 @@ const Footer = ({ imgData, isLoadingImage }) => {
               <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-8 hidden w-screen lg:mb-10 lg:block">
                 {imgData
                   .filter((image) => image.imagetype === "footer_desktop")
-                  .map((img, index) => (
-                    <a
-                      key={img.cdnid}
-                      className={`${!img.properties ? "pointer-events-none" : ""} `}
-                      target="_blank"
-                      href={img.properties?.url}
-                    >
-                      <Image
-                        imgSrc={img.imagepath}
-                        className={"w-full"}
-                        objectFit="object-cover"
-                        ratio={"aspect-20x9"}
-                      />
-                    </a>
-                  ))}
+                  .map((img, index) => {
+                    return (
+                      <a
+                        key={img.cdnid}
+                        className={`${!img.properties ? "pointer-events-none" : ""} `}
+                        target="_blank"
+                        href={JSON.parse(img.properties)?.url}
+                      >
+                        <Image
+                          imgSrc={img.imagepath}
+                          className={"w-full"}
+                          objectFit="object-cover"
+                          ratio={"aspect-20x9"}
+                        />
+                      </a>
+                    );
+                  })}
               </div>
             ) : (
               <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-14 hidden w-screen lg:mb-16 lg:block">
@@ -58,7 +60,7 @@ const Footer = ({ imgData, isLoadingImage }) => {
                       key={img.cdnid}
                       className={`${!img.properties ? "pointer-events-none" : ""} `}
                       target="_blank"
-                      href={img.properties?.url}
+                      href={JSON.parse(img.properties)?.url}
                     >
                       <Image
                         imgSrc={img.imagepath}
