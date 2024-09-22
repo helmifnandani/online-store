@@ -72,7 +72,7 @@ const ProductDetailSection = ({
         imgData.filter(
           (img) =>
             img.imagetype.split("_")[0] === product.productid &&
-            img.imagetype.split("_")[1] === selectedColor,
+            img.imagetype.split("_")[1] === selectedColor.hex,
         ),
       );
     }

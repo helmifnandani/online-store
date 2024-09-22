@@ -10,6 +10,10 @@ export const navItems = [
     categoryid: "e4554ea1-b441-474c-8a2a-b4ed1bffce4b",
   },
   {
+    label: "Shop All",
+    href: "/products/all",
+  },
+  {
     label: "Shop",
     hasNestedMenu: true,
   },
@@ -55,8 +59,8 @@ export const collectionItems = [
   },
   {
     categoryname: "Denim",
-    href: "/products/b979eb7a-5a3f-48ec-b543-6b138fa1233e",
-    categoryid: "b979eb7a-5a3f-48ec-b543-6b138fa1233e",
+    href: "/products/5aa2bfdf-eb1c-4ff0-8c94-0e7447672c71",
+    categoryid: "5aa2bfdf-eb1c-4ff0-8c94-0e7447672c71",
   },
 ];
 

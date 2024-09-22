@@ -25,24 +25,26 @@ const Home = ({ heightNavbar, imgData, isLoadingImage, categoryList }) => {
             <SlideShow className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-14 hidden w-screen lg:mb-16 lg:block">
               {imgData
                 .filter((image) => image.imagetype === "header_desktop")
-                .map((item, index) => (
-                  <div key={index}>
-                    <a
-                      className={`${!item.properties ? "pointer-events-none" : ""} `}
-                      target="_blank"
-                      href={item.properties?.url}
-                    >
-                      <Image
-                        imgSrc={item.imagepath}
-                        hasButton={!!item.href}
-                        btnType={"outline"}
-                        btnIsLink={true}
-                        btnUrlTarget={item.href}
-                        ratio={"aspect-20x9"}
-                      />
-                    </a>
-                  </div>
-                ))}
+                .map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <a
+                        className={`${!item.properties ? "pointer-events-none" : ""} `}
+                        target="_blank"
+                        href={item.properties?.url}
+                      >
+                        <Image
+                          imgSrc={item.imagepath}
+                          hasButton={!!item.href}
+                          btnType={"outline"}
+                          btnIsLink={true}
+                          btnUrlTarget={item.href}
+                          ratio={"aspect-20x9"}
+                        />
+                      </a>
+                    </div>
+                  );
+                })}
             </SlideShow>
           ) : (
             <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-14 hidden w-screen lg:mb-16 lg:block">
@@ -81,12 +83,12 @@ const Home = ({ heightNavbar, imgData, isLoadingImage, categoryList }) => {
         </>
       )}
       <ProductSection
-        title={"New Arrivals"}
+        title={"New Arrival"}
         categoryId="e4554ea1-b441-474c-8a2a-b4ed1bffce4b"
         imgData={imgData}
       />
       <ProductSection
-        title={"Our Pick"}
+        title={"Our Picks"}
         categoryId="9074f328-aee8-4ddc-9f6e-e665c91822cb"
         imgData={imgData}
       />

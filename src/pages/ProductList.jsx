@@ -23,13 +23,14 @@ const ProductListSection = ({
   const [isLoadedAll, setIsLoadedAll] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const [isCategoryParent, setIsCategoryParent] = useState(false);
   const [style, setStyle] = useState({});
   const [page, setPage] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState("");
   const [selectedSorts, setSelectedSorts] = useState("newest");
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [categoryBannerDesktop, setCategoryBannerDesktop] = useState(null);
-  const [categoryBannerMobile, setCategoryBannerMobile] = useState(null);
+  // const [categoryBannerDesktop, setCategoryBannerDesktop] = useState(null);
+  // const [categoryBannerMobile, setCategoryBannerMobile] = useState(null);
   const [products, setProducts] = useState([]);
 
   const { collection } = useParams();
@@ -76,30 +77,43 @@ const ProductListSection = ({
     if (page < 1) {
       setIsLoading(true);
     }
-    if (!selectedCategory) return;
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/api/products-category/${selectedCategory.categorydetailid}?page=${page}`,
-      );
-      if (page > 1) {
-        setProducts((prevProducts) => [
-          ...prevProducts,
-          ...response.data.products,
-        ]);
-        setIsBottomBody(false);
-      } else {
-        setProducts(response.data.products);
+
+    let category_url = isCategoryParent
+      ? `products-category-parent`
+      : "products-category";
+
+    let api_url = `${import.meta.env.VITE_API_URL}/api/${category_url}/${collection}?page=${page}`;
+
+    if (collection === "all") {
+      api_url = `${import.meta.env.VITE_API_URL}/api/products?page=${page}`;
+    }
+
+    if (selectedCategory) {
+      try {
+        const response = await axios.get(api_url);
+        if (page > 1) {
+          setProducts((prevProducts) => [
+            ...prevProducts,
+            ...response.data.products,
+          ]);
+          setIsBottomBody(false);
+        } else {
+          setProducts(response.data.products);
+        }
+        if (response.data.nextPage) {
+          setPage(response.data.nextPage);
+        }
+        setIsLoadedAll(!response.data.nextPage);
+      } catch (error) {
+        setProducts([]);
+        // console.error("Failed to load products:", error);
+      } finally {
+        setIsLoading(false);
+        setIsLoadingMore(false);
       }
-      if (response.data.nextPage) {
-        setPage(response.data.nextPage);
-      }
-      setIsLoadedAll(!response.data.nextPage);
-    } catch (error) {
-      setProducts([]);
-      // console.error("Failed to load products:", error);
-    } finally {
-      setIsLoading(false);
-      setIsLoadingMore(false);
+    } else {
+      // setIsLoading(false);
+      return;
     }
   };
 
@@ -122,21 +136,38 @@ const ProductListSection = ({
     const categorydetail = categoryList
       .flatMap((category) => category.CategoryDetails)
       .find((detail) => detail.categorydetailid === collection);
-    setSelectedCategory(categorydetail);
-    setCategoryBannerDesktop(() =>
-      imgData.find(
-        (img) =>
-          img.imagetype.split("_")[0] === categorydetail.categorydetailid &&
-          img.imagetype.split("_")[2] === "desktop",
-      ),
+
+    const categoryParent = categoryList.find(
+      (detail) => detail.categoryid === collection,
     );
-    setCategoryBannerMobile(() =>
-      imgData.find(
-        (img) =>
-          img.imagetype.split("_")[0] === categorydetail.categorydetailid &&
-          img.imagetype.split("_")[2] === "mobile",
-      ),
-    );
+
+    if (categorydetail) {
+      setSelectedCategory(categorydetail);
+    } else if (categoryParent) {
+      setIsCategoryParent(!!categoryParent);
+      setSelectedCategory(categoryParent);
+    } else {
+      setSelectedCategory("all");
+    }
+
+    // setCategoryBannerDesktop(() => {
+    //   if (categorydetail?.categorydetailid) {
+    //     return imgData.find(
+    //       (img) =>
+    //         img.imagetype.split("_")[0] === categorydetail.categorydetailid &&
+    //         img.imagetype.split("_")[2] === "desktop",
+    //     );
+    //   }
+    // });
+    // setCategoryBannerMobile(() => {
+    //   if (categorydetail?.categorydetailid) {
+    //     return imgData.find(
+    //       (img) =>
+    //         img.imagetype.split("_")[0] === categorydetail.categorydetailid &&
+    //         img.imagetype.split("_")[2] === "mobile",
+    //     );
+    //   }
+    // });
 
     const handleScroll = () => {
       const containerEl = document.querySelector("#container");
@@ -205,11 +236,11 @@ const ProductListSection = ({
     <div className="group mx-auto py-7 lg:px-4" ref={productListRef}>
       {isLoading ? (
         <>
-          <Skeleton
+          {/* <Skeleton
             className={
               "relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-5 mb-14 aspect-4x5 w-screen lg:-mt-12 lg:mb-16 lg:aspect-20x9"
             }
-          />
+          /> */}
           <Skeleton className="mb-7 h-7 w-3/12" />
           <Skeleton
             className="mb-7 h-7 w-4/12 lg:w-2/12"
@@ -243,7 +274,7 @@ const ProductListSection = ({
         <>
           {selectedCategory && (
             <>
-              <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-5 mb-7 hidden w-screen lg:-mt-12 lg:block">
+              {/* <div className="relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] -mt-5 mb-7 hidden w-screen lg:-mt-12 lg:block">
                 <Image
                   imgSrc={
                     categoryBannerDesktop
@@ -268,7 +299,7 @@ const ProductListSection = ({
                   btnUrlTarget={"https://www.instagram.com/titipkitadi"}
                   ratio={"aspect-[320/250]"}
                 />
-              </div>
+              </div> */}
               <div className="mb-7">
                 <ol className="inline-flex items-center space-x-1 md:space-x-2">
                   <li className="inline-flex items-center">
@@ -292,7 +323,9 @@ const ProductListSection = ({
                         />
                         {index === pathnames.length - 1 ? (
                           <span className="ml-1 text-sm font-medium capitalize text-gray-400 md:ml-2">
-                            {selectedCategory.categorydetailname}
+                            {selectedCategory.categorydetailname
+                              ? selectedCategory.categorydetailname
+                              : "all"}
                           </span>
                         ) : (
                           <Link

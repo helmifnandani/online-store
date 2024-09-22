@@ -30,12 +30,9 @@ const Image = ({
       ) : (
         ""
       )}
-      {text ? (
+      {btnUrlTarget ? (
         <Link to={btnUrlTarget}>
-          <div className="absolute inset-0 bg-gray-400 opacity-30"></div>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <h2 className="text-xl font-bold text-white md:text-3xl">{text}</h2>
-          </div>
+          <div className="absolute inset-0 bg-gray-400 opacity-0"></div>
         </Link>
       ) : (
         ""

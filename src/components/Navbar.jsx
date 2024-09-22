@@ -53,6 +53,7 @@ const Navbar = ({
       window.removeEventListener("resize", updatePosition);
     };
   }, [isHovered]);
+
   return (
     <>
       <AnnouncementBar isScrolled={isScrolled} />
@@ -114,10 +115,14 @@ const Navbar = ({
                             (category, index) =>
                               category.categoryname.toLowerCase() !==
                                 "collection" &&
-                              category.categoryname.toLowerCase() !==
-                                "new arrival" &&
-                              category.categoryname.toLowerCase() !==
-                                "our's pick" &&
+                              category.categoryid !==
+                                "44fc86f7-216a-41ff-8ec6-3623a7f15912" &&
+                              category.categoryid !==
+                                "006f4a95-0653-4d38-a9e2-976f2c55c1e5" &&
+                              category.categoryid !==
+                                "fc64fa3e-cd69-438a-9201-960f0f48491f" &&
+                              category.categoryid !==
+                                "1575dcde-3eeb-4da7-a1d1-73e4dea52e4c" &&
                               category.CategoryDetails.length > 1 && (
                                 <li key={category.categoryid}>
                                   <p className="mx-4 text-nowrap border-b border-gray-300 py-2 font-semibold tracking-widest">
@@ -157,10 +162,14 @@ const Navbar = ({
                               {categoryList?.map(
                                 (category, index) =>
                                   category.CategoryDetails.length === 1 &&
-                                  category.categoryname.toLowerCase() !==
-                                    "new arrival" &&
-                                  category.categoryname.toLowerCase() !==
-                                    "our's pick" && (
+                                  category.categoryid !==
+                                    "44fc86f7-216a-41ff-8ec6-3623a7f15912" &&
+                                  category.categoryid !==
+                                    "006f4a95-0653-4d38-a9e2-976f2c55c1e5" &&
+                                  category.categoryid !==
+                                    "fc64fa3e-cd69-438a-9201-960f0f48491f" &&
+                                  category.categoryid !==
+                                    "1575dcde-3eeb-4da7-a1d1-73e4dea52e4c" && (
                                     <li key={index}>
                                       <Button
                                         isLink={true}
@@ -331,10 +340,14 @@ const Navbar = ({
                               (category, index) =>
                                 category.categoryname.toLowerCase() !==
                                   "collection" &&
-                                category.categoryname.toLowerCase() !==
-                                  "new arrival" &&
-                                category.categoryname.toLowerCase() !==
-                                  "our's pick" && (
+                                category.categoryid !==
+                                  "44fc86f7-216a-41ff-8ec6-3623a7f15912" &&
+                                category.categoryid !==
+                                  "006f4a95-0653-4d38-a9e2-976f2c55c1e5" &&
+                                category.categoryid !==
+                                  "fc64fa3e-cd69-438a-9201-960f0f48491f" &&
+                                category.categoryid !==
+                                  "1575dcde-3eeb-4da7-a1d1-73e4dea52e4c" && (
                                   <li
                                     key={index}
                                     className="border-b pb-5 ps-2 pt-5 last:border-0 last:pb-0"
@@ -347,7 +360,7 @@ const Navbar = ({
                                         urlTarget={
                                           category.CategoryDetails.length ===
                                             1 &&
-                                          `/products/${category.categoryname}`
+                                          `/products/${category.CategoryDetails[0].categorydetailid}`
                                         }
                                         type={"link"}
                                         text={category.categoryname}

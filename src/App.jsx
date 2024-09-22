@@ -208,9 +208,6 @@ function App() {
         ),
       );
     }
-    if (!parsedState) {
-      handleLogin(user);
-    }
     setIsLoadingCustomers(false);
   }, [customers]);
 
@@ -233,6 +230,21 @@ function App() {
     return () => {
       window.removeEventListener("resize", updateHeight);
       element.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      // This triggers a reload when the back button is pressed
+      window.location.reload();
+    };
+
+    // Listen for the popstate event (back/forward button actions)
+    window.addEventListener("popstate", handlePopState);
+
+    // Cleanup event listener on component unmount
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
     };
   }, []);
 
