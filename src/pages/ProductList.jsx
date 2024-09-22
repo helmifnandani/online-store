@@ -349,7 +349,10 @@ const ProductListSection = ({
               </div>
               <div className="mb-7 flex justify-center">
                 <h1 className="text-xl font-semibold capitalize tracking-wider lg:text-2xl">
-                  {selectedCategory.categorydetailname}
+                  {selectedCategory && selectedCategory.categorydetailname
+                    ? selectedCategory.categorydetailname
+                    : selectedCategory.categoryname}
+                  {selectedCategory === "all" && "all"}
                 </h1>
               </div>
               <div className="mb-7 flex justify-end">

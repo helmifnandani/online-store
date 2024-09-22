@@ -88,6 +88,7 @@ const ProductSection = ({ title = "Best Seller", categoryId, imgData }) => {
               isLink={true}
               className="text-xs font-semibold"
               text={"View More"}
+              urlTarget={`/products/${categoryId}`}
             />
           </div>
         </>
