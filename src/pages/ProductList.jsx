@@ -434,7 +434,7 @@ const ProductListSection = ({
                     ref={dropdownRef}
                     style={style}
                   >
-                    <h3 className="text-md mb-3 border-b pb-3">Categories</h3>
+                    <h3 className="text-md mb-3 border-b pb-3">Sort By</h3>
                     {sorts.map((sort, index) => {
                       return (
                         <li key={index} className="mb-2 list-none">
