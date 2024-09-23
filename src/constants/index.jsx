@@ -10,11 +10,8 @@ export const navItems = [
     categoryid: "1575dcde-3eeb-4da7-a1d1-73e4dea52e4c",
   },
   {
-    label: "Shop All",
-    href: "/products/all",
-  },
-  {
     label: "Shop",
+    href: "/products/all",
     hasNestedMenu: true,
   },
   {

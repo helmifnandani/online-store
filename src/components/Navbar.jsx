@@ -23,6 +23,7 @@ const Navbar = ({
     e.classList.toggle("active");
     setIsCollapse(!isCollapse);
   };
+
   const handleClickNestedChildMenu = (index, e) => {
     e.classList.toggle("active");
     setIsCollapseChild(isCollapseChild === index ? null : index);
@@ -125,9 +126,16 @@ const Navbar = ({
                                 "1575dcde-3eeb-4da7-a1d1-73e4dea52e4c" &&
                               category.CategoryDetails.length > 1 && (
                                 <li key={category.categoryid}>
-                                  <p className="mx-4 text-nowrap border-b border-gray-300 py-2 font-semibold tracking-widest">
-                                    {category.categoryname}
-                                  </p>
+                                  <Button
+                                    isLink={true}
+                                    type={"link"}
+                                    urlTarget={`/products/${category.categoryid}`}
+                                    text={category.categoryname}
+                                    className={
+                                      "mx-4 !justify-start text-nowrap border-b border-gray-300 py-2 !text-start font-semibold tracking-widest"
+                                    }
+                                  />
+                                  {/* <p className="mx-4 text-nowrap border-b border-gray-300 py-2 font-semibold tracking-widest"></p> */}
                                   {category.CategoryDetails.length > 1 && (
                                     <ul>
                                       {category.CategoryDetails.map(
@@ -308,9 +316,9 @@ const Navbar = ({
                   item.label.toLowerCase() !== "sale" &&
                   item.label.toLowerCase() !== "best seller" && (
                     <li key={index} className="border-b py-5">
-                      <div className="relative">
+                      <div className="relative flex justify-between">
                         <Button
-                          isLink={!item.hasNestedMenu}
+                          isLink={true}
                           type={"link"}
                           urlTarget={item.href ? item.href : ""}
                           text={item.label}
@@ -320,15 +328,16 @@ const Navbar = ({
                               : ""
                           } `}
                           btnTextClass={"tracking-[0.125em]"}
-                          onClick={(event) =>
-                            item.hasNestedMenu &&
-                            handleClickNestedMenu(event.currentTarget)
-                          }
-                        >
-                          {item.hasNestedMenu && (
+                        ></Button>
+                        {item.hasNestedMenu && (
+                          <button
+                            onClick={(event) =>
+                              handleClickNestedMenu(event.currentTarget)
+                            }
+                          >
                             <div className="icon-collapsable-plus"></div>
-                          )}
-                        </Button>
+                          </button>
+                        )}
                       </div>
 
                       {item.hasNestedMenu && (
@@ -352,32 +361,25 @@ const Navbar = ({
                                     key={index}
                                     className="border-b pb-5 ps-2 pt-5 last:border-0 last:pb-0"
                                   >
-                                    <div className="relative text-nowrap font-semibold">
+                                    <div className="relative flex justify-between text-nowrap font-semibold">
                                       <Button
-                                        isLink={
-                                          category.CategoryDetails.length === 1
-                                        }
-                                        urlTarget={
-                                          category.CategoryDetails.length ===
-                                            1 &&
-                                          `/products/${category.CategoryDetails[0].categorydetailid}`
-                                        }
+                                        isLink={true}
+                                        urlTarget={`/products/${category.categoryid}`}
                                         type={"link"}
                                         text={category.categoryname}
+                                        className={"!justify-start !text-start"}
+                                      ></Button>
+
+                                      <button
                                         onClick={(event) =>
-                                          category.CategoryDetails.length > 1 &&
                                           handleClickNestedChildMenu(
                                             index,
                                             event.currentTarget,
                                           )
                                         }
-                                        className={"!justify-start !text-start"}
                                       >
-                                        {category.CategoryDetails.length >
-                                          1 && (
-                                          <div className="icon-collapsable-plus"></div>
-                                        )}
-                                      </Button>
+                                        <div className="icon-collapsable-plus"></div>
+                                      </button>
                                     </div>
                                     <div
                                       className={`transition-height overflow-hidden pt-2 duration-300 ease-in-out ${isCollapseChild === index ? "block h-full" : "hidden h-0"}`}
