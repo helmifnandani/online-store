@@ -139,7 +139,7 @@ function App() {
         setIsLoadingCustomers(false);
       }
     } catch (error) {
-      setErrorLogIn("Your account is not registered");
+      setErrorLogIn(error.response.data.error);
       // console.error("Login failed", error);
     }
   };
@@ -159,7 +159,7 @@ function App() {
         setUser(user);
       }
     } catch (error) {
-      setErrorLogIn("Your account is not registered");
+      setErrorLogIn(error.response.data.error);
       // console.error("Login failed", error);
     }
   };

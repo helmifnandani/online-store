@@ -426,7 +426,7 @@ const ProductListSection = ({
                     type="link"
                     text="Sort"
                     iconWidth={20}
-                    iconName="sort"
+                    iconName="sort" 
                     onClick={toggleSortMenu}
                   />
                   <div

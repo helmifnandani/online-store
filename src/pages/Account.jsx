@@ -25,11 +25,14 @@ const Account = ({
   const [customername, setCustomerName] = useState("");
   const [error, setError] = useState("");
 
+  useEffect(() => setError(errorLogIn), [errorLogIn]);
+
   const handleClickAccount = () => {
     setIsRegister((prev) => {
       return !prev;
     });
     setError("");
+    setErrorLogIn("");
   };
 
   const handleLogin = (event) => {

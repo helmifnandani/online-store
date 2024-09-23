@@ -405,7 +405,7 @@ const ProductDetailSection = ({
                                 />
                               )}
                               {product.sizemetricid ==
-                                "50b6873f-7380-4031-9db9-946f8db4af31" && (
+                                "df08831d-007e-45ad-806f-0655554a0662" && (
                                 <>
                                   <Image
                                     imgSrc={SizeCardigan1}
