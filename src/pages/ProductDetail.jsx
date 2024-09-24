@@ -516,7 +516,7 @@ const ProductDetailSection = ({
                   </div>
                   <div className="flex w-full items-center gap-3">
                     {product.onlinestores.find(
-                      (el) => el.onlineStore === "shopee",
+                      (el) => el.onlineStore.toLowerCase() === "shopee",
                     ) && (
                       <Button
                         text="Shopee"
@@ -524,7 +524,7 @@ const ProductDetailSection = ({
                         className={"flex-grow"}
                         urlTarget={
                           product.onlinestores.find(
-                            (el) => el.onlineStore === "shopee",
+                            (el) => el.onlineStore.toLowerCase() === "shopee",
                           ).link
                         }
                         isLink={true}
@@ -532,7 +532,7 @@ const ProductDetailSection = ({
                       />
                     )}
                     {product.onlinestores.find(
-                      (el) => el.onlineStore === "tokped",
+                      (el) => el.onlineStore.toLowerCase() === "tokopedia",
                     ) && (
                       <Button
                         text="Tokopedia"
@@ -540,7 +540,8 @@ const ProductDetailSection = ({
                         className={"flex-grow"}
                         urlTarget={
                           product.onlinestores.find(
-                            (el) => el.onlineStore === "tokped",
+                            (el) =>
+                              el.onlineStore.toLowerCase() === "tokopedia",
                           ).link
                         }
                         isLink={true}
