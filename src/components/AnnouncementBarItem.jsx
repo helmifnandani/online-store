@@ -1,7 +1,7 @@
 const AnnouncementBarItem = ({ item }) => {
   return (
     <div className="text-md flex justify-center tracking-wider">
-      {item.text}
+      {item.announcementtext}
     </div>
   );
 };

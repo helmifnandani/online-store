@@ -4,7 +4,12 @@ import Image from "./Image";
 import { Link, useMatch, useResolvedPath } from "react-router-dom";
 import placeholderImg from "../assets/images/placeholder-image.jpg";
 
-const ProductItem = ({ item, imgData, isWishlistPage = false }) => {
+const ProductItem = ({
+  item,
+  imgData,
+  isWishlistPage = false,
+  productid = item.productid,
+}) => {
   const [selectedColor, setSelectedColor] = useState(null);
   const [imgArray, setImgArray] = useState([]);
 
@@ -24,10 +29,10 @@ const ProductItem = ({ item, imgData, isWishlistPage = false }) => {
         imgData
           .filter((img) => {
             if (isWishlistPage) {
-              return img.imagetype.split("_")[0] === item.productid;
+              return img.imagetype.split("_")[0] === productid;
             } else {
               return (
-                img.imagetype.split("_")[0] === item.productid &&
+                img.imagetype.split("_")[0] === productid &&
                 img.imagetype.split("_")[1] === selectedColor?.hex
               );
             }
@@ -40,7 +45,7 @@ const ProductItem = ({ item, imgData, isWishlistPage = false }) => {
 
   return (
     <div className="group flex max-w-xs flex-col overflow-hidden">
-      <Link to={`/product/${item.productid}`} className="flex-grow">
+      <Link to={`/product/${productid}`} className="flex-grow">
         <div className="relative mb-3 flex aspect-card overflow-hidden">
           <Image
             className={"peer !absolute top-0 h-full max-h-full max-w-full"}

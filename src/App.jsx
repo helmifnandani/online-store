@@ -26,10 +26,10 @@ function App() {
   const [addWishlist, setAddWishlist] = useState(false);
   const [errorLogIn, setErrorLogIn] = useState(null);
   const [user, setUser] = useState(null);
-  const [customers, setCustomers] = useState([]);
   const [heightNavbar, setHeightNavbar] = useState(0);
   const [announcementBarHeight, setAnnouncementBarHeight] = useState(0);
   const containerRef = useRef(null);
+  const [customers, setCustomers] = useState([]);
   const [categoryList, setCategoryList] = useState([]);
   const [imgData, setImgData] = useState([]);
   const [wishlist, setWishlist] = useState([]);
@@ -78,9 +78,11 @@ function App() {
 
   const updateHeight = () => {
     var navbar = document.querySelector("#navbar");
-    setAnnouncementBarHeight(
-      document.querySelector("#announcement_bar").offsetHeight,
-    );
+    if (document.querySelector("#announcement_bar")) {
+      setAnnouncementBarHeight(
+        document.querySelector("#announcement_bar").offsetHeight,
+      );
+    }
     if (navbar) {
       if (window.innerWidth <= 768) {
         setHeightNavbar(navbar.offsetHeight);
@@ -285,7 +287,9 @@ function App() {
             path="/"
             element={
               <Home
-                heightNavbar={heightNavbar}
+                heightNavbar={
+                  announcementBarHeight > 0 ? heightNavbar : heightNavbar + 40
+                }
                 imgData={imgData}
                 isLoadingImage={isLoadingImage}
                 categoryList={categoryList}
