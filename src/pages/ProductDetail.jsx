@@ -585,7 +585,7 @@ const ProductDetailSection = ({
                 </div>
               </div>
 
-              {product.ProductRecommendations.length > 0 && (
+              {product.ProductRecommendations?.length > 0 && (
                 <div>
                   <h1 className="text-xl font-semibold tracking-wider">
                     Recommended Products
