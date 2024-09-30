@@ -313,6 +313,7 @@ function App() {
                 wishlist={wishlist}
                 addWishlist={addWishlist}
                 setAddWishlist={setAddWishlist}
+                isAuthenticated={isAuthenticated}
               />
             }
           />

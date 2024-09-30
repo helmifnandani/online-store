@@ -88,12 +88,12 @@ const ProductItem = ({ item, imgData, isWishlistPage = false }) => {
                     className={`block rounded-full border p-0.5 transition duration-300 ease-in ${
                       color.hex === selectedColor?.hex
                         ? "border-gray-500"
-                        : "border-white"
+                        : "border-gray-100"
                     }`}
                   >
                     <Button
                       type={"link"}
-                      onClick={() => handleClickColor(color.hex)}
+                      onClick={() => handleClickColor(color)}
                       style={{ backgroundColor: color.hex }}
                       className="h-3 w-3 rounded-full p-2"
                     />

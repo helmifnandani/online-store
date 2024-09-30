@@ -17,6 +17,7 @@ import SizeCardigan2 from "../assets/images/size-cardigan-2.jpeg";
 import placeholderImg from "../assets/images/placeholder-image.jpg";
 import placeholderImgEmpty from "../assets/images/placeholder-empty.png";
 import axios from "axios";
+import HTMLRenderer from "../components/HTMLRenderer";
 
 const ProductDetailSection = ({
   imgData,
@@ -24,6 +25,7 @@ const ProductDetailSection = ({
   wishlist,
   addWishlist,
   setAddWishlist,
+  isAuthenticated,
 }) => {
   const { guid } = useParams();
   const [product, setProduct] = useState(null);
@@ -32,6 +34,7 @@ const ProductDetailSection = ({
   const [selectedSize, setSelectedSize] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isWishlist, setIsWishlist] = useState(false);
+  const [error, setError] = useState("");
   const location = useLocation();
   const fullUrl = `${window.location.origin}${location.pathname}${location.search}${location.hash}`;
 
@@ -89,6 +92,11 @@ const ProductDetailSection = ({
   };
 
   const handleWishlist = async () => {
+    if (!isAuthenticated) {
+      setError("Please login to add this product to favorite");
+      return;
+    }
+    setError("");
     setAddWishlist(true);
     try {
       const formData = {
@@ -245,7 +253,7 @@ const ProductDetailSection = ({
                                 className={`block rounded-full border p-1 transition duration-300 ease-in ${
                                   color.hex === selectedColor.hex
                                     ? "border-gray-500"
-                                    : "border-white"
+                                    : "border-gray-100"
                                 }`}
                               >
                                 <Button
@@ -433,7 +441,7 @@ const ProductDetailSection = ({
                             </span>
                           </summary>
                           <p className="mt-3 text-neutral-600 group-open:animate-fadeIn">
-                            {product.material}
+                            <HTMLRenderer htmlContent={product.material} />
                           </p>
                         </details>
                       </div>
@@ -566,6 +574,9 @@ const ProductDetailSection = ({
                       onClick={handleWishlist}
                     />
                   </div>
+                  {error && (
+                    <p className="mb-4 text-center text-red-500">{error}</p>
+                  )}
                 </div>
               </div>
             </div>

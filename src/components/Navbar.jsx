@@ -103,98 +103,100 @@ const Navbar = ({
                         onMouseEnter={handleMouseEnter}
                         onMouseLeave={handleMouseLeave}
                       />
-                      {item.hasNestedMenu && categoryList && (
-                        <ul
-                          className="min-w pointer-events-none absolute top-full z-50 flex w-fit flex-wrap gap-7 bg-white p-3 opacity-0 shadow-md transition-all group-hover:pointer-events-auto group-hover:opacity-100 lg:max-w-screen-lg lg:flex-nowrap xl:max-w-screen-xl 2xl:max-w-screen-2xl"
-                          style={{
-                            left: `${menuPosition}px`,
-                          }}
-                          id={`menu_${index}`}
-                          ref={menuRef}
-                        >
-                          {categoryList?.map(
-                            (category, index) =>
-                              category.categoryname.toLowerCase() !==
-                                "collection" &&
-                              category.categoryid !==
-                                "44fc86f7-216a-41ff-8ec6-3623a7f15912" &&
-                              category.categoryid !==
-                                "006f4a95-0653-4d38-a9e2-976f2c55c1e5" &&
-                              category.categoryid !==
-                                "fc64fa3e-cd69-438a-9201-960f0f48491f" &&
-                              category.categoryid !==
-                                "1575dcde-3eeb-4da7-a1d1-73e4dea52e4c" &&
-                              category.CategoryDetails.length > 1 && (
-                                <li key={category.categoryid}>
-                                  <Button
-                                    isLink={true}
-                                    type={"link"}
-                                    urlTarget={`/products/${category.categoryid}`}
-                                    text={category.categoryname}
-                                    className={
-                                      "mx-4 !justify-start text-nowrap border-b border-gray-300 py-2 !text-start font-semibold tracking-widest"
-                                    }
-                                  />
-                                  {/* <p className="mx-4 text-nowrap border-b border-gray-300 py-2 font-semibold tracking-widest"></p> */}
-                                  {category.CategoryDetails.length > 1 && (
-                                    <ul>
-                                      {category.CategoryDetails.map(
-                                        (categoryDetail, index) => (
-                                          <li
-                                            className="px-4 py-2"
-                                            key={
-                                              categoryDetail.categorydetailid
-                                            }
-                                          >
-                                            <Button
-                                              isLink={true}
-                                              type={"link"}
-                                              urlTarget={`/products/${categoryDetail.categorydetailid}`}
-                                              text={
-                                                categoryDetail.categorydetailname
+                      {item.hasNestedMenu &&
+                        categoryList &&
+                        categoryList.length > 0 && (
+                          <ul
+                            className="min-w pointer-events-none absolute top-full z-50 flex w-fit flex-wrap gap-7 bg-white p-3 opacity-0 shadow-md transition-all group-hover:pointer-events-auto group-hover:opacity-100 lg:max-w-screen-lg lg:flex-nowrap xl:max-w-screen-xl 2xl:max-w-screen-2xl"
+                            style={{
+                              left: `${menuPosition}px`,
+                            }}
+                            id={`menu_${index}`}
+                            ref={menuRef}
+                          >
+                            {categoryList?.map(
+                              (category, index) =>
+                                category.categoryname.toLowerCase() !==
+                                  "collection" &&
+                                category.categoryid !==
+                                  "44fc86f7-216a-41ff-8ec6-3623a7f15912" &&
+                                category.categoryid !==
+                                  "006f4a95-0653-4d38-a9e2-976f2c55c1e5" &&
+                                category.categoryid !==
+                                  "fc64fa3e-cd69-438a-9201-960f0f48491f" &&
+                                category.categoryid !==
+                                  "1575dcde-3eeb-4da7-a1d1-73e4dea52e4c" &&
+                                category.CategoryDetails.length > 1 && (
+                                  <li key={category.categoryid}>
+                                    <Button
+                                      isLink={true}
+                                      type={"link"}
+                                      urlTarget={`/products/${category.categoryid}`}
+                                      text={category.categoryname}
+                                      className={
+                                        "mx-4 !justify-start text-nowrap border-b border-gray-300 py-2 !text-start font-semibold tracking-widest"
+                                      }
+                                    />
+                                    {/* <p className="mx-4 text-nowrap border-b border-gray-300 py-2 font-semibold tracking-widest"></p> */}
+                                    {category.CategoryDetails.length > 1 && (
+                                      <ul>
+                                        {category.CategoryDetails.map(
+                                          (categoryDetail, index) => (
+                                            <li
+                                              className="px-4 py-2"
+                                              key={
+                                                categoryDetail.categorydetailid
                                               }
-                                              className={
-                                                "!justify-start text-nowrap !text-start"
-                                              }
-                                            />
-                                          </li>
-                                        ),
-                                      )}
-                                    </ul>
-                                  )}
-                                </li>
-                              ),
-                          )}
-                          <li>
-                            <ul>
-                              {categoryList?.map(
-                                (category, index) =>
-                                  category.CategoryDetails.length === 1 &&
-                                  category.categoryid !==
-                                    "44fc86f7-216a-41ff-8ec6-3623a7f15912" &&
-                                  category.categoryid !==
-                                    "006f4a95-0653-4d38-a9e2-976f2c55c1e5" &&
-                                  category.categoryid !==
-                                    "fc64fa3e-cd69-438a-9201-960f0f48491f" &&
-                                  category.categoryid !==
-                                    "1575dcde-3eeb-4da7-a1d1-73e4dea52e4c" && (
-                                    <li key={index}>
-                                      <Button
-                                        isLink={true}
-                                        type={"link"}
-                                        urlTarget={`/products/${category.CategoryDetails[0].categorydetailid}`}
-                                        text={category.categoryname}
-                                        className={
-                                          "mx-4 !justify-start text-nowrap py-2 !text-start font-semibold"
-                                        }
-                                      />
-                                    </li>
-                                  ),
-                              )}
-                            </ul>
-                          </li>
-                        </ul>
-                      )}
+                                            >
+                                              <Button
+                                                isLink={true}
+                                                type={"link"}
+                                                urlTarget={`/products/${categoryDetail.categorydetailid}`}
+                                                text={
+                                                  categoryDetail.categorydetailname
+                                                }
+                                                className={
+                                                  "!justify-start text-nowrap !text-start"
+                                                }
+                                              />
+                                            </li>
+                                          ),
+                                        )}
+                                      </ul>
+                                    )}
+                                  </li>
+                                ),
+                            )}
+                            <li>
+                              <ul>
+                                {categoryList?.map(
+                                  (category, index) =>
+                                    category.CategoryDetails.length === 1 &&
+                                    category.categoryid !==
+                                      "44fc86f7-216a-41ff-8ec6-3623a7f15912" &&
+                                    category.categoryid !==
+                                      "006f4a95-0653-4d38-a9e2-976f2c55c1e5" &&
+                                    category.categoryid !==
+                                      "fc64fa3e-cd69-438a-9201-960f0f48491f" &&
+                                    category.categoryid !==
+                                      "1575dcde-3eeb-4da7-a1d1-73e4dea52e4c" && (
+                                      <li key={index}>
+                                        <Button
+                                          isLink={true}
+                                          type={"link"}
+                                          urlTarget={`/products/${category.CategoryDetails[0].categorydetailid}`}
+                                          text={category.categoryname}
+                                          className={
+                                            "mx-4 !justify-start text-nowrap py-2 !text-start font-semibold"
+                                          }
+                                        />
+                                      </li>
+                                    ),
+                                )}
+                              </ul>
+                            </li>
+                          </ul>
+                        )}
                     </li>
                   ),
               )}
