@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+} from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { sorts } from "../constants";
@@ -10,6 +16,8 @@ import Banner from "../assets/images/banner-4.jpg";
 import Image from "../components/Image";
 import placeholderImgEmpty from "../assets/images/placeholder-empty.png";
 import Banner1 from "../assets/images/banner-1.jpg";
+import debounce from "lodash/debounce";
+import useInfiniteScroll from "../constants/useInfiniteScroll";
 
 const ProductListSection = ({
   categoryList,
@@ -17,23 +25,39 @@ const ProductListSection = ({
   isBottomBody,
   setIsBottomBody,
 }) => {
+  const { collection } = useParams();
+
   const [filterMenuOpen, setFilterMenuOpen] = useState(false);
   const [sortMenuOpen, setSortMenuOpen] = useState(false);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
-  const [isLoadedAll, setIsLoadedAll] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [isCategoryParent, setIsCategoryParent] = useState(false);
   const [style, setStyle] = useState({});
-  const [page, setPage] = useState(1);
   const [selectedCategories, setSelectedCategories] = useState("");
-  const [selectedSorts, setSelectedSorts] = useState("newest");
   const [selectedCategory, setSelectedCategory] = useState(null);
   // const [categoryBannerDesktop, setCategoryBannerDesktop] = useState(null);
   // const [categoryBannerMobile, setCategoryBannerMobile] = useState(null);
-  const [products, setProducts] = useState([]);
 
-  const { collection } = useParams();
+  // const [products, setProducts] = useState([]);
+  // const [isLoadedAll, setIsLoadedAll] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
+  // const [isLoadingMore, setIsLoadingMore] = useState(false);
+  // const [selectedSorts, setSelectedSorts] = useState("newest");
+  // const [page, setPage] = useState(1);
+
+  const {
+    products,
+    isLoading,
+    isLoadingMore,
+    isLoadedAll,
+    handleSort,
+    selectedSort,
+  } = useInfiniteScroll(
+    collection,
+    isCategoryParent,
+    selectedCategory,
+    isBottomBody,
+    setIsBottomBody,
+  );
 
   const location = useLocation();
 
@@ -73,50 +97,6 @@ const ProductListSection = ({
     });
   };
 
-  const fetchProducts = async (page) => {
-    if (page < 1) {
-      setIsLoading(true);
-    }
-
-    let category_url = isCategoryParent
-      ? `products-category-parent`
-      : "products-category";
-
-    let api_url = `${import.meta.env.VITE_API_URL}/api/${category_url}/${collection}?page=${page}`;
-
-    if (collection === "all") {
-      api_url = `${import.meta.env.VITE_API_URL}/api/products?page=${page}`;
-    }
-
-    if (selectedCategory) {
-      try {
-        const response = await axios.get(api_url);
-        if (page > 1) {
-          setProducts((prevProducts) => [
-            ...prevProducts,
-            ...response.data.products,
-          ]);
-          setIsBottomBody(false);
-        } else {
-          setProducts(response.data.products);
-        }
-        if (response.data.nextPage) {
-          setPage(response.data.nextPage);
-        }
-        setIsLoadedAll(!response.data.nextPage);
-      } catch (error) {
-        setProducts([]);
-        // console.error("Failed to load products:", error);
-      } finally {
-        setIsLoading(false);
-        setIsLoadingMore(false);
-      }
-    } else {
-      // setIsLoading(false);
-      return;
-    }
-  };
-
   useEffect(() => {
     const handleBodyClick = (event) => {
       if (filterMenuOpen || sortMenuOpen) {
@@ -133,7 +113,6 @@ const ProductListSection = ({
   }, [filterMenuOpen, sortMenuOpen]);
 
   useEffect(() => {
-    setPage(1);
     if (categoryList) {
       const categorydetail = categoryList
         .flatMap((category) => category.CategoryDetails)
@@ -173,69 +152,12 @@ const ProductListSection = ({
     //     );
     //   }
     // });
-
-    const handleScroll = () => {
-      const containerEl = document.querySelector("#container");
-      const productListEl = productListRef.current;
-      if (
-        containerEl.scrollTop + containerEl.offsetHeight >=
-          productListEl.offsetHeight &&
-        products?.length < products?.length
-      ) {
-        loadMoreProducts();
-      }
-    };
-
-    const containerEl = document.querySelector("#container");
-    containerEl.addEventListener("scroll", handleScroll);
-
-    return () => {
-      containerEl.removeEventListener("scroll", handleScroll);
-    };
   }, [categoryList, collection]);
 
-  useEffect(() => {
-    fetchProducts(page);
-  }, [selectedCategory]);
-
-  useEffect(() => {
-    switch (selectedSorts) {
-      case "newest":
-        setProducts(
-          [...products].sort(
-            (a, b) => new Date(a.createddate) - new Date(b.createddate),
-          ),
-        );
-        return;
-      case "oldest":
-        setProducts(
-          [...products].sort(
-            (a, b) => new Date(b.createddate) - new Date(a.createddate),
-          ),
-        );
-        return;
-      case "cheap":
-        setProducts([...products].sort((a, b) => a.price - b.price));
-        return;
-      case "expensive":
-        setProducts([...products].sort((a, b) => b.price - a.price));
-        return;
-      default:
-        return;
-    }
-  }, [selectedSorts]);
-
-  useEffect(() => {
-    if (isBottomBody && !isLoadedAll) {
-      setIsLoadingMore(true);
-      fetchProducts(page);
-    }
-  }, [isBottomBody]);
-
-  const loadMoreProducts = () => {
-    setIsLoadingMore(true);
-    setPage((prevPage) => prevPage + 1);
-  };
+  // const loadMoreProducts = () => {
+  //   setIsLoadingMore(true);
+  //   setPage((prevPage) => prevPage + 1);
+  // };
 
   return (
     <div className="group mx-auto py-7 lg:px-4" ref={productListRef}>
@@ -426,7 +348,7 @@ const ProductListSection = ({
                     type="link"
                     text="Sort"
                     iconWidth={20}
-                    iconName="sort" 
+                    iconName="sort"
                     onClick={toggleSortMenu}
                   />
                   <div
@@ -445,15 +367,15 @@ const ProductListSection = ({
                               name="categories"
                               id={sort.value}
                               value={sort.value}
-                              checked={selectedSorts === sort.value}
-                              onChange={() => setSelectedSorts(sort.value)}
+                              checked={selectedSort === sort.value}
+                              onChange={(e) => handleSort(e.target.value)}
                             />
                             <label
                               className="flex cursor-pointer items-center gap-2"
                               htmlFor={sort.value}
                             >
                               <span
-                                className={`relative h-5 w-5 rounded-full border-2 shadow-sm transition-all ease-in-out before:absolute before:left-1/2 before:top-1/2 before:h-3 before:w-3 before:origin-center before:-translate-x-1/2 before:-translate-y-1/2 before:content-[''] ${selectedSorts === sort.value ? "border-slate-900 before:scale-100 before:bg-slate-900" : "border-gray-200 before:scale-0 before:bg-transparent"} before:rounded-full`}
+                                className={`relative h-5 w-5 rounded-full border-2 shadow-sm transition-all ease-in-out before:absolute before:left-1/2 before:top-1/2 before:h-3 before:w-3 before:origin-center before:-translate-x-1/2 before:-translate-y-1/2 before:content-[''] ${selectedSort === sort.value ? "border-slate-900 before:scale-100 before:bg-slate-900" : "border-gray-200 before:scale-0 before:bg-transparent"} before:rounded-full`}
                               ></span>
                               <span className="radio-text">{sort.text}</span>
                             </label>
